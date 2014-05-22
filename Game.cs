@@ -1,4 +1,3 @@
-//vsichko ba4ka, ne butaj!
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +30,7 @@ namespace Minesweeper
                    _topPlayers.Any(currentPlayer => currentPlayer.Score < score);
         }
 
-        private static void topadd(ref Player player)
+        private static void TopAdd(ref Player player)
         {
             if (_topPlayers.Capacity > _topPlayers.Count)
             {
@@ -46,7 +45,7 @@ namespace Minesweeper
             }
         }
 
-        private static void top()
+        private static void Top()
         {
             Console.WriteLine("Scoreboard");
             for (var i = 0; i < _topPlayers.Count; i++)
@@ -79,7 +78,7 @@ namespace Minesweeper
                         Console.Read();
                         break;
                     case "top":
-                        top();
+                        Top();
                         break;
                     case "coordinates":
                         try
@@ -98,8 +97,8 @@ namespace Minesweeper
                                     Console.WriteLine("Please enter your name for the top scoreboard: ");
                                     string name = Console.ReadLine();
                                     var player = new Player(name, score);
-                                    topadd(ref player);
-                                    top();
+                                    TopAdd(ref player);
+                                    Top();
                                 }
                                 str = "restart";
                                 continue;
@@ -121,9 +120,9 @@ namespace Minesweeper
                                         Console.WriteLine("Please enter your name for the top scoreboard: ");
                                         var name = Console.ReadLine();
                                         var player = new Player(name, score);
-                                        topadd(ref player);
+                                        TopAdd(ref player);
                                         // pokazvame klasiraneto
-                                        top();
+                                        Top();
                                     }
                                     str = "restart";
                                     continue;
@@ -155,6 +154,7 @@ namespace Minesweeper
                 }
 
                 str = Console.ReadLine();
+
                 try
                 {
                     chosenColumn = int.Parse(str);
