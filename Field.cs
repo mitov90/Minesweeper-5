@@ -1,22 +1,32 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
 namespace Minesweeper
 {
-    internal class Field
+    class Field
     {
-        public enum FieldStatus
-        {
-            Closed,
-            Opened,
-            IsAMine
-        }
-
         public Field()
         {
-            Value = 0;
-            Status = FieldStatus.Closed;
+            this.value = 0;
+            this.status = FieldStatus.Closed;
         }
 
-        public int Value { get; set; }
+        private int value;
+        private FieldStatus status;
 
-        public FieldStatus Status { get; set; }
+        public enum FieldStatus { Closed, Opened, IsAMine }
+
+        public int Value
+        {
+            get { return this.value; }
+            set { this.value = value; }
+        }
+
+        public FieldStatus Status
+        {
+            get { return this.status; }
+            set { this.status = value; }
+        }
     }
 }

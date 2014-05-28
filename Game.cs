@@ -1,145 +1,168 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text;
+
+//vsichko ba4ka, ne butaj!
 
 namespace Minesweeper
 {
-    internal class Game
+    class Game
     {
-        private const int MaxRows = 5;
-        private const int MaxColumns = 10;
-        private const int MaxMines = 15;
-        private const int MaxTopPlayers = 5;
+        private const int maxRows = 5;
+        private const int maxColumns = 10;
+        private const int maxMines = 15;
+        private const int maxTopPlayers = 5;
 
-        private static Board _board;
-        private static List<Player> _topPlayers;
+        private static Board board;
+        private static List<Player> topPlayers;
 
         private static void InitializeGameBoard()
         {
-            _board = new Board(MaxRows, MaxColumns, MaxMines);
-        }
+            board = new Board(maxRows, maxColumns, maxMines);
 
+        }
         private static void InitializeTopPlayers()
         {
-            _topPlayers = new List<Player> {Capacity = MaxTopPlayers};
+            topPlayers = new List<Player>();
+            topPlayers.Capacity = maxTopPlayers;
         }
-
         private static bool CheckHighScores(int score)
         {
-            return _topPlayers.Capacity > _topPlayers.Count ||
-                   _topPlayers.Any(currentPlayer => currentPlayer.Score < score);
+            if (topPlayers.Capacity > topPlayers.Count)
+            {
+                return true;
+            }
+
+            foreach (Player currentPlayer in topPlayers)
+            {
+                if (currentPlayer.Score < score)
+                {
+                    return true;
+
+
+                }
+            }
+            return false;
         }
 
-        private static void TopAdd(ref Player player)
+        private static void topadd(ref Player player)
         {
-            if (_topPlayers.Capacity > _topPlayers.Count)
+            if (topPlayers.Capacity > topPlayers.Count)
             {
-                _topPlayers.Add(player);
-                _topPlayers.Sort();
+                topPlayers.Add(player);
+                topPlayers.Sort();
             }
             else
             {
-                _topPlayers.RemoveAt(_topPlayers.Capacity - 1);
-                _topPlayers.Add(player);
-                _topPlayers.Sort();
+                topPlayers.RemoveAt(topPlayers.Capacity - 1);
+                topPlayers.Add(player);
+                topPlayers.Sort();
             }
+
+
         }
 
-        private static void Top()
+        private static void top()
         {
             Console.WriteLine("Scoreboard");
-            for (var i = 0; i < _topPlayers.Count; i++)
+            for (int i = 0; i < topPlayers.Count; i++)
             {
-                Console.WriteLine(i + 1 + ". " + _topPlayers[i]);
+                Console.WriteLine((int)(i + 1) + ". " + topPlayers[i]);
             }
         }
 
         private static void Menu()
         {
             InitializeTopPlayers();
-            var str = "restart";
-            var choosenRow = 0;
-            var chosenColumn = 0;
+            string str = "restart";
+            int choosenRow = 0;
+            int chosenColumn = 0;
 
             while (str != "exit")
             {
-                switch (str)
+
+
+                if (str == "restart")
                 {
-                    case "restart":
-                        InitializeGameBoard();
-                        Console.WriteLine("Welcome to the game “Minesweeper”. " +
-                                          "Try to reveal all cells without mines. " +
-                                          "Use 'top' to view the scoreboard, 'restart' to start a new game" +
-                                          "and 'exit' to quit the game.");
-                        _board.PrintGameBoard();
-                        break;
-                    case "exit":
-                        Console.WriteLine("Good bye!");
-                        Console.Read();
-                        break;
-                    case "top":
-                        Top();
-                        break;
-                    case "coordinates":
-                        try
+                    InitializeGameBoard();
+                    Console.WriteLine("Welcome to the game “Minesweeper”. " +
+                        "Try to reveal all cells without mines. " +
+                        "Use 'top' to view the scoreboard, 'restart' to start a new game" +
+                        "and 'exit' to quit the game.");
+                    board.PrintGameBoard();
+                }
+                else if (str == "exit")
+                {
+                    Console.WriteLine("Good bye!");
+                    Console.Read();
+                }
+                else if (str == "top")
+                {
+                    top();
+                }
+                else if (str == "coordinates")
+                {
+
+
+                    try
+                    {
+                        Board.Status status = board.OpenField(choosenRow, chosenColumn);
+                        if (status == Board.Status.SteppedOnAMine)
                         {
-                            var status = _board.OpenField(choosenRow, chosenColumn);
-                            if (status == Board.Status.SteppedOnAMine)
+                            board.PrintAllFields();
+                            int score = board.CountOpenedFields();
+                            Console.WriteLine("Booooom! You were killed by a mine. You revealed " +
+                                score +
+                                " cells without mines.");
+
+                            if (CheckHighScores(score))
                             {
-                                _board.PrintAllFields();
-                                var score = _board.CountOpenedFields();
-                                Console.WriteLine("Booooom! You were killed by a mine. You revealed " +
-                                                  score +
-                                                  " cells without mines.");
-
-                                if (CheckHighScores(score))
-                                {
-                                    Console.WriteLine("Please enter your name for the top scoreboard: ");
-                                    string name = Console.ReadLine();
-                                    var player = new Player(name, score);
-                                    TopAdd(ref player);
-                                    Top();
-                                }
-                                str = "restart";
-                                continue;
+                                Console.WriteLine("Please enter your name for the top scoreboard: ");
+                                string name = Console.ReadLine();
+                                Player player = new Player(name, score);
+                                topadd(ref player);
+                                top();
                             }
-
-
-                            switch (status)
-                            {
-                                case Board.Status.AlreadyOpened:
-                                    Console.WriteLine("Illegal move!");
-                                    break;
-                                case Board.Status.AllFieldsAreOpened:
-                                {
-                                    _board.PrintAllFields();
-                                    var score = _board.CountOpenedFields();
-                                    Console.WriteLine("Congratulations! You win!!");
-                                    if (CheckHighScores(score))
-                                    {
-                                        Console.WriteLine("Please enter your name for the top scoreboard: ");
-                                        var name = Console.ReadLine();
-                                        var player = new Player(name, score);
-                                        TopAdd(ref player);
-                                        // pokazvame klasiraneto
-                                        Top();
-                                    }
-                                    str = "restart";
-                                    continue;
-                                }
-                                default:
-                                    _board.PrintGameBoard();
-                                    break;
-                            }
+                            str = "restart";
+                            continue;
                         }
-                        catch (Exception)
+
+
+                        else if (status == Board.Status.AlreadyOpened)
                         {
-                            Console.WriteLine("Illegal move");
+                            Console.WriteLine("Illegal move!");
                         }
-                        break;
+                        else if (status == Board.Status.AllFieldsAreOpened)
+                        {
+                            board.PrintAllFields();
+                            int score = board.CountOpenedFields();
+                            Console.WriteLine("Congratulations! You win!!");
+                            if (CheckHighScores(score))
+                            {
+                                Console.WriteLine("Please enter your name for the top scoreboard: ");
+                                string name = Console.ReadLine();
+                                Player player = new Player(name, score);
+                                topadd(ref player);
+                                // pokazvame klasiraneto
+                                top();
+                            }
+                            str = "restart";
+                            continue;
+                        }
+                        else
+                        {
+
+
+                            board.PrintGameBoard();
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Illegal move");
+                    }
                 }
 
-                Console.Write(Environment.NewLine + "Enter row and column: ");
+                Console.Write(System.Environment.NewLine + "Enter row and column: ");
 
                 str = Console.ReadLine();
                 try
@@ -149,11 +172,12 @@ namespace Minesweeper
                 }
                 catch
                 {
+
+                    // niama smisal tuka
                     continue;
                 }
 
                 str = Console.ReadLine();
-
                 try
                 {
                     chosenColumn = int.Parse(str);
@@ -161,11 +185,12 @@ namespace Minesweeper
                 }
                 catch (Exception)
                 {
+                    continue;
                 }
             }
         }
 
-        private static void Main()
+        static void Main(string[] args)
         {
             Menu();
         }
