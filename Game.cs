@@ -149,7 +149,6 @@ namespace Minesweeper
                 }
                 catch
                 {
-                    // niama smisal tuka
                     continue;
                 }
 
