@@ -33,7 +33,6 @@ namespace Minesweeper
             this.SetMines();
         }
 
-
         public void PrintGameBoard()
         {
             Console.Write("    ");
@@ -275,12 +274,13 @@ namespace Minesweeper
                     }
                 }
             }
+
             return openedFields;
         }
 
         private bool CheckIfWin()
         {
-            int openedFields = CountOpenedFields();
+            int openedFields = this.CountOpenedFields();
             if ((openedFields + this.minesCount) == (this.rows * this.columns))
             {
                 return true;
