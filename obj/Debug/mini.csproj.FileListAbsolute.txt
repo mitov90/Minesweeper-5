@@ -10,3 +10,8 @@ E:\projects\Minesweeper\Minesweeper-5\obj\Debug\Minesweeper.pdb
 E:\projects\Minesweeper\Minesweeper-5\bin\Debug\Minesweeper.exe
 E:\projects\Minesweeper\Minesweeper-5\bin\Debug\Minesweeper.pdb
 E:\projects\Minesweeper\Minesweeper-5\obj\Debug\mini.csprojResolveAssemblyReference.cache
+D:\Git-TeamWork\obj\Debug\Minesweeper.exe
+D:\Git-TeamWork\obj\Debug\Minesweeper.pdb
+D:\Git-TeamWork\bin\Debug\Minesweeper.exe
+D:\Git-TeamWork\bin\Debug\Minesweeper.pdb
+D:\Git-TeamWork\obj\Debug\mini.csprojResolveAssemblyReference.cache
