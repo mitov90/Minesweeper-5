@@ -103,8 +103,8 @@ namespace Minesweeper
                 {
                     try
                     {
-                        Board.Status status = board.OpenField(choosenRow, chosenColumn);
-                        if (status == Board.Status.SteppedOnAMine)
+                        BoardStatus status = board.OpenField(choosenRow, chosenColumn);
+                        if (status == BoardStatus.SteppedOnAMine)
                         {
                             board.PrintAllFields();
                             int score = board.CountOpenedFields();
@@ -124,11 +124,11 @@ namespace Minesweeper
                             str = "restart";
                             continue;
                         }
-                        else if (status == Board.Status.AlreadyOpened)
+                        else if (status == BoardStatus.AlreadyOpened)
                         {
                             Console.WriteLine("Illegal move!");
                         }
-                        else if (status == Board.Status.AllFieldsAreOpened)
+                        else if (status == BoardStatus.AllFieldsAreOpened)
                         {
                             board.PrintAllFields();
                             int score = board.CountOpenedFields();

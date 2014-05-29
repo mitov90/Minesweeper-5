@@ -33,10 +33,6 @@ namespace Minesweeper
             this.SetMines();
         }
 
-        public enum Status
-        {
-            SteppedOnAMine, AlreadyOpened, SuccessfullyOpened, AllFieldsAreOpened
-        }
 
         public void PrintGameBoard()
         {
@@ -86,18 +82,18 @@ namespace Minesweeper
             Console.WriteLine();
         }
 
-        public Status OpenField(int row, int column)
+        public BoardStatus OpenField(int row, int column)
         {
             Field field = this.fields[row][column];
-            Status status;
+            BoardStatus status;
 
             if (field.Status == Field.FieldStatus.IsAMine)
             {
-                status = Status.SteppedOnAMine;
+                status = BoardStatus.SteppedOnAMine;
             }
             else if (field.Status == Field.FieldStatus.Opened)
             {
-                status = Status.AlreadyOpened;
+                status = BoardStatus.AlreadyOpened;
             }
             else
             {
@@ -105,11 +101,11 @@ namespace Minesweeper
                 field.Status = Field.FieldStatus.Opened;
                 if (this.CheckIfWin())
                 {
-                    status = Status.AllFieldsAreOpened;
+                    status = BoardStatus.AllFieldsAreOpened;
                 }
                 else
                 {
-                    status = Status.SuccessfullyOpened;
+                    status = BoardStatus.SuccessfullyOpened;
                 }
             }
 
@@ -266,7 +262,7 @@ namespace Minesweeper
             }
         }
 
-        private bool CheckIfWin()
+        private int CountOpenFields()
         {
             int openedFields = 0;
             for (int i = 0; i < this.fields.Length; i++)
@@ -279,7 +275,12 @@ namespace Minesweeper
                     }
                 }
             }
+            return openedFields;
+        }
 
+        private bool CheckIfWin()
+        {
+            int openedFields = CountOpenedFields();
             if ((openedFields + this.minesCount) == (this.rows * this.columns))
             {
                 return true;
