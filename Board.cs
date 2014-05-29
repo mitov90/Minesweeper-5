@@ -12,7 +12,6 @@ namespace Minesweeper
 
         public Board(int rows, int columns, int minesCount)
         {
-            //I`m just trying to commit
             this.random = new Random();
             this.rows = rows;
             this.columns = columns;
