@@ -72,9 +72,13 @@ namespace Minesweeper
             }
         }
 
+        /// <summary>
+        /// The Main Menu of the Game.
+        /// </summary>
         private static void Menu()
         {
             InitializeTopPlayers();
+
             string str = "restart";
             int choosenRow = 0;
             int chosenColumn = 0;
@@ -84,10 +88,12 @@ namespace Minesweeper
                 if (str == "restart")
                 {
                     InitializeGameBoard();
+
                     Console.WriteLine("Welcome to the game “Minesweeper”. " +
                         "Try to reveal all cells without mines. " +
                         "Use 'top' to view the scoreboard, 'restart' to start a new game" +
                         "and 'exit' to quit the game.");
+
                     board.PrintGameBoard();
                 }
                 else if (str == "exit")
@@ -104,9 +110,11 @@ namespace Minesweeper
                     try
                     {
                         BoardStatus status = board.OpenField(choosenRow, chosenColumn);
+
                         if (status == BoardStatus.SteppedOnAMine)
                         {
                             board.PrintAllFields();
+
                             int score = board.CountOpenedFields();
                             Console.WriteLine("Booooom! You were killed by a mine. You revealed " +
                                 score +
@@ -117,6 +125,7 @@ namespace Minesweeper
                                 Console.WriteLine("Please enter your name for the top scoreboard: ");
                                 string name = Console.ReadLine();
                                 Player player = new Player(name, score);
+
                                 Topadd(ref player);
                                 Top();
                             }
@@ -131,16 +140,17 @@ namespace Minesweeper
                         else if (status == BoardStatus.AllFieldsAreOpened)
                         {
                             board.PrintAllFields();
-                            int score = board.CountOpenedFields();
                             Console.WriteLine("Congratulations! You win!!");
+
+                            int score = board.CountOpenedFields();
+
                             if (CheckHighScores(score))
                             {
                                 Console.WriteLine("Please enter your name for the top scoreboard: ");
                                 string name = Console.ReadLine();
                                 Player player = new Player(name, score);
-                                Topadd(ref player);
 
-                                // pokazvame klasiraneto
+                                Topadd(ref player);
                                 Top();
                             }
 
@@ -159,8 +169,8 @@ namespace Minesweeper
                 }
 
                 Console.Write(System.Environment.NewLine + "Enter row and column: ");
-
                 str = Console.ReadLine();
+
                 try
                 {
                     choosenRow = int.Parse(str);
@@ -168,11 +178,11 @@ namespace Minesweeper
                 }
                 catch
                 {
-                    // niama smisal tuka
                     continue;
                 }
 
                 str = Console.ReadLine();
+
                 try
                 {
                     chosenColumn = int.Parse(str);
