@@ -11,11 +11,6 @@ namespace Minesweeper
             this.status = FieldStatus.Closed;
         }
 
-        public enum FieldStatus
-        {
-            Closed, Opened, IsAMine
-        }
-
         public int Value
         {
             get { return this.value; }

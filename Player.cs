@@ -1,6 +1,7 @@
 ﻿namespace Minesweeper
 {
     using System;
+    using System.Text;
 
     public class Player : IComparable
     {
@@ -31,14 +32,17 @@
                    "A Player object is required for comparison.");
             }
 
-            return -1 * this.score.CompareTo(((Player)obj).score);
+            int comparison = this.score.CompareTo(((Player)obj).score);
+            return -1 * comparison;
         }
 
         public override string ToString()
         {
-            string result = this.name + " --> " + this.score;
-
-            return result;
+            StringBuilder result = new StringBuilder();
+            result.Append(this.name);
+            result.Append(" --> ");
+            result.Append(this.Score);
+            return result.ToString();
         }
     }
 }
