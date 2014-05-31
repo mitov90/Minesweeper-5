@@ -11,6 +11,8 @@ namespace Minesweeper
         private const int MaxMines = 15;
         private const int MaxTopPlayers = 5;
 
+        private static int chosenRow = 0;
+        private static int chosenColumn = 0;
         private static Board board;
         private static List<Player> topPlayers;
 
@@ -78,9 +80,7 @@ namespace Minesweeper
         private static void Menu()
         {
             InitializeTopPlayers();
-
-            int chosenRow = 0;
-            int chosenColumn = 0;
+    
             string gameState = "restart";
 
             while (gameState != "exit")
@@ -191,6 +191,42 @@ namespace Minesweeper
                 catch (Exception)
                 {
                     continue;
+                }
+            }
+        }
+
+        /// <summary>
+        /// The Engine of the Game.
+        /// </summary>
+        private static void Engine()
+        {
+            InitializeGameBoard();
+            board.PrintGameBoard();
+
+            while (true)
+            {
+                Console.WriteLine(System.Environment.NewLine + "Choose and press Enter:\n" + "'" + ConsoleKey.X.ToString() + "'" +
+                    " to return to the menu or\nEnter row and column separated by a space: ");
+                Console.WriteLine();
+                string command = Console.ReadLine();
+
+                if (command.Trim().ToUpper() == ConsoleKey.X.ToString())
+                {
+                    Menu();
+                }
+                else
+                {
+                    try
+                    {
+                        string[] coordinates = command.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        chosenRow = int.Parse(coordinates[0]);
+                        chosenColumn = int.Parse(coordinates[1]);
+                        CheckBoardStatus(chosenRow, chosenColumn);
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Wrong field's coordinates!");
+                    }
                 }
             }
         }
