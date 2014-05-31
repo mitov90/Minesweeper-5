@@ -47,7 +47,7 @@
   <sourcecode name="Board.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014.04.01 10:18:24.000</styleCop>
-      <settingsFile>2014.05.30 10:50:00.838</settingsFile>
+      <settingsFile>2014.05.31 18:48:00.632</settingsFile>
       <sourceFile>2014.05.30 16:56:36.189</sourceFile>
       <parser>2014.04.01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014.04.01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
@@ -70,7 +70,7 @@
   <sourcecode name="BoardStatus.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014.04.01 10:18:24.000</styleCop>
-      <settingsFile>2014.05.30 10:50:00.838</settingsFile>
+      <settingsFile>2014.05.31 18:48:00.632</settingsFile>
       <sourceFile>2014.05.30 10:50:00.822</sourceFile>
       <parser>2014.04.01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014.04.01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
@@ -93,7 +93,7 @@
   <sourcecode name="Field.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014.04.01 10:18:24.000</styleCop>
-      <settingsFile>2014.05.30 10:50:00.838</settingsFile>
+      <settingsFile>2014.05.31 18:48:00.632</settingsFile>
       <sourceFile>2014.05.30 10:50:00.830</sourceFile>
       <parser>2014.04.01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014.04.01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
@@ -116,8 +116,8 @@
   <sourcecode name="Game.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014.04.01 10:18:24.000</styleCop>
-      <settingsFile>2014.05.30 10:50:00.838</settingsFile>
-      <sourceFile>2014.05.31 18:34:10.374</sourceFile>
+      <settingsFile>2014.05.31 18:48:00.632</settingsFile>
+      <sourceFile>2014.05.31 18:57:16.668</sourceFile>
       <parser>2014.04.01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014.04.01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>-1945363787</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -139,7 +139,7 @@
   <sourcecode name="Player.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014.04.01 10:18:24.000</styleCop>
-      <settingsFile>2014.05.30 10:50:00.838</settingsFile>
+      <settingsFile>2014.05.31 18:48:00.632</settingsFile>
       <sourceFile>2014.05.30 10:50:00.836</sourceFile>
       <parser>2014.04.01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014.04.01 10:18:24.000</StyleCop.CSharp.DocumentationRules>

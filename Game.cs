@@ -5,13 +5,11 @@ namespace Minesweeper
 
     public class Game
     {
-        private const int MaxRows = 5;
-        private const int MaxColumns = 10;
-        private const int MaxMines = 15;
-        private const int MaxTopPlayers = 5;
+        private const int MAX_ROWS = 5;
+        private const int MAX_COLUMNS = 10;
+        private const int MAX_MINES = 15;
+        private const int MAX_TOP_PLAYERS = 5;
 
-        private static int chosenRow = 0;
-        private static int chosenColumn = 0;
         private static Board board;
         private static List<Player> topPlayers;
 
@@ -22,13 +20,13 @@ namespace Minesweeper
 
         private static void InitializeGameBoard()
         {
-            board = new Board(MaxRows, MaxColumns, MaxMines);
+            board = new Board(MAX_ROWS, MAX_COLUMNS, MAX_MINES);
         }
 
         private static void InitializeTopPlayers()
         {
             topPlayers = new List<Player>();
-            topPlayers.Capacity = MaxTopPlayers;
+            topPlayers.Capacity = MAX_TOP_PLAYERS;
         }
 
         private static bool CheckHighScores(int score)
@@ -148,6 +146,9 @@ namespace Minesweeper
             InitializeGameBoard();
             board.PrintGameBoard();
 
+            int chosenRow = 0;
+            int chosenColumn = 0;
+
             while (true)
             {
                 Console.WriteLine(System.Environment.NewLine + "Choose and press Enter:\n" + "'" + ConsoleKey.X.ToString() + "'" +
@@ -197,15 +198,7 @@ namespace Minesweeper
                             Console.WriteLine("Booooom! You were killed by a mine. You revealed " +
                                 playerScore + " cells without mines.");
 
-                            if (CheckHighScores(playerScore))
-                            {
-                                Console.WriteLine("Please enter your name for the top players' scoreboard: ");
-                                string playerName = Console.ReadLine();
-                                Player player = new Player(playerName, playerScore);
-
-                                Topadd(ref player);
-                                Top();
-                            }
+                            AddIfTopPlayer(playerScore);
                         }
 
                         break;
@@ -223,15 +216,7 @@ namespace Minesweeper
                             Console.WriteLine("Congratulations! You win!!");
 
                             int playerScore = board.CountOpenedFields();
-                            if (CheckHighScores(playerScore))
-                            {
-                                Console.WriteLine("Please enter your name for the top players' scoreboard: ");
-                                string playerName = Console.ReadLine();
-                                Player player = new Player(playerName, playerScore);
-
-                                Topadd(ref player);
-                                Top();
-                            }
+                            AddIfTopPlayer(playerScore);
                         }
 
                         break;
@@ -247,6 +232,23 @@ namespace Minesweeper
             catch
             {
                 Console.WriteLine("Wrong field's coordinates!");
+            }
+        }
+
+        /// <summary>
+        /// If the current player is with top score, add it to Top list players and show the scoreboard.
+        /// </summary>
+        /// <param name="playerScore">The score of the current player.</param>
+        private static void AddIfTopPlayer(int playerScore)
+        {
+            if (CheckHighScores(playerScore))
+            {
+                Console.WriteLine("Please enter your name for the top players' scoreboard: ");
+                string playerName = Console.ReadLine();
+                Player player = new Player(playerName, playerScore);
+
+                Topadd(ref player);
+                Top();
             }
         }
     }
