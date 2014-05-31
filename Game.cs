@@ -1,4 +1,3 @@
-// vsichko ba4ka, ne butaj!
 namespace Minesweeper
 {
     using System;
@@ -80,117 +79,63 @@ namespace Minesweeper
         private static void Menu()
         {
             InitializeTopPlayers();
-    
-            string gameState = "restart";
 
-            while (gameState != "exit")
+            bool inGame = true;
+
+            while (inGame)
             {
-                if (gameState == "restart")
-                {
-                    InitializeGameBoard();
+                Console.WriteLine();
+                Console.WriteLine("Welcome to the game “Minesweeper”!\nTry to reveal all cells without mines.\nPlease press:\n\n" +
+                                "'" + ConsoleKey.T.ToString() + "' to view the scoreboard\n" +
+                                "'" + ConsoleKey.N.ToString() + "' to start a new game\n" +
+                                "'" + ConsoleKey.Q.ToString() + "' to quit the game!\n\n");
+                Console.WriteLine();
+                ConsoleKeyInfo keyPressed = Console.ReadKey();
+                Console.WriteLine();
 
-                    Console.WriteLine("Welcome to the game “Minesweeper”. " +
-                        "Try to reveal all cells without mines. " +
-                        "Use 'top' to view the scoreboard, 'restart' to start a new game" +
-                        "and 'exit' to quit the game.");
-
-                    board.PrintGameBoard();
-                }
-                else if (gameState == "exit")
+                switch (keyPressed.Key)
                 {
-                    Console.WriteLine("Good bye!");
-                    Console.Read();
-                }
-                else if (gameState == "top")
-                {
-                    Top();
-                }
-                else if (gameState == "coordinates")
-                {
-                    try
-                    {
-                        BoardStatus boardStatus = board.OpenField(chosenRow, chosenColumn);
-
-                        if (boardStatus == BoardStatus.SteppedOnAMine)
+                    ///Start a new Game
+                    case ConsoleKey.N:
                         {
-                            board.PrintAllFields();
+                            Engine();
+                            inGame = false;
+                        }
 
-                            int playerScore = board.CountOpenedFields();
-                            Console.WriteLine("Booooom! You were killed by a mine. You revealed " +
-                                playerScore +
-                                " cells without mines.");
+                        break;
 
-                            if (CheckHighScores(playerScore))
+                    ///Exit the Game
+                    case ConsoleKey.Q:
+                        {
+                            inGame = false;
+                            Console.WriteLine("Good bye!");
+                            Environment.Exit(1);
+                        }
+
+                        break;
+
+                    ///Show Top Scores
+                    case ConsoleKey.T:
+                        {
+                            inGame = true;
+                            if (topPlayers.Count > 0)
                             {
-                                Console.WriteLine("Please enter your name for the top players' scoreboard: ");
-                                string playerName = Console.ReadLine();
-                                Player player = new Player(playerName, playerScore);
-
-                                Topadd(ref player);
                                 Top();
                             }
-
-                            gameState = "restart";
-                            continue;
-                        }
-                        else if (boardStatus == BoardStatus.AlreadyOpened)
-                        {
-                            Console.WriteLine("The field is already opened!");
-                        }
-                        else if (boardStatus == BoardStatus.AllFieldsAreOpened)
-                        {
-                            board.PrintAllFields();
-                            Console.WriteLine("Congratulations! You win!!");
-
-                            int playerScore = board.CountOpenedFields();
-
-                            if (CheckHighScores(playerScore))
+                            else
                             {
-                                Console.WriteLine("Please enter your name for the top players' scoreboard: ");
-                                string playerName = Console.ReadLine();
-                                Player player = new Player(playerName, playerScore);
-
-                                Topadd(ref player);
-                                Top();
+                                Console.WriteLine("There is still no TOP players!");
                             }
-
-                            gameState = "restart";
-                            continue;
                         }
-                        else
+
+                        break;
+                    ///Ask for a choice again
+                    default:
                         {
-                            board.PrintGameBoard();
+                            inGame = true;
                         }
-                    }
-                    catch (Exception)
-                    {
-                        Console.WriteLine("Wrong field's coordinates!");
-                    }
-                }
 
-                Console.Write(System.Environment.NewLine + "Enter row and column: ");
-                gameState = Console.ReadLine();
-
-                try
-                {
-                    chosenRow = int.Parse(gameState);
-                    gameState = "coordinates";
-                }
-                catch
-                {
-                    continue;
-                }
-
-                gameState = Console.ReadLine();
-
-                try
-                {
-                    chosenColumn = int.Parse(gameState);
-                    gameState = "coordinates";
-                }
-                catch (Exception)
-                {
-                    continue;
+                        break;
                 }
             }
         }
