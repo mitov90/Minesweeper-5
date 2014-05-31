@@ -194,5 +194,79 @@ namespace Minesweeper
                 }
             }
         }
+
+        /// <summary>
+        /// Check the current status of the Game and print a result.        
+        /// </summary>
+        /// <param name="chosenRow">Current field's row.</param>
+        /// <param name="chosenColumn">Current field's column.</param>
+        private static void CheckBoardStatus(int chosenRow, int chosenColumn)
+        {
+            try
+            {
+                BoardStatus boardStatus = board.OpenField(chosenRow, chosenColumn);
+
+                switch (boardStatus)
+                {
+                    case BoardStatus.SteppedOnAMine:
+                        {
+                            board.PrintAllFields();
+
+                            int playerScore = board.CountOpenedFields();
+                            Console.WriteLine("Booooom! You were killed by a mine. You revealed " +
+                                playerScore + " cells without mines.");
+
+                            if (CheckHighScores(playerScore))
+                            {
+                                Console.WriteLine("Please enter your name for the top players' scoreboard: ");
+                                string playerName = Console.ReadLine();
+                                Player player = new Player(playerName, playerScore);
+
+                                Topadd(ref player);
+                                Top();
+                            }
+                        }
+
+                        break;
+
+                    case BoardStatus.AlreadyOpened:
+                        {
+                            Console.WriteLine("The field is already opened!");
+                        }
+
+                        break;
+
+                    case BoardStatus.AllFieldsAreOpened:
+                        {
+                            board.PrintAllFields();
+                            Console.WriteLine("Congratulations! You win!!");
+
+                            int playerScore = board.CountOpenedFields();
+                            if (CheckHighScores(playerScore))
+                            {
+                                Console.WriteLine("Please enter your name for the top players' scoreboard: ");
+                                string playerName = Console.ReadLine();
+                                Player player = new Player(playerName, playerScore);
+
+                                Topadd(ref player);
+                                Top();
+                            }
+                        }
+
+                        break;
+
+                    default:
+                        {
+                            board.PrintGameBoard();
+                        }
+
+                        break;
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Wrong field's coordinates!");
+            }
+        }
     }
 }
