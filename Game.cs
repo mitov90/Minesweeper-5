@@ -47,17 +47,24 @@ namespace Minesweeper
             return false;
         }
 
-        private static void Topadd(ref Player player)
+        private static void AddTopPlayer(ref Player newPlayer)
         {
+            if (newPlayer == null)
+            {
+                throw new ArgumentNullException("Player can not be null");
+            }
+
             if (topPlayers.Capacity > topPlayers.Count)
             {
-                topPlayers.Add(player);
+                topPlayers.Add(newPlayer);
                 topPlayers.Sort();
             }
             else
             {
-                topPlayers.RemoveAt(topPlayers.Capacity - 1);
-                topPlayers.Add(player);
+                int lastTopPlayerIndex = topPlayers.Capacity - 1;
+
+                topPlayers.RemoveAt(lastTopPlayerIndex);
+                topPlayers.Add(newPlayer);
                 topPlayers.Sort();
             }
         }
@@ -256,7 +263,7 @@ namespace Minesweeper
                 string playerName = Console.ReadLine();
                 Player player = new Player(playerName, playerScore);
 
-                Topadd(ref player);
+                AddTopPlayer(ref player);
                 ShowTopPlayers();
             }
         }
