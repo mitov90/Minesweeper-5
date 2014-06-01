@@ -29,16 +29,16 @@ namespace Minesweeper
             topPlayers.Capacity = MAX_TOP_PLAYERS;
         }
 
-        private static bool CheckHighScores(int score)
+        private static bool IsHighScore(int currentPlayerScore)
         {
             if (topPlayers.Capacity > topPlayers.Count)
             {
                 return true;
             }
 
-            foreach (Player currentPlayer in topPlayers)
+            foreach (Player topPlayer in topPlayers)
             {
-                if (currentPlayer.Score < score)
+                if (topPlayer.Score < currentPlayerScore)
                 {
                     return true;
                 }
@@ -47,16 +47,16 @@ namespace Minesweeper
             return false;
         }
 
-        private static void AddTopPlayer(ref Player newPlayer)
+        private static void AddTopPlayer(ref Player currentPlayer)
         {
-            if (newPlayer == null)
+            if (currentPlayer == null)
             {
                 throw new ArgumentNullException("Player can not be null");
             }
 
             if (topPlayers.Capacity > topPlayers.Count)
             {
-                topPlayers.Add(newPlayer);
+                topPlayers.Add(currentPlayer);
                 topPlayers.Sort();
             }
             else
@@ -64,7 +64,7 @@ namespace Minesweeper
                 int lastTopPlayerIndex = topPlayers.Capacity - 1;
 
                 topPlayers.RemoveAt(lastTopPlayerIndex);
-                topPlayers.Add(newPlayer);
+                topPlayers.Add(currentPlayer);
                 topPlayers.Sort();
             }
         }
@@ -83,7 +83,7 @@ namespace Minesweeper
             }
             else
             {
-                Console.WriteLine("There is still no TOP players!");
+                Console.WriteLine("There is still no TOP players!---");
             }
         }
 
@@ -257,7 +257,7 @@ namespace Minesweeper
         /// <param name="playerScore">The score of the current player.</param>
         private static void AddIfTopPlayer(int playerScore)
         {
-            if (CheckHighScores(playerScore))
+            if (IsHighScore(playerScore))
             {
                 Console.WriteLine("Please enter your name for the top players' scoreboard: ");
                 string playerName = Console.ReadLine();
