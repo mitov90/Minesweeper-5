@@ -62,12 +62,21 @@ namespace Minesweeper
             }
         }
 
-        private static void Top()
+        private static void ShowTopPlayers()
         {
-            Console.WriteLine("Scoreboard");
-            for (int i = 0; i < topPlayers.Count; i++)
+            if (topPlayers.Count > 0)
             {
-                Console.WriteLine((int)(i + 1) + ". " + topPlayers[i]);
+                Console.WriteLine("Scoreboard");
+                int playerRank = 0;
+                for (int i = 0; i < topPlayers.Count; i++)
+                {
+                    playerRank = i + 1;
+                    Console.WriteLine(playerRank + ". " + topPlayers[i]);
+                }
+            }
+            else
+            {
+                Console.WriteLine("There is still no TOP players!");
             }
         }
 
@@ -118,7 +127,7 @@ namespace Minesweeper
                             inGame = true;
                             if (topPlayers.Count > 0)
                             {
-                                Top();
+                                ShowTopPlayers();
                             }
                             else
                             {
@@ -248,7 +257,7 @@ namespace Minesweeper
                 Player player = new Player(playerName, playerScore);
 
                 Topadd(ref player);
-                Top();
+                ShowTopPlayers();
             }
         }
     }
