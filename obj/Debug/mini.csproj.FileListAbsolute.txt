@@ -20,3 +20,6 @@ E:\projects\JaneAustin\Minesweeper-5\obj\Debug\Minesweeper.pdb
 E:\projects\JaneAustin\Minesweeper-5\bin\Debug\Minesweeper.exe
 E:\projects\JaneAustin\Minesweeper-5\bin\Debug\Minesweeper.pdb
 E:\projects\JaneAustin\Minesweeper-5\obj\Debug\mini.csprojResolveAssemblyReference.cache
+F:\GitHub\Minesweeper-5\bin\Debug\Minesweeper.exe
+F:\GitHub\Minesweeper-5\bin\Debug\Minesweeper.pdb
+F:\GitHub\Minesweeper-5\obj\Debug\mini.csprojResolveAssemblyReference.cache

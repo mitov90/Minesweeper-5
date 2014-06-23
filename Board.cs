@@ -24,7 +24,7 @@ namespace Minesweeper
                 {
                     this.fields[row, col] = new Field();
                 }
-            }            
+            }
 
             this.SetMines();
         }
@@ -182,59 +182,35 @@ namespace Minesweeper
             return number;
         }
 
+        private bool IsMineInPosition(int row, int column)
+        {
+            if ((0 <= row) && (row < this.rows)
+                && (0 <= column) && (column < this.columns)
+                && (this.fields[row, column].Status == FieldStatus.IsAMine))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         private int ScanSurroundingFields(int row, int column)
         {
             int mines = 0;
-            if ((row > 0) &&
-                (column > 0) &&
-                (this.fields[row - 1, column - 1].Status == FieldStatus.IsAMine))
-            {
-                mines++;
-            }
+            int previousRow = row - 1;
+            int nextRow = row + 1;
+            int previousColumn = column - 1;
+            int nextColumn = column + 1;
 
-            if ((row > 0) &&
-                (this.fields[row - 1, column].Status == FieldStatus.IsAMine))
+            for (int i = previousRow; i <= nextRow; i++)
             {
-                mines++;
-            }
-
-            if ((row > 0) &&
-                (column < this.columns - 1) &&
-                (this.fields[row - 1, column + 1].Status == FieldStatus.IsAMine))
-            {
-                mines++;
-            }
-
-            if ((column > 0) &&
-                (this.fields[row, column - 1].Status == FieldStatus.IsAMine))
-            {
-                mines++;
-            }
-
-            if ((column < this.columns - 1) &&
-                (this.fields[row, column + 1].Status == FieldStatus.IsAMine))
-            {
-                mines++;
-            }
-
-            if ((row < this.rows - 1) &&
-                (column > 0) &&
-                (this.fields[row + 1, column - 1].Status == FieldStatus.IsAMine))
-            {
-                mines++;
-            }
-
-            if ((row < this.rows - 1) &&
-                (this.fields[row + 1, column].Status == FieldStatus.IsAMine))
-            {
-                mines++;
-            }
-
-            if ((row < this.rows - 1) &&
-                (column < this.columns - 1) &&
-                (this.fields[row + 1, column + 1].Status == FieldStatus.IsAMine))
-            {
-                mines++;
+                for (int j = previousColumn; j <= nextColumn; j++)
+                {
+                    if (!(i == row && j == column) && IsMineInPosition(i, j))
+                    {
+                        mines++;
+                    }
+                }
             }
 
             return mines;
@@ -246,6 +222,7 @@ namespace Minesweeper
             {
                 int row = this.GenerateRandomNumber(0, this.rows);
                 int column = this.GenerateRandomNumber(0, this.columns);
+
                 if (this.fields[row, column].Status == FieldStatus.IsAMine)
                 {
                     i--;
