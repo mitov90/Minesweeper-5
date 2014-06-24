@@ -1,0 +1,5 @@
+F:\GitHub\Minesweeper-5\bin\Debug\Minesweeper.exe
+F:\GitHub\Minesweeper-5\bin\Debug\Minesweeper.pdb
+F:\GitHub\Minesweeper-5\obj\Debug\Minesweeper.csprojResolveAssemblyReference.cache
+F:\GitHub\Minesweeper-5\obj\Debug\Minesweeper.exe
+F:\GitHub\Minesweeper-5\obj\Debug\Minesweeper.pdb

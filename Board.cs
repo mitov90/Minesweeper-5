@@ -206,7 +206,7 @@ namespace Minesweeper
             {
                 for (int j = previousColumn; j <= nextColumn; j++)
                 {
-                    if (!(i == row && j == column) && IsMineInPosition(i, j))
+                    if (!(i == row && j == column) && this.IsMineInPosition(i, j))
                     {
                         mines++;
                     }
