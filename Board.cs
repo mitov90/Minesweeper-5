@@ -18,15 +18,24 @@ namespace Minesweeper
             this.minesCount = minesCount;
             this.fields = new Field[rows, columns];
 
-            for (int row = 0; row < this.fields.GetLength(0); row++)
+            this.fields = PrepareMatrix(this.rows, this.columns);
+
+            this.SetMines();
+        }
+
+        public static Field[,] PrepareMatrix(int rows, int cols)
+        {
+            var fieldMatrix = new Field[rows, cols];
+
+            for (int row = 0; row < rows; row++)
             {
-                for (int col = 0; col < this.fields.GetLength(1); col++)
+                for (int col = 0; col < cols; col++)
                 {
-                    this.fields[row, col] = new Field();
+                    fieldMatrix[row, col] = new Field();
                 }
             }
 
-            this.SetMines();
+            return fieldMatrix;
         }
 
         public void PrintGameBoard()
