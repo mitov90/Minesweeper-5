@@ -43,5 +43,29 @@ namespace Minesweeper
                 this.status = value;
             }
         }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Field))
+            {
+                return false;
+            }
+            Field field = (Field)obj;
+            if (!Object.Equals(this.Status, field.Status))
+            {
+                return false;
+            }
+
+            if (!Object.Equals(this.Value, field.Value))
+            {
+                return false;
+            }
+
+            return true;
+        }
+        public override int GetHashCode()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
