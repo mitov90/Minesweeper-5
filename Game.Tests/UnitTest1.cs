@@ -20,6 +20,24 @@
             };
 
             Field[,] matrixInitialized = Board.PrepareMatrix(5, 10);
+            bool result = AreMatricesEqual(expected, matrixInitialized);
+
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void PrepareMatrixSecondTest()
+        {
+            Field[,] expected =
+            {
+                { new Field(), new Field() }, 
+                { new Field(), new Field() },                
+            };
+
+            Field[,] matrixInitialized = Board.PrepareMatrix(2, 2);
+            bool result = AreMatricesEqual(expected, matrixInitialized);
+
+            Assert.IsTrue(result);
         }
 
         [TestMethod]
