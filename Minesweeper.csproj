@@ -63,6 +63,7 @@
     <Compile Include="Field.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="BoardStatus.cs" />
+    <Compile Include="Renderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

@@ -41,6 +41,44 @@
         }
 
         [TestMethod]
+        public void PrepareMatrixFalseTest()
+        {
+            Field[,] expected =
+            {
+                { new Field(), new Field(), new Field(), new Field() }, 
+                { new Field(), new Field(), new Field(), new Field() },
+                { new Field(), new Field(), new Field(), new Field() },
+                { new Field(), new Field(), new Field(), new Field() },
+                { new Field(), new Field(), new Field(), new Field() },
+            };
+
+            //different cols count
+            Field[,] matrixInitialized = Board.PrepareMatrix(5, 5);
+            bool result = AreMatricesEqual(expected, matrixInitialized);
+
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void PrepareMatrixFalseSecondTest()
+        {
+            Field[,] expected =
+            {
+                { new Field(), new Field(), new Field(), new Field() }, 
+                { new Field(), new Field(), new Field(), new Field() },
+                { new Field(), new Field(), new Field(), new Field() },
+                { new Field(), new Field(), new Field(), new Field() },
+                { new Field(), new Field(), new Field(), new Field() },
+            };
+
+            //different rows count
+            Field[,] matrixInitialized = Board.PrepareMatrix(6, 4);
+            bool result = AreMatricesEqual(expected, matrixInitialized);
+
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
         public void EqualsFieldsTest()
         {
             Field first = new Field();
