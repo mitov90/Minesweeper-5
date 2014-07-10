@@ -1,5 +1,7 @@
 namespace Minesweeper
 {
+    using System;
+
     public class Field
     {
         private int value;
@@ -13,14 +15,33 @@ namespace Minesweeper
 
         public int Value
         {
-            get { return this.value; }
-            set { this.value = value; }
+            get 
+            { 
+                return this.value;
+            }
+
+            set 
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentException("Invalid field value. It cannot be negative number.");
+                }
+
+                this.value = value; 
+            }
         }
 
         public FieldStatus Status
         {
-            get { return this.status; }
-            set { this.status = value; }
+            get 
+            { 
+                return this.status;
+            }
+
+            set 
+            { 
+                this.status = value;
+            }
         }
     }
 }

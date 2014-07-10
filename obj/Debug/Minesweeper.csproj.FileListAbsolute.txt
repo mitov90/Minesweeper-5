@@ -5,3 +5,6 @@ F:\GitHub\Minesweeper-5\obj\Debug\Minesweeper.exe
 F:\GitHub\Minesweeper-5\obj\Debug\Minesweeper.pdb
 D:\KPK PROJECT\obj\Debug\Minesweeper.exe
 D:\KPK PROJECT\obj\Debug\Minesweeper.pdb
+D:\KPK PROJECT\bin\Debug\Minesweeper.exe
+D:\KPK PROJECT\bin\Debug\Minesweeper.pdb
+D:\KPK PROJECT\obj\Debug\Minesweeper.csprojResolveAssemblyReference.cache
