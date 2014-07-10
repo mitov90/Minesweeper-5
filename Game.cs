@@ -2,6 +2,7 @@ namespace Minesweeper
 {
     using System;
     using System.Collections.Generic;
+    using Interfaces;
 
     public class Game
     {
@@ -11,7 +12,7 @@ namespace Minesweeper
         private const int MAX_TOP_PLAYERS = 5;
 
         private static Board board;
-        private static List<Player> topPlayers;
+        private static List<IPlayer> topPlayers;
 
         public static void Main(string[] args)
         {
@@ -25,7 +26,7 @@ namespace Minesweeper
 
         private static void InitializeTopPlayers()
         {
-            topPlayers = new List<Player>();
+            topPlayers = new List<IPlayer>();
             topPlayers.Capacity = MAX_TOP_PLAYERS;
         }
 
