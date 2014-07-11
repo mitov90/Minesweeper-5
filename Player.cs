@@ -4,7 +4,7 @@
     using System.Text;
     using Interfaces;
 
-    public class Player :IPlayer, IComparable
+    public class Player : IPlayer, IComparable
     {
         private string name;
         private int score;
@@ -59,13 +59,13 @@
                    "A Player object is required for comparison.");
             }
 
-            int comparison = this.score.CompareTo(((Player)obj).score);
+            var comparison = this.score.CompareTo(((Player)obj).score);
             return -1 * comparison;
         }
 
         public override string ToString()
         {
-            StringBuilder result = new StringBuilder();
+            var result = new StringBuilder();
             result.Append(this.name);
             result.Append(" --> ");
             result.Append(this.Score);

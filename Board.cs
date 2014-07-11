@@ -4,11 +4,11 @@ namespace Minesweeper
 
     public class Board
     {
-        private int rows;
-        private int columns;
-        private int minesCount;
-        private Field[,] fields;
-        private Random random;
+        private readonly int rows;
+        private readonly int columns;
+        private readonly int minesCount;
+        private readonly Field[,] fields;
+        private readonly Random random;
 
         public Board(int rows, int columns, int minesCount)
         {
@@ -27,9 +27,9 @@ namespace Minesweeper
         {
             var fieldMatrix = new Field[rows, cols];
 
-            for (int row = 0; row < rows; row++)
+            for (var row = 0; row < rows; row++)
             {
-                for (int col = 0; col < cols; col++)
+                for (var col = 0; col < cols; col++)
                 {
                     fieldMatrix[row, col] = new Field();
                 }
@@ -41,7 +41,7 @@ namespace Minesweeper
         public void PrintGameBoard()
         {
             Console.Write("    ");
-            for (int i = 0; i < this.columns; i++)
+            for (var i = 0; i < this.columns; i++)
             {
                 Console.Write(i + " ");
             }
@@ -49,20 +49,20 @@ namespace Minesweeper
             Console.WriteLine();
 
             Console.Write("   _");
-            for (int i = 0; i < this.columns; i++)
+            for (var i = 0; i < this.columns; i++)
             {
                 Console.Write("__");
             }
 
             Console.WriteLine();
 
-            for (int i = 0; i < this.rows; i++)
+            for (var i = 0; i < this.rows; i++)
             {
                 Console.Write(i);
                 Console.Write(" | ");
-                for (int j = 0; j < this.columns; j++)
+                for (var j = 0; j < this.columns; j++)
                 {
-                    Field currentField = this.fields[i, j];
+                    var currentField = this.fields[i, j];
                     if (currentField.Status == FieldStatus.Opened)
                     {
                         Console.Write(this.fields[i, j].Value);
@@ -78,7 +78,7 @@ namespace Minesweeper
             }
 
             Console.Write("   _");
-            for (int i = 0; i < this.columns; i++)
+            for (var i = 0; i < this.columns; i++)
             {
                 Console.Write("__");
             }
@@ -88,29 +88,22 @@ namespace Minesweeper
 
         public BoardStatus OpenField(int row, int column)
         {
-            Field field = this.fields[row, column];
+            var field = this.fields[row, column];
             BoardStatus status;
 
-            if (field.Status == FieldStatus.IsAMine)
+            switch (field.Status)
             {
-                status = BoardStatus.SteppedOnAMine;
-            }
-            else if (field.Status == FieldStatus.Opened)
-            {
-                status = BoardStatus.AlreadyOpened;
-            }
-            else
-            {
-                field.Value = this.ScanSurroundingFields(row, column);
-                field.Status = FieldStatus.Opened;
-                if (this.CheckIfWin())
-                {
-                    status = BoardStatus.AllFieldsAreOpened;
-                }
-                else
-                {
-                    status = BoardStatus.SuccessfullyOpened;
-                }
+                case FieldStatus.IsAMine:
+                    status = BoardStatus.SteppedOnAMine;
+                    break;
+                case FieldStatus.Opened:
+                    status = BoardStatus.AlreadyOpened;
+                    break;
+                default:
+                    field.Value = this.ScanSurroundingFields(row, column);
+                    field.Status = FieldStatus.Opened;
+                    status = this.CheckIfWin() ? BoardStatus.AllFieldsAreOpened : BoardStatus.SuccessfullyOpened;
+                    break;
             }
 
             return status;
@@ -119,7 +112,7 @@ namespace Minesweeper
         public void PrintAllFields()
         {
             Console.Write("    ");
-            for (int i = 0; i < this.columns; i++)
+            for (var i = 0; i < this.columns; i++)
             {
                 Console.Write(i + " ");
             }
@@ -127,32 +120,32 @@ namespace Minesweeper
             Console.WriteLine();
 
             Console.Write("   _");
-            for (int i = 0; i < this.columns; i++)
+            for (var i = 0; i < this.columns; i++)
             {
                 Console.Write("__");
             }
 
             Console.WriteLine();
 
-            for (int i = 0; i < this.rows; i++)
+            for (var i = 0; i < this.rows; i++)
             {
                 Console.Write(i);
                 Console.Write(" | ");
-                for (int j = 0; j < this.columns; j++)
+                for (var j = 0; j < this.columns; j++)
                 {
-                    Field currentField = this.fields[i, j];
-                    if (currentField.Status == FieldStatus.Opened)
+                    var currentField = this.fields[i, j];
+                    switch (currentField.Status)
                     {
-                        Console.Write(this.fields[i, j].Value + " ");
-                    }
-                    else if (currentField.Status == FieldStatus.IsAMine)
-                    {
-                        Console.Write("* ");
-                    }
-                    else
-                    {
-                        currentField.Value = this.ScanSurroundingFields(i, j);
-                        Console.Write(this.fields[i, j].Value + " ");
+                        case FieldStatus.Opened:
+                            Console.Write(this.fields[i, j].Value + " ");
+                            break;
+                        case FieldStatus.IsAMine:
+                            Console.Write("* ");
+                            break;
+                        default:
+                            currentField.Value = this.ScanSurroundingFields(i, j);
+                            Console.Write(this.fields[i, j].Value + " ");
+                            break;
                     }
                 }
 
@@ -160,7 +153,7 @@ namespace Minesweeper
             }
 
             Console.Write("   _");
-            for (int i = 0; i < this.columns; i++)
+            for (var i = 0; i < this.columns; i++)
             {
                 Console.Write("__");
             }
@@ -170,10 +163,10 @@ namespace Minesweeper
 
         public int CountOpenedFields()
         {
-            int count = 0;
-            for (int i = 0; i < this.fields.GetLength(0); i++)
+            var count = 0;
+            for (var i = 0; i < this.fields.GetLength(0); i++)
             {
-                for (int j = 0; j < this.fields.GetLength(1); j++)
+                for (var j = 0; j < this.fields.GetLength(1); j++)
                 {
                     if (this.fields[i, j].Status == FieldStatus.Opened)
                     {
@@ -187,33 +180,28 @@ namespace Minesweeper
 
         private int GenerateRandomNumber(int minValue, int maxValue)
         {
-            int number = this.random.Next(minValue, maxValue);
+            var number = this.random.Next(minValue, maxValue);
             return number;
         }
 
         private bool IsMineInPosition(int row, int column)
         {
-            if ((0 <= row) && (row < this.rows)
-                && (0 <= column) && (column < this.columns)
-                && (this.fields[row, column].Status == FieldStatus.IsAMine))
-            {
-                return true;
-            }
-
-            return false;
+            return (0 <= row) && (row < this.rows)
+                   && (0 <= column) && (column < this.columns)
+                   && (this.fields[row, column].Status == FieldStatus.IsAMine);
         }
 
         private int ScanSurroundingFields(int row, int column)
         {
-            int mines = 0;
-            int previousRow = row - 1;
-            int nextRow = row + 1;
-            int previousColumn = column - 1;
-            int nextColumn = column + 1;
+            var mines = 0;
+            var previousRow = row - 1;
+            var nextRow = row + 1;
+            var previousColumn = column - 1;
+            var nextColumn = column + 1;
 
-            for (int i = previousRow; i <= nextRow; i++)
+            for (var i = previousRow; i <= nextRow; i++)
             {
-                for (int j = previousColumn; j <= nextColumn; j++)
+                for (var j = previousColumn; j <= nextColumn; j++)
                 {
                     if (!(i == row && j == column) && this.IsMineInPosition(i, j))
                     {
@@ -227,10 +215,10 @@ namespace Minesweeper
 
         private void SetMines()
         {
-            for (int i = 0; i < this.minesCount; i++)
+            for (var i = 0; i < this.minesCount; i++)
             {
-                int row = this.GenerateRandomNumber(0, this.rows);
-                int column = this.GenerateRandomNumber(0, this.columns);
+                var row = this.GenerateRandomNumber(0, this.rows);
+                var column = this.GenerateRandomNumber(0, this.columns);
 
                 if (this.fields[row, column].Status == FieldStatus.IsAMine)
                 {

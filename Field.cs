@@ -5,12 +5,11 @@ namespace Minesweeper
     public class Field
     {
         private int value;
-        private FieldStatus status;
 
         public Field()
         {
             this.value = 0;
-            this.status = FieldStatus.Closed;
+            this.Status = FieldStatus.Closed;
         }
 
         public int Value
@@ -31,18 +30,7 @@ namespace Minesweeper
             }
         }
 
-        public FieldStatus Status
-        {
-            get 
-            { 
-                return this.status;
-            }
-
-            set 
-            { 
-                this.status = value;
-            }
-        }
+        public FieldStatus Status { get; set; }
 
         public override bool Equals(object obj)
         {
@@ -50,19 +38,12 @@ namespace Minesweeper
             {
                 return false;
             }
-            Field field = (Field)obj;
-            if (!Object.Equals(this.Status, field.Status))
-            {
-                return false;
-            }
 
-            if (!Object.Equals(this.Value, field.Value))
-            {
-                return false;
-            }
-
-            return true;
+            var field = (Field)obj;
+            return object.Equals(this.Status, field.Status) 
+                   && object.Equals(this.Value, field.Value);
         }
+
         public override int GetHashCode()
         {
             throw new NotImplementedException();

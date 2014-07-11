@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Minesweeper.Interfaces
+﻿namespace Minesweeper.Interfaces
 {
-    interface IPlayer
+    public interface IPlayer
     {
         string ToString();
     }

@@ -26,8 +26,7 @@ namespace Minesweeper
 
         private static void InitializeTopPlayers()
         {
-            topPlayers = new List<IPlayer>();
-            topPlayers.Capacity = MAX_TOP_PLAYERS;
+            topPlayers = new List<IPlayer> { Capacity = MAX_TOP_PLAYERS };
         }
 
         private static bool IsHighScore(int currentPlayerScore)
@@ -37,8 +36,9 @@ namespace Minesweeper
                 return true;
             }
 
-            foreach (Player topPlayer in topPlayers)
+            foreach (var player in topPlayers)
             {
+                var topPlayer = (Player)player;
                 if (topPlayer.Score < currentPlayerScore)
                 {
                     return true;
@@ -52,7 +52,7 @@ namespace Minesweeper
         {
             if (currentPlayer == null)
             {
-                throw new ArgumentNullException("Player can not be null");
+                throw new ArgumentNullException("currentPlayer");
             }
 
             if (topPlayers.Capacity > topPlayers.Count)
@@ -62,7 +62,7 @@ namespace Minesweeper
             }
             else
             {
-                int lastTopPlayerIndex = topPlayers.Capacity - 1;
+                var lastTopPlayerIndex = topPlayers.Capacity - 1;
 
                 topPlayers.RemoveAt(lastTopPlayerIndex);
                 topPlayers.Add(currentPlayer);
@@ -75,10 +75,9 @@ namespace Minesweeper
             if (topPlayers.Count > 0)
             {
                 Console.WriteLine("Scoreboard");
-                int playerRank = 0;
-                for (int i = 0; i < topPlayers.Count; i++)
+                for (var i = 0; i < topPlayers.Count; i++)
                 {
-                    playerRank = i + 1;
+                    var playerRank = i + 1;
                     Console.WriteLine(playerRank + ". " + topPlayers[i]);
                 }
             }
@@ -110,7 +109,7 @@ namespace Minesweeper
 
                 switch (keyPressed.Key)
                 {
-                    ///Start a new Game
+                        // Start a new Game
                     case ConsoleKey.N:
                         {
                             Engine();
@@ -119,7 +118,7 @@ namespace Minesweeper
 
                         break;
 
-                    ///Exit the Game
+                    // Exit the Game
                     case ConsoleKey.Q:
                         {
                             inGame = false;
@@ -129,10 +128,9 @@ namespace Minesweeper
 
                         break;
 
-                    ///Show Top Scores
+                    // Show Top Scores
                     case ConsoleKey.T:
                         {
-                            inGame = true;
                             if (topPlayers.Count > 0)
                             {
                                 ShowTopPlayers();
@@ -144,10 +142,10 @@ namespace Minesweeper
                         }
 
                         break;
-                    ///Ask for a choice again
+
+                        // Ask for a choice again
                     default:
                         {
-                            inGame = true;
                         }
 
                         break;
@@ -163,17 +161,14 @@ namespace Minesweeper
             InitializeGameBoard();
             board.PrintGameBoard();
 
-            int chosenRow = 0;
-            int chosenColumn = 0;
-
             while (true)
             {
-                Console.WriteLine(System.Environment.NewLine + "Choose and press Enter:\n" + "'" + ConsoleKey.X.ToString() + "'" +
+                Console.WriteLine(Environment.NewLine + "Choose and press Enter:\n" + "'" + ConsoleKey.X.ToString() + "'" +
                     " to return to the menu or\nEnter row and column separated by a space: ");
                 Console.WriteLine();
-                string command = Console.ReadLine();
+                var command = Console.ReadLine();
 
-                if (command.Trim().ToUpper() == ConsoleKey.X.ToString())
+                if (command != null && command.Trim().ToUpper() == ConsoleKey.X.ToString())
                 {
                     Menu();
                 }
@@ -181,10 +176,13 @@ namespace Minesweeper
                 {
                     try
                     {
-                        string[] coordinates = command.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                        chosenRow = int.Parse(coordinates[0]);
-                        chosenColumn = int.Parse(coordinates[1]);
-                        CheckBoardStatus(chosenRow, chosenColumn);
+                        if (command != null)
+                        {
+                            var coordinates = command.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            var chosenRow = int.Parse(coordinates[0]);
+                            var chosenColumn = int.Parse(coordinates[1]);
+                            CheckBoardStatus(chosenRow, chosenColumn);
+                        }
                     }
                     catch
                     {
@@ -203,7 +201,7 @@ namespace Minesweeper
         {
             try
             {
-                BoardStatus boardStatus = board.OpenField(chosenRow, chosenColumn);
+                var boardStatus = board.OpenField(chosenRow, chosenColumn);
 
                 switch (boardStatus)
                 {
@@ -211,7 +209,7 @@ namespace Minesweeper
                         {
                             board.PrintAllFields();
 
-                            int playerScore = board.CountOpenedFields();
+                            var playerScore = board.CountOpenedFields();
                             Console.WriteLine("Booooom! You were killed by a mine. You revealed " +
                                 playerScore + " cells without mines.");
 
@@ -232,7 +230,7 @@ namespace Minesweeper
                             board.PrintAllFields();
                             Console.WriteLine("Congratulations! You win!!");
 
-                            int playerScore = board.CountOpenedFields();
+                            var playerScore = board.CountOpenedFields();
                             AddIfTopPlayer(playerScore);
                         }
 
@@ -261,8 +259,8 @@ namespace Minesweeper
             if (IsHighScore(playerScore))
             {
                 Console.WriteLine("Please enter your name for the top players' scoreboard: ");
-                string playerName = Console.ReadLine();
-                Player player = new Player(playerName, playerScore);
+                var playerName = Console.ReadLine();
+                var player = new Player(playerName, playerScore);
 
                 AddTopPlayer(ref player);
                 ShowTopPlayers();

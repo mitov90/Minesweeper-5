@@ -1,6 +1,5 @@
 ﻿namespace Game.Tests
 {
-    using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Minesweeper;
 
@@ -19,8 +18,8 @@
                 { new Field(), new Field(), new Field(), new Field(), new Field(), new Field(), new Field(), new Field(), new Field(), new Field() },
             };
 
-            Field[,] matrixInitialized = Board.PrepareMatrix(5, 10);
-            bool result = AreMatricesEqual(expected, matrixInitialized);
+            var matrixInitialized = Board.PrepareMatrix(5, 10);
+            var result = this.AreMatricesEqual(expected, matrixInitialized);
 
             Assert.IsTrue(result);
         }
@@ -34,8 +33,8 @@
                 { new Field(), new Field() },                
             };
 
-            Field[,] matrixInitialized = Board.PrepareMatrix(2, 2);
-            bool result = AreMatricesEqual(expected, matrixInitialized);
+            var matrixInitialized = Board.PrepareMatrix(2, 2);
+            var result = this.AreMatricesEqual(expected, matrixInitialized);
 
             Assert.IsTrue(result);
         }
@@ -52,9 +51,9 @@
                 { new Field(), new Field(), new Field(), new Field() },
             };
 
-            //different cols count
-            Field[,] matrixInitialized = Board.PrepareMatrix(5, 5);
-            bool result = AreMatricesEqual(expected, matrixInitialized);
+            // different cols count
+            var matrixInitialized = Board.PrepareMatrix(5, 5);
+            var result = this.AreMatricesEqual(expected, matrixInitialized);
 
             Assert.IsFalse(result);
         }
@@ -71,9 +70,9 @@
                 { new Field(), new Field(), new Field(), new Field() },
             };
 
-            //different rows count
-            Field[,] matrixInitialized = Board.PrepareMatrix(6, 4);
-            bool result = AreMatricesEqual(expected, matrixInitialized);
+            // different rows count
+            var matrixInitialized = Board.PrepareMatrix(6, 4);
+            var result = this.AreMatricesEqual(expected, matrixInitialized);
 
             Assert.IsFalse(result);
         }
@@ -81,10 +80,10 @@
         [TestMethod]
         public void EqualsFieldsTest()
         {
-            Field first = new Field();
-            Field second = new Field();
+            var first = new Field();
+            var second = new Field();
 
-            bool equal = first.Equals(second);
+            var equal = first.Equals(second);
 
             Assert.IsTrue(equal);
         }
@@ -92,10 +91,10 @@
         [TestMethod]
         public void EqualsFieldsNullableTest()
         {
-            Field first = new Field();
+            var first = new Field();
             Field second = null;
 
-            bool equal = first.Equals(second);
+            var equal = first.Equals(second);
 
             Assert.IsFalse(equal);
         }
@@ -112,9 +111,9 @@
                 return false;
             }
 
-            for (int row = 0; row < first.GetLength(0); row++)
+            for (var row = 0; row < first.GetLength(0); row++)
             {
-                for (int col = 0; col < first.GetLength(1); col++)
+                for (var col = 0; col < first.GetLength(1); col++)
                 {
                     if (!first[row, col].Equals(second[row, col]))
                     {
