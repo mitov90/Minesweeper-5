@@ -61,6 +61,7 @@
     <Compile Include="FieldStatus.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Field.cs" />
+    <Compile Include="GameStarter.cs" />
     <Compile Include="Interfaces\IPlayer.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="BoardStatus.cs" />
