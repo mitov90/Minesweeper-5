@@ -1,6 +1,7 @@
 namespace Minesweeper
 {
     using System;
+    using Interfaces;
 
     public class Board
     {
@@ -253,6 +254,11 @@ namespace Minesweeper
             }
 
             return count;
+        }
+
+        public void Accept(IVisitor visitor)
+        {
+            visitor.Visit(this);
         }
 
         private int GenerateRandomNumber(int minValue, int maxValue)

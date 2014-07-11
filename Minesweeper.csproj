@@ -63,6 +63,8 @@
     <Compile Include="Field.cs" />
     <Compile Include="GameStarter.cs" />
     <Compile Include="Interfaces\IPlayer.cs" />
+    <Compile Include="Interfaces\IVisitor.cs" />
+    <Compile Include="MineSetterVisitor.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="BoardStatus.cs" />
   </ItemGroup>
