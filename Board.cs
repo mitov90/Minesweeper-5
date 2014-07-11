@@ -4,11 +4,11 @@ namespace Minesweeper
 
     public class Board
     {
-        private readonly int rows;
-        private readonly int columns;
-        private readonly int minesCount;
-        private readonly Field[,] fields;
-        private readonly Random random;
+        private int rows;
+        private int columns;
+        private int minesCount;
+        private Field[,] fields;
+        private Random random;
 
         public Board(int rows, int columns, int minesCount)
         {
@@ -21,6 +21,83 @@ namespace Minesweeper
             this.fields = PrepareMatrix(this.rows, this.columns);
 
             this.SetMines();
+        }
+
+        public int Rows
+        {
+            get
+            {
+                return this.rows;
+            }
+
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentException("Rows cannot be less than zero.");
+                }
+
+                this.rows = value;
+            }
+        }
+
+        public int Columns
+        {
+            get
+            {
+                return this.columns;
+            }
+
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentException("Columns cannot be less than zero.");
+                }
+
+                this.columns = value;
+            }
+        }
+
+        public int MinesCount
+        {
+            get
+            {
+                return this.minesCount;
+            }
+
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentException("There should be positive number of mines in the game.");
+                }
+
+                this.minesCount = value;
+            }
+        }
+
+        public Field this[int row, int col]
+        {
+            get
+            {
+                if (!this.IsPositionValid(row, col))
+                {
+                    throw new IndexOutOfRangeException("Invalid index");
+                }
+
+                return this.fields[row, col];
+            }
+
+            set
+            {
+                if (!this.IsPositionValid(row, col))
+                {
+                    throw new IndexOutOfRangeException("Invalid index");
+                }
+
+                this.fields[row, col] = value;
+            }
         }
 
         public static Field[,] PrepareMatrix(int rows, int cols)
@@ -240,6 +317,16 @@ namespace Minesweeper
             }
 
             return false;
+        }
+
+        private bool IsPositionValid(int row, int col)
+        {
+            if ((row < 0 || row >= this.fields.GetLength(0)) || (col < 0 || col >= this.fields.GetLength(1)))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
