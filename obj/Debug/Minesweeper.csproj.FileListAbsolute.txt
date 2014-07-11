@@ -13,3 +13,8 @@ Y:\Dropbox\Telerik\High-Quality-Code\Teamwork\Minesweeper-5\obj\Debug\Minesweepe
 Y:\Dropbox\Telerik\High-Quality-Code\Teamwork\Minesweeper-5\obj\Debug\Minesweeper.csprojResolveAssemblyReference.cache
 Y:\Dropbox\Telerik\High-Quality-Code\Teamwork\Minesweeper-5\bin\Debug\Minesweeper.exe
 Y:\Dropbox\Telerik\High-Quality-Code\Teamwork\Minesweeper-5\bin\Debug\Minesweeper.pdb
+D:\CURRENT_PROJECT\obj\Debug\Minesweeper.exe
+D:\CURRENT_PROJECT\obj\Debug\Minesweeper.pdb
+D:\CURRENT_PROJECT\bin\Debug\Minesweeper.exe
+D:\CURRENT_PROJECT\bin\Debug\Minesweeper.pdb
+D:\CURRENT_PROJECT\obj\Debug\Minesweeper.csprojResolveAssemblyReference.cache

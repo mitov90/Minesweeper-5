@@ -237,4 +237,7 @@
     </timestamps>
     <violations />
   </sourcecode>
+  <project key="1506491997">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
 </stylecopresultscache>
