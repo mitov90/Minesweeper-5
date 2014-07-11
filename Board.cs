@@ -20,8 +20,6 @@ namespace Minesweeper
             this.fields = new Field[rows, columns];
 
             this.fields = PrepareMatrix(this.rows, this.columns);
-
-            this.SetMines();
         }
 
         public int Rows
@@ -295,25 +293,7 @@ namespace Minesweeper
 
             return mines;
         }
-
-        private void SetMines()
-        {
-            for (var i = 0; i < this.minesCount; i++)
-            {
-                var row = this.GenerateRandomNumber(0, this.rows);
-                var column = this.GenerateRandomNumber(0, this.columns);
-
-                if (this.fields[row, column].Status == FieldStatus.IsAMine)
-                {
-                    i--;
-                }
-                else
-                {
-                    this.fields[row, column].Status = FieldStatus.IsAMine;
-                }
-            }
-        }
-
+        
         private bool CheckIfWin()
         {
             int openedFields = this.CountOpenedFields();
