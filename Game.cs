@@ -23,7 +23,7 @@ namespace Minesweeper
         /// <summary>
         /// The Main Menu of the Game.
         /// </summary>
-        public void Menu()
+        public void Run()
         {
             bool inGame = true;
 
@@ -159,7 +159,7 @@ namespace Minesweeper
 
                 if (command != null && command.Trim().ToUpper() == ConsoleKey.X.ToString())
                 {
-                    this.Menu();
+                    this.Run();
                 }
                 else
                 {

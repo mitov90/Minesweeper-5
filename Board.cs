@@ -255,13 +255,7 @@ namespace Minesweeper
         public void Accept(IVisitor visitor)
         {
             visitor.Visit(this);
-        }
-
-        private int GenerateRandomNumber(int minValue, int maxValue)
-        {
-            var number = this.random.Next(minValue, maxValue);
-            return number;
-        }
+        }        
 
         private bool IsMineInPosition(int row, int column)
         {
