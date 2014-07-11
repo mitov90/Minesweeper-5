@@ -9,11 +9,9 @@ namespace Minesweeper
         private int columns;
         private int minesCount;
         private Field[,] fields;
-        private Random random;
 
         public Board(int rows, int columns, int minesCount)
         {
-            this.random = new Random();
             this.rows = rows;
             this.columns = columns;
             this.minesCount = minesCount;
