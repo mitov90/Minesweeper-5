@@ -176,7 +176,7 @@ namespace Minesweeper
                             var coordinates = command.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                             var chosenRow = int.Parse(coordinates[0]);
                             var chosenColumn = int.Parse(coordinates[1]);
-                            this.CheckBoardStatus(chosenRow, chosenColumn);
+                            this.IsGameOver(chosenRow, chosenColumn);
                         }
                     }
                     catch
@@ -192,7 +192,7 @@ namespace Minesweeper
         /// </summary>
         /// <param name="chosenRow">Current field's row.</param>
         /// <param name="chosenColumn">Current field's column.</param>
-        private void CheckBoardStatus(int chosenRow, int chosenColumn)
+        private void IsGameOver(int chosenRow, int chosenColumn)
         {
             try
             {
