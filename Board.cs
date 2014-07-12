@@ -3,7 +3,7 @@ namespace Minesweeper
     using System;
     using Interfaces;
 
-    public class Board : IBoard
+    public class Board : IBoard, IAcceptable
     {
         private int rows;
         private int columns;

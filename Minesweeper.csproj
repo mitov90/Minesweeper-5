@@ -64,6 +64,7 @@
     <Compile Include="Game.cs" />
     <Compile Include="Field.cs" />
     <Compile Include="GameStarter.cs" />
+    <Compile Include="Interfaces\IAcceptable.cs" />
     <Compile Include="Interfaces\IBoard.cs" />
     <Compile Include="Interfaces\IBoardManager.cs" />
     <Compile Include="Interfaces\IBoardScanner.cs" />
