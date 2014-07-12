@@ -2,6 +2,7 @@
 {
     using System;
     using Interfaces;
+
     public class BoardScanner : IBoardScanner
     {
         private IBoard board;
