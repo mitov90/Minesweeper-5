@@ -12,11 +12,17 @@ namespace Minesweeper
         private const int MAX_TOP_PLAYERS = 5;
 
         private Board board;
+        private IBoardScanner boardScanner;
         private List<IPlayer> topPlayers;
+        private IRenderer renderer;
+        private IBoardManager boardManager;
 
         public Game()
         {
             this.board = new Board(MAX_ROWS, MAX_COLUMNS, MAX_MINES);
+            this.boardScanner = new BoardScanner(this.board);
+            this.renderer = new Renderer(this.board, this.boardScanner);
+            this.boardManager = new BoardManager(this.board, this.boardScanner);
             this.topPlayers = new List<IPlayer> { Capacity = MAX_TOP_PLAYERS };
         }                        
 
@@ -148,7 +154,7 @@ namespace Minesweeper
         private void Engine()
         {
             this.board.Accept(new MineSetterVisitor());
-            this.board.PrintGameBoard();
+            this.renderer.PrintGameBoard();
 
             while (true)
             {
@@ -190,15 +196,15 @@ namespace Minesweeper
         {
             try
             {
-                var boardStatus = this.board.OpenField(chosenRow, chosenColumn);
+                var boardStatus = this.boardManager.OpenField(chosenRow, chosenColumn);
 
                 switch (boardStatus)
                 {
                     case BoardStatus.SteppedOnAMine:
                         {
-                            this.board.PrintAllFields();
+                            this.renderer.PrintAllFields();
 
-                            var playerScore = this.board.CountOpenedFields();
+                            var playerScore = this.boardManager.CountOpenedFields();
                             Console.WriteLine("Booooom! You were killed by a mine. You revealed " +
                                 playerScore + " cells without mines.");
 
@@ -216,10 +222,10 @@ namespace Minesweeper
 
                     case BoardStatus.AllFieldsAreOpened:
                         {
-                            this.board.PrintAllFields();
+                            this.renderer.PrintAllFields();
                             Console.WriteLine("Congratulations! You win!!");
 
-                            var playerScore = this.board.CountOpenedFields();
+                            var playerScore = this.boardManager.CountOpenedFields();
                             this.AddIfTopPlayer(playerScore);
                         }
 
@@ -227,7 +233,7 @@ namespace Minesweeper
 
                     default:
                         {
-                            this.board.PrintGameBoard();
+                            this.renderer.PrintGameBoard();
                         }
 
                         break;
