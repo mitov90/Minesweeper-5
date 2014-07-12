@@ -18,3 +18,8 @@ D:\CURRENT_PROJECT\obj\Debug\Minesweeper.pdb
 D:\CURRENT_PROJECT\bin\Debug\Minesweeper.exe
 D:\CURRENT_PROJECT\bin\Debug\Minesweeper.pdb
 D:\CURRENT_PROJECT\obj\Debug\Minesweeper.csprojResolveAssemblyReference.cache
+D:\NEW_VERSION\obj\Debug\Minesweeper.exe
+D:\NEW_VERSION\obj\Debug\Minesweeper.pdb
+D:\NEW_VERSION\bin\Debug\Minesweeper.exe
+D:\NEW_VERSION\bin\Debug\Minesweeper.pdb
+D:\NEW_VERSION\obj\Debug\Minesweeper.csprojResolveAssemblyReference.cache

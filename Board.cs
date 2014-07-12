@@ -3,21 +3,21 @@ namespace Minesweeper
     using System;
     using Interfaces;
 
-    public class Board
+    public class Board : IBoard
     {
         private int rows;
         private int columns;
         private int minesCount;
-        private Field[,] fields;
+        private Field[,] fieldsMatrix;
 
         public Board(int rows, int columns, int minesCount)
         {
             this.rows = rows;
             this.columns = columns;
             this.minesCount = minesCount;
-            this.fields = new Field[rows, columns];
+            this.fieldsMatrix = new Field[rows, columns];
 
-            this.fields = PrepareMatrix(this.rows, this.columns);
+            this.fieldsMatrix = PrepareMatrix(this.rows, this.columns);
         }
 
         public int Rows
@@ -74,6 +74,14 @@ namespace Minesweeper
             }
         }
 
+        public Field[,] FieldsMatrix
+        {
+            get 
+            {
+                return (Field[,])this.fieldsMatrix.Clone();
+            }
+        }
+
         public Field this[int row, int col]
         {
             get
@@ -83,7 +91,7 @@ namespace Minesweeper
                     throw new IndexOutOfRangeException("Invalid index");
                 }
 
-                return this.fields[row, col];
+                return this.fieldsMatrix[row, col];
             }
 
             set
@@ -93,7 +101,7 @@ namespace Minesweeper
                     throw new IndexOutOfRangeException("Invalid index");
                 }
 
-                this.fields[row, col] = value;
+                this.fieldsMatrix[row, col] = value;
             }
         }
 
@@ -136,10 +144,10 @@ namespace Minesweeper
                 Console.Write(" | ");
                 for (var j = 0; j < this.columns; j++)
                 {
-                    var currentField = this.fields[i, j];
+                    var currentField = this.fieldsMatrix[i, j];
                     if (currentField.Status == FieldStatus.Opened)
                     {
-                        Console.Write(this.fields[i, j].Value);
+                        Console.Write(this.fieldsMatrix[i, j].Value);
                         Console.Write(" ");
                     }
                     else
@@ -162,7 +170,7 @@ namespace Minesweeper
 
         public BoardStatus OpenField(int row, int column)
         {
-            var field = this.fields[row, column];
+            var field = this.fieldsMatrix[row, column];
             BoardStatus status;
 
             switch (field.Status)
@@ -207,18 +215,18 @@ namespace Minesweeper
                 Console.Write(" | ");
                 for (var j = 0; j < this.columns; j++)
                 {
-                    var currentField = this.fields[i, j];
+                    var currentField = this.fieldsMatrix[i, j];
                     switch (currentField.Status)
                     {
                         case FieldStatus.Opened:
-                            Console.Write(this.fields[i, j].Value + " ");
+                            Console.Write(this.fieldsMatrix[i, j].Value + " ");
                             break;
                         case FieldStatus.IsAMine:
                             Console.Write("* ");
                             break;
                         default:
                             currentField.Value = this.ScanSurroundingFields(i, j);
-                            Console.Write(this.fields[i, j].Value + " ");
+                            Console.Write(this.fieldsMatrix[i, j].Value + " ");
                             break;
                     }
                 }
@@ -238,11 +246,11 @@ namespace Minesweeper
         public int CountOpenedFields()
         {
             var count = 0;
-            for (var i = 0; i < this.fields.GetLength(0); i++)
+            for (var i = 0; i < this.fieldsMatrix.GetLength(0); i++)
             {
-                for (var j = 0; j < this.fields.GetLength(1); j++)
+                for (var j = 0; j < this.fieldsMatrix.GetLength(1); j++)
                 {
-                    if (this.fields[i, j].Status == FieldStatus.Opened)
+                    if (this.fieldsMatrix[i, j].Status == FieldStatus.Opened)
                     {
                         count++;
                     }
@@ -261,7 +269,7 @@ namespace Minesweeper
         {
             return (0 <= row) && (row < this.rows)
                    && (0 <= column) && (column < this.columns)
-                   && (this.fields[row, column].Status == FieldStatus.IsAMine);
+                   && (this.fieldsMatrix[row, column].Status == FieldStatus.IsAMine);
         }
 
         private int ScanSurroundingFields(int row, int column)
@@ -299,7 +307,7 @@ namespace Minesweeper
 
         private bool IsPositionValid(int row, int col)
         {
-            if ((row < 0 || row >= this.fields.GetLength(0)) || (col < 0 || col >= this.fields.GetLength(1)))
+            if ((row < 0 || row >= this.fieldsMatrix.GetLength(0)) || (col < 0 || col >= this.fieldsMatrix.GetLength(1)))
             {
                 return false;
             }
