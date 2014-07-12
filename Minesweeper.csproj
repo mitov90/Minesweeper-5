@@ -68,10 +68,12 @@
     <Compile Include="Interfaces\IBoardManager.cs" />
     <Compile Include="Interfaces\IBoardScanner.cs" />
     <Compile Include="Interfaces\IPlayer.cs" />
+    <Compile Include="Interfaces\IRenderer.cs" />
     <Compile Include="Interfaces\IVisitor.cs" />
     <Compile Include="MineSetterVisitor.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="BoardStatus.cs" />
+    <Compile Include="Renderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
