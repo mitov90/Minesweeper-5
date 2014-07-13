@@ -14,7 +14,7 @@
             this.boardScanner = boardScanner;
         }
 
-        public static void Write(string input)
+        public void Write(string input)
         {
             Console.WriteLine(input);
         }

@@ -28,3 +28,8 @@ D:\MINESWEEPER\obj\Debug\Minesweeper.pdb
 D:\MINESWEEPER\bin\Debug\Minesweeper.exe
 D:\MINESWEEPER\bin\Debug\Minesweeper.pdb
 D:\MINESWEEPER\obj\Debug\Minesweeper.csprojResolveAssemblyReference.cache
+D:\PROJECT\obj\Debug\Minesweeper.exe
+D:\PROJECT\obj\Debug\Minesweeper.pdb
+D:\PROJECT\bin\Debug\Minesweeper.exe
+D:\PROJECT\bin\Debug\Minesweeper.pdb
+D:\PROJECT\obj\Debug\Minesweeper.csprojResolveAssemblyReference.cache
