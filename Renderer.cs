@@ -2,6 +2,7 @@
 {
     using System;
     using Interfaces;
+    using System.Collections.Generic;
 
     public class Renderer : IRenderer
     {
@@ -130,6 +131,23 @@
             }
 
             Console.WriteLine();
+        }
+
+        public void PrintTopPlayers(List<IPlayer> players)
+        {
+            if (players.Count > 0)
+            {
+                Console.WriteLine("Scoreboard");
+                for (var i = 0; i < players.Count; i++)
+                {
+                    var playerRank = i + 1;
+                    Console.WriteLine(playerRank + ". " + players[i]);
+                }
+            }
+            else
+            {
+                Console.WriteLine("There is still no TOP players!---");
+            }
         }
     }
 }

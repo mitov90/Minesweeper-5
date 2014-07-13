@@ -45,7 +45,7 @@ namespace Minesweeper
                     case ConsoleKey.Q:
                         {
                             inGame = false;
-                            renderer.Write("Good bye!");
+                            this.renderer.Write("Good bye!");
                             Environment.Exit(1);
                         }
 
@@ -56,11 +56,11 @@ namespace Minesweeper
                         {
                             if (this.topPlayers.Count > 0)
                             {
-                                this.ShowTopPlayers();
+                                this.renderer.PrintTopPlayers(this.topPlayers);
                             }
                             else
                             {
-                                renderer.Write("There is still no TOP players!");
+                                this.renderer.Write("There is still no TOP players!");
                             }
                         }
 
@@ -73,23 +73,6 @@ namespace Minesweeper
 
                         break;
                 }
-            }
-        }
-
-        private void ShowTopPlayers()
-        {
-            if (this.topPlayers.Count > 0)
-            {
-                Console.WriteLine("Scoreboard");
-                for (var i = 0; i < this.topPlayers.Count; i++)
-                {
-                    var playerRank = i + 1;
-                    Console.WriteLine(playerRank + ". " + this.topPlayers[i]);
-                }
-            }
-            else
-            {
-                Console.WriteLine("There is still no TOP players!---");
             }
         }
 
@@ -154,7 +137,7 @@ namespace Minesweeper
 
             while (true)
             {
-                renderer.Write("\nChoose and press Enter:\n" + "'" + ConsoleKey.X.ToString() + "'" +
+                this.renderer.Write("\nChoose and press Enter:\n" + "'" + ConsoleKey.X.ToString() + "'" +
                     " to return to the menu or\nEnter row and column separated by a space: \n");
 
                 var command = Console.ReadLine();
@@ -180,7 +163,7 @@ namespace Minesweeper
                     }
                     catch
                     {
-                        renderer.Write("\nWrong field's coordinates!");
+                        this.renderer.Write("\nWrong field's coordinates!");
                     }
                 }
             }
@@ -205,11 +188,11 @@ namespace Minesweeper
                             this.renderer.PrintAllFields();
 
                             var playerScore = this.boardManager.CountOpenedFields();
-                            renderer.Write("Booooom! You were killed by a mine. You revealed " +
+                            this.renderer.Write("Booooom! You were killed by a mine. You revealed " +
                                 playerScore + " cells without mines.");
 
                             this.AddIfTopPlayer(playerScore);
-                            renderer.Write("Press Enter: to return to the menu");
+                            this.renderer.Write("Press Enter: to return to the menu");
                             Console.ReadLine();
                             gameOver = true;
                         }
@@ -218,7 +201,7 @@ namespace Minesweeper
 
                     case BoardStatus.AlreadyOpened:
                         {
-                            renderer.Write("The field is already opened!");
+                            this.renderer.Write("The field is already opened!");
                         }
 
                         break;
@@ -226,12 +209,12 @@ namespace Minesweeper
                     case BoardStatus.AllFieldsAreOpened:
                         {
                             this.renderer.PrintAllFields();
-                            renderer.Write("Congratulations! You win!!!");
+                            this.renderer.Write("Congratulations! You win!!!");
 
                             var playerScore = this.boardManager.CountOpenedFields();
 
                             this.AddIfTopPlayer(playerScore);
-                            renderer.Write("Press Enter: to return to the menu");
+                            this.renderer.Write("Press Enter: to return to the menu");
                             Console.ReadLine();
                             gameOver = true;
                         }
@@ -248,7 +231,7 @@ namespace Minesweeper
             }
             catch
             {
-                renderer.Write("Wrong field's coordinates!");
+                this.renderer.Write("Wrong field's coordinates!");
             }
 
             return gameOver;
@@ -262,13 +245,13 @@ namespace Minesweeper
         {
             if (this.IsHighScore(playerScore))
             {
-                renderer.Write("Please enter your name for the top players' scoreboard: ");
+                this.renderer.Write("Please enter your name for the top players' scoreboard: ");
 
                 var playerName = Console.ReadLine();
                 var player = new Player(playerName, playerScore);
 
                 this.AddTopPlayer(ref player);
-                this.ShowTopPlayers();
+                this.renderer.PrintTopPlayers(this.topPlayers);
             }
         }
     }
