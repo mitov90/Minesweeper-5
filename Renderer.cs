@@ -16,6 +16,7 @@
 
         public void PrintAllFields()
         {
+            Console.Clear();
             Console.Write("    ");
             for (var i = 0; i < this.board.Columns; i++)
             {
@@ -68,6 +69,7 @@
 
         public void PrintGameBoard()
         {
+            Console.Clear();
             Console.Write("    ");
             for (var i = 0; i < this.board.Columns; i++)
             {

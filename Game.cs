@@ -1,3 +1,5 @@
+using System.CodeDom;
+
 namespace Minesweeper
 {
     using System;
@@ -26,6 +28,7 @@ namespace Minesweeper
 
             while (inGame)
             {
+                Console.Clear();
                 Console.WriteLine();
                 Console.WriteLine("Welcome to the game “Minesweeper”!\nTry to reveal all cells without mines.\nPlease press:\n\n" +
                                 "'" + ConsoleKey.T.ToString() + "' to view the scoreboard\n" +
@@ -37,6 +40,7 @@ namespace Minesweeper
 
                 switch (keyPressed.Key)
                 {
+
                         // Start a new Game
                     case ConsoleKey.N:
                         {
@@ -176,7 +180,11 @@ namespace Minesweeper
                             var coordinates = command.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                             var chosenRow = int.Parse(coordinates[0]);
                             var chosenColumn = int.Parse(coordinates[1]);
-                            this.IsGameOver(chosenRow, chosenColumn);
+                            if (this.IsGameOver(chosenRow, chosenColumn))
+                            {
+                                this.Run();
+                            }
+                            
                         }
                     }
                     catch
@@ -192,8 +200,9 @@ namespace Minesweeper
         /// </summary>
         /// <param name="chosenRow">Current field's row.</param>
         /// <param name="chosenColumn">Current field's column.</param>
-        private void IsGameOver(int chosenRow, int chosenColumn)
+        private bool IsGameOver(int chosenRow, int chosenColumn)
         {
+            bool gameOver = false;
             try
             {
                 var boardStatus = this.boardManager.OpenField(chosenRow, chosenColumn);
@@ -209,6 +218,10 @@ namespace Minesweeper
                                 playerScore + " cells without mines.");
 
                             this.AddIfTopPlayer(playerScore);
+                            Console.WriteLine("Press Enter: to return to the menu");
+                            Console.ReadLine();
+                            Console.Clear();
+                            gameOver = true;
                         }
 
                         break;
@@ -227,6 +240,10 @@ namespace Minesweeper
 
                             var playerScore = this.boardManager.CountOpenedFields();
                             this.AddIfTopPlayer(playerScore);
+                            Console.WriteLine("Press Enter: to return to the menu");
+                            Console.ReadLine();
+                            Console.Clear();
+                            gameOver = true;
                         }
 
                         break;
@@ -243,6 +260,8 @@ namespace Minesweeper
             {
                 Console.WriteLine("Wrong field's coordinates!");
             }
+
+            return gameOver;
         }
 
         /// <summary>
