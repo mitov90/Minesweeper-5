@@ -6,7 +6,7 @@
     /// <summary>
     /// Sets all mines at random position
     /// </summary>
-    public class MineSetterVisitor:IVisitor
+    public class MineSetterVisitor : IVisitor
     {
         private Random rand = new Random();
 

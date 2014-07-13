@@ -14,6 +14,22 @@
             this.boardScanner = boardScanner;
         }
 
+        public static void Write(string input)
+        {
+            Console.WriteLine(input);
+        }
+
+        public static void PrintMainMenu()
+        {
+            Console.Clear();
+            Console.WriteLine();
+            Console.WriteLine("Welcome to the game “Minesweeper”!\nTry to reveal all cells without mines.\nPlease press:\n\n" +
+                            "'" + ConsoleKey.T.ToString() + "' to view the scoreboard\n" +
+                            "'" + ConsoleKey.N.ToString() + "' to start a new game\n" +
+                            "'" + ConsoleKey.Q.ToString() + "' to quit the game!\n\n");
+            Console.WriteLine();
+        }
+
         public void PrintAllFields()
         {
             Console.Clear();
