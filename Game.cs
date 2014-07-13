@@ -15,16 +15,7 @@ namespace Minesweeper
         private IBoardScanner boardScanner;
         private List<IPlayer> topPlayers;
         private IRenderer renderer;
-        private IBoardManager boardManager;
-
-        public Game()
-        {
-            this.board = new Board(MAX_ROWS, MAX_COLUMNS, MAX_MINES);
-            this.boardScanner = new BoardScanner(this.board);
-            this.renderer = new Renderer(this.board, this.boardScanner);
-            this.boardManager = new BoardManager(this.board, this.boardScanner);
-            this.topPlayers = new List<IPlayer> { Capacity = MAX_TOP_PLAYERS };
-        }                        
+        private IBoardManager boardManager;                                
 
         /// <summary>
         /// The Main Menu of the Game.
@@ -106,6 +97,14 @@ namespace Minesweeper
                 Console.WriteLine("There is still no TOP players!---");
             }
         }
+        private void InitializeGameBoard()
+        {
+            this.board = new Board(MAX_ROWS, MAX_COLUMNS, MAX_MINES);
+            this.boardScanner = new BoardScanner(this.board);
+            this.renderer = new Renderer(this.board, this.boardScanner);
+            this.boardManager = new BoardManager(this.board, this.boardScanner);
+            this.topPlayers = new List<IPlayer> { Capacity = MAX_TOP_PLAYERS };
+        }
 
         private bool IsHighScore(int currentPlayerScore)
         {
@@ -153,6 +152,7 @@ namespace Minesweeper
         /// </summary>
         private void Engine()
         {
+            this.InitializeGameBoard();
             this.board.Accept(new MineSetterVisitor());
             this.renderer.PrintGameBoard();
 
