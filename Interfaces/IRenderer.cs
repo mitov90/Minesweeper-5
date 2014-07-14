@@ -6,9 +6,9 @@
     {
         void Write(string str);
 
-        void PrintGameBoard();
+        void PrintGameBoard(IBoard board);
 
-        void PrintAllFields();
+        void PrintAllFields(IBoard board, IBoardScanner boardScanner);
 
         void PrintTopPlayers(List<IPlayer> players);
     }

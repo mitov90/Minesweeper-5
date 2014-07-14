@@ -15,7 +15,13 @@ namespace Minesweeper
         private IBoardScanner boardScanner;
         private List<IPlayer> topPlayers;
         private IRenderer renderer;
-        private IBoardManager boardManager;                                
+        private IBoardManager boardManager;
+
+        public Game()
+        {
+            this.renderer = new Renderer();
+            this.topPlayers = new List<IPlayer> { Capacity = MAX_TOP_PLAYERS };
+        }           
 
         /// <summary>
         /// The Main Menu of the Game.
@@ -79,10 +85,8 @@ namespace Minesweeper
         private void InitializeGameBoard()
         {
             this.board = new Board(MAX_ROWS, MAX_COLUMNS, MAX_MINES);
-            this.boardScanner = new BoardScanner(this.board);
-            this.renderer = new Renderer(this.board, this.boardScanner);
-            this.boardManager = new BoardManager(this.board, this.boardScanner);
-            this.topPlayers = new List<IPlayer> { Capacity = MAX_TOP_PLAYERS };
+            this.boardScanner = new BoardScanner(this.board);            
+            this.boardManager = new BoardManager(this.board, this.boardScanner);            
         }
 
         private bool IsHighScore(int currentPlayerScore)
@@ -133,7 +137,7 @@ namespace Minesweeper
         {
             this.InitializeGameBoard();
             this.board.Accept(new MineSetterVisitor());
-            this.renderer.PrintGameBoard();
+            this.renderer.PrintGameBoard(this.board);
 
             while (true)
             {
@@ -185,7 +189,7 @@ namespace Minesweeper
                 {
                     case BoardStatus.SteppedOnAMine:
                         {
-                            this.renderer.PrintAllFields();
+                            this.renderer.PrintAllFields(this.board, this.boardScanner);
 
                             var playerScore = this.boardManager.CountOpenedFields();
                             this.renderer.Write("Booooom! You were killed by a mine. You revealed " +
@@ -208,7 +212,7 @@ namespace Minesweeper
 
                     case BoardStatus.AllFieldsAreOpened:
                         {
-                            this.renderer.PrintAllFields();
+                            this.renderer.PrintAllFields(this.board, this.boardScanner);
                             this.renderer.Write("Congratulations! You win!!!");
 
                             var playerScore = this.boardManager.CountOpenedFields();
@@ -223,7 +227,7 @@ namespace Minesweeper
 
                     default:
                         {
-                            this.renderer.PrintGameBoard();
+                            this.renderer.PrintGameBoard(this.board);
                         }
 
                         break;

@@ -33,3 +33,8 @@ D:\PROJECT\obj\Debug\Minesweeper.pdb
 D:\PROJECT\bin\Debug\Minesweeper.exe
 D:\PROJECT\bin\Debug\Minesweeper.pdb
 D:\PROJECT\obj\Debug\Minesweeper.csprojResolveAssemblyReference.cache
+D:\SEGA\obj\Debug\Minesweeper.exe
+D:\SEGA\obj\Debug\Minesweeper.pdb
+D:\SEGA\bin\Debug\Minesweeper.exe
+D:\SEGA\bin\Debug\Minesweeper.pdb
+D:\SEGA\obj\Debug\Minesweeper.csprojResolveAssemblyReference.cache
