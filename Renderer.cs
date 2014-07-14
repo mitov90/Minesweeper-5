@@ -5,7 +5,13 @@
     using System.Collections.Generic;
 
     public class Renderer : IRenderer
-    {        
+    {
+        private const string bombSymbol = "*";
+        private const string uncoveredFieldSymbol = "?";
+        private const string space = " ";
+        private const string noPlayersRecordedMessage = "There is still no TOP players!---";
+        private const string scoreBoardTitle = "Scoreboard";
+
         public void Write(string input)
         {
             Console.WriteLine(input);
@@ -52,7 +58,7 @@
                             Console.Write(board.FieldsMatrix[i, j].Value + " ");
                             break;
                         case FieldStatus.IsAMine:
-                            Console.Write("* ");
+                            Console.Write(bombSymbol + space);
                             break;
                         default:
                             currentField.Value = boardScanner.ScanSurroundingFields(i, j);
@@ -105,7 +111,7 @@
                     }
                     else
                     {
-                        Console.Write("? ");
+                        Console.Write(uncoveredFieldSymbol + space);
                     }
                 }
 
@@ -125,7 +131,7 @@
         {
             if (players.Count > 0)
             {
-                Console.WriteLine("Scoreboard");
+                Console.WriteLine(scoreBoardTitle);
                 for (var i = 0; i < players.Count; i++)
                 {
                     var playerRank = i + 1;
@@ -134,7 +140,7 @@
             }
             else
             {
-                Console.WriteLine("There is still no TOP players!---");
+                Console.WriteLine(noPlayersRecordedMessage);
             }
         }
     }
