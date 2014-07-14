@@ -1,16 +1,16 @@
 ﻿namespace Minesweeper
 {
-    using System;
-    using Interfaces;
+    using System;    
     using System.Collections.Generic;
+    using Interfaces;
 
     public class Renderer : IRenderer
     {
-        private const string bombSymbol = "*";
-        private const string uncoveredFieldSymbol = "?";
-        private const string space = " ";
-        private const string noPlayersRecordedMessage = "There is still no TOP players!---";
-        private const string scoreBoardTitle = "Scoreboard";
+        private const string BombSymbol = "*";
+        private const string UncoveredFieldSymbol = "?";
+        private const string Space = " ";
+        private const string NoPlayersRecordedMessage = "There is still no TOP players!---";
+        private const string ScoreBoardTitle = "Scoreboard";
 
         public void Write(string input)
         {
@@ -29,21 +29,7 @@
 
         public void PrintAllFields(IBoard board, IBoardScanner boardScanner)
         {
-            Console.Write("    ");
-            for (var i = 0; i < board.Columns; i++)
-            {
-                Console.Write(i + " ");
-            }
-
-            Console.WriteLine();
-
-            Console.Write("   _");
-            for (var i = 0; i < board.Columns; i++)
-            {
-                Console.Write("__");
-            }
-
-            Console.WriteLine();
+            PrintUpperBorder(board);
 
             for (var i = 0; i < board.Rows; i++)
             {
@@ -58,7 +44,7 @@
                             Console.Write(board.FieldsMatrix[i, j].Value + " ");
                             break;
                         case FieldStatus.IsAMine:
-                            Console.Write(bombSymbol + space);
+                            Console.Write(BombSymbol + Space);
                             break;
                         default:
                             currentField.Value = boardScanner.ScanSurroundingFields(i, j);
@@ -70,6 +56,11 @@
                 Console.WriteLine("|");
             }
 
+            PrintBottomBorder(board);
+        }
+
+        private static void PrintBottomBorder(IBoard board)
+        {
             Console.Write("   _");
             for (var i = 0; i < board.Columns; i++)
             {
@@ -77,25 +68,11 @@
             }
 
             Console.WriteLine();
-        }
+        }        
 
         public void PrintGameBoard(IBoard board)
         {
-            Console.Write("    ");
-            for (var i = 0; i < board.Columns; i++)
-            {
-                Console.Write(i + " ");
-            }
-
-            Console.WriteLine();
-
-            Console.Write("   _");
-            for (var i = 0; i < board.Columns; i++)
-            {
-                Console.Write("__");
-            }
-
-            Console.WriteLine();
+            PrintUpperBorder(board);
 
             for (var i = 0; i < board.Rows; i++)
             {
@@ -111,27 +88,21 @@
                     }
                     else
                     {
-                        Console.Write(uncoveredFieldSymbol + space);
+                        Console.Write(UncoveredFieldSymbol + Space);
                     }
                 }
 
                 Console.WriteLine("|");
             }
 
-            Console.Write("   _");
-            for (var i = 0; i < board.Columns; i++)
-            {
-                Console.Write("__");
-            }
-
-            Console.WriteLine();
+            PrintBottomBorder(board);
         }
 
         public void PrintTopPlayers(List<IPlayer> players)
         {
             if (players.Count > 0)
             {
-                Console.WriteLine(scoreBoardTitle);
+                Console.WriteLine(ScoreBoardTitle);
                 for (var i = 0; i < players.Count; i++)
                 {
                     var playerRank = i + 1;
@@ -140,8 +111,27 @@
             }
             else
             {
-                Console.WriteLine(noPlayersRecordedMessage);
+                Console.WriteLine(NoPlayersRecordedMessage);
             }
+        }
+
+        private static void PrintUpperBorder(IBoard board)
+        {
+            Console.Write("    ");
+            for (var i = 0; i < board.Columns; i++)
+            {
+                Console.Write(i + " ");
+            }
+
+            Console.WriteLine();
+
+            Console.Write("   _");
+            for (var i = 0; i < board.Columns; i++)
+            {
+                Console.Write("__");
+            }
+
+            Console.WriteLine();
         }
     }
 }
