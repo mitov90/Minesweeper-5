@@ -11,11 +11,11 @@
         {
             Field[,] expected =
             {
-                { new Field(), new Field(), new Field(), new Field(), new Field(), new Field(), new Field(), new Field(), new Field(), new Field() }, 
-                { new Field(), new Field(), new Field(), new Field(), new Field(), new Field(), new Field(), new Field(), new Field(), new Field() },
-                { new Field(), new Field(), new Field(), new Field(), new Field(), new Field(), new Field(), new Field(), new Field(), new Field() },
-                { new Field(), new Field(), new Field(), new Field(), new Field(), new Field(), new Field(), new Field(), new Field(), new Field() },
-                { new Field(), new Field(), new Field(), new Field(), new Field(), new Field(), new Field(), new Field(), new Field(), new Field() },
+                { new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed) }, 
+                { new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed) },
+                { new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed) },
+                { new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed) },
+                { new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed) },
             };
 
             var matrixInitialized = Board.PrepareMatrix(5, 10);
@@ -29,8 +29,8 @@
         {
             Field[,] expected =
             {
-                { new Field(), new Field() }, 
-                { new Field(), new Field() },                
+                { new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed) }, 
+                { new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed) },
             };
 
             var matrixInitialized = Board.PrepareMatrix(2, 2);
@@ -44,11 +44,11 @@
         {
             Field[,] expected =
             {
-                { new Field(), new Field(), new Field(), new Field() }, 
-                { new Field(), new Field(), new Field(), new Field() },
-                { new Field(), new Field(), new Field(), new Field() },
-                { new Field(), new Field(), new Field(), new Field() },
-                { new Field(), new Field(), new Field(), new Field() },
+                { new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed) }, 
+                { new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed) }, 
+                { new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed) }, 
+                { new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed) }, 
+                { new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed) }, 
             };
 
             // different cols count
@@ -63,11 +63,11 @@
         {
             Field[,] expected =
             {
-                { new Field(), new Field(), new Field(), new Field() }, 
-                { new Field(), new Field(), new Field(), new Field() },
-                { new Field(), new Field(), new Field(), new Field() },
-                { new Field(), new Field(), new Field(), new Field() },
-                { new Field(), new Field(), new Field(), new Field() },
+                { new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed) }, 
+                { new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed) },
+                { new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed) },
+                { new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed) },
+                { new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed), new Field(0, FieldStatus.Closed) },
             };
 
             // different rows count
@@ -80,8 +80,8 @@
         [TestMethod]
         public void EqualsFieldsTest()
         {
-            var first = new Field();
-            var second = new Field();
+            var first = new Field(0, FieldStatus.Closed);
+            var second = new Field(0, FieldStatus.Closed);
 
             var equal = first.Equals(second);
 
@@ -91,7 +91,7 @@
         [TestMethod]
         public void EqualsFieldsNullableTest()
         {
-            var first = new Field();
+            var first = new Field(0 , FieldStatus.Closed);
             Field second = null;
 
             var equal = first.Equals(second);

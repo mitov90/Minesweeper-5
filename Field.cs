@@ -6,10 +6,10 @@ namespace Minesweeper
     {
         private int value;
 
-        public Field()
+        public Field(int value, FieldStatus status)
         {
-            this.value = 0;
-            this.Status = FieldStatus.Closed;
+            this.Value = value;
+            this.Status = status;
         }
 
         public int Value

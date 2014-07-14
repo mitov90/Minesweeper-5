@@ -12,12 +12,12 @@ namespace Minesweeper
 
         public Board(int rows, int columns, int minesCount)
         {
-            this.rows = rows;
-            this.columns = columns;
-            this.minesCount = minesCount;
-            this.fieldsMatrix = new Field[rows, columns];
+            this.Rows = rows;
+            this.Columns = columns;
+            this.MinesCount = minesCount;
+            this.FieldsMatrix = new Field[rows, columns];
 
-            this.fieldsMatrix = PrepareMatrix(this.rows, this.columns);
+            this.FieldsMatrix = PrepareMatrix(this.rows, this.columns);
         }
 
         public int Rows
@@ -80,6 +80,11 @@ namespace Minesweeper
             {
                 return (Field[,])this.fieldsMatrix.Clone();
             }
+
+            private set
+            {
+                this.fieldsMatrix = value;
+            }
         }
 
         public Field this[int row, int col]
@@ -113,7 +118,7 @@ namespace Minesweeper
             {
                 for (var col = 0; col < cols; col++)
                 {
-                    fieldMatrix[row, col] = new Field();
+                    fieldMatrix[row, col] = new Field(0, FieldStatus.Closed);
                 }
             }
 
