@@ -6,11 +6,11 @@
 
     public class Renderer : IRenderer
     {
-        private const string BombSymbol = "*";
-        private const string UncoveredFieldSymbol = "?";
-        private const string Space = " ";
-        private const string NoPlayersRecordedMessage = "There is still no TOP players!---";
-        private const string ScoreBoardTitle = "Scoreboard";
+        private const string BOMB_SYMBOL = "*";
+        private const string UNCOVERED_FIELD_SYMBOL = "?";
+        private const string SPACE = " ";
+        private const string NO_PLAYERS_MESSAGE = "There is still no TOP players!---";
+        private const string SCORE_BOARD_TITLE = "Scoreboard";
 
         public void Write(string input)
         {
@@ -44,7 +44,7 @@
                             Console.Write(board.FieldsMatrix[i, j].Value + " ");
                             break;
                         case FieldStatus.IsAMine:
-                            Console.Write(BombSymbol + Space);
+                            Console.Write(BOMB_SYMBOL + SPACE);
                             break;
                         default:
                             currentField.Value = boardScanner.ScanSurroundingFields(i, j);
@@ -88,7 +88,7 @@
                     }
                     else
                     {
-                        Console.Write(UncoveredFieldSymbol + Space);
+                        Console.Write(UNCOVERED_FIELD_SYMBOL + SPACE);
                     }
                 }
 
@@ -102,7 +102,7 @@
         {
             if (players.Count > 0)
             {
-                Console.WriteLine(ScoreBoardTitle);
+                Console.WriteLine(SCORE_BOARD_TITLE);
                 for (var i = 0; i < players.Count; i++)
                 {
                     var playerRank = i + 1;
@@ -111,7 +111,7 @@
             }
             else
             {
-                Console.WriteLine(NoPlayersRecordedMessage);
+                Console.WriteLine(NO_PLAYERS_MESSAGE);
             }
         }
 
