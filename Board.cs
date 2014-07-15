@@ -2,7 +2,7 @@ namespace Minesweeper
 {
     using System;
     using Interfaces;
-
+    //test
     /// <summary>
     /// Represent playing field populated with mines
     /// </summary>
