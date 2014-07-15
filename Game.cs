@@ -1,12 +1,3 @@
-// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Game.cs" company="">
-//   
-// </copyright>
-// <summary>
-//   The game.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
 namespace Minesweeper
 {
     using System;
@@ -22,49 +13,21 @@ namespace Minesweeper
     public sealed class Game
     {
         #region Static Fields
-
-        /// <summary>
-        /// The the game.
-        /// </summary>
         private static Game theGame;
-
         #endregion
 
         #region Fields
 
-        /// <summary>
-        /// The highscore.
-        /// </summary>
         internal readonly IHighscore Highscore;
-
-        /// <summary>
-        /// The renderer.
-        /// </summary>
         internal readonly IRenderer Renderer;
-
-        /// <summary>
-        /// The board.
-        /// </summary>
         private readonly Board board;
-
-        /// <summary>
-        /// The board manager.
-        /// </summary>
         private readonly IBoardManager boardManager;
-
-        /// <summary>
-        /// The board scanner.
-        /// </summary>
         private readonly IBoardScanner boardScanner;
-
-        /// <summary>
-        /// The user input handler.
-        /// </summary>
         private readonly UserInput userInputHandler;
 
         #endregion
 
-        #region Constructors and Destructors
+        #region Constructors
 
         /// <summary>
         /// Prevents a default instance of the <see cref="Game"/> class from being created.
@@ -99,9 +62,6 @@ namespace Minesweeper
 
         #region Public Methods and Operators
 
-        /// <summary>
-        /// The run.
-        /// </summary>
         public void Run()
         {
             bool inGame = true;
@@ -177,15 +137,6 @@ namespace Minesweeper
         /// <summary>
         /// Check the current status of the Game and print a result.
         /// </summary>
-        /// <param name="chosenRow">
-        /// Current field's row.
-        /// </param>
-        /// <param name="chosenColumn">
-        /// Current field's column.
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
         private bool IsGameOver(int chosenRow, int chosenColumn)
         {
             bool gameOver = false;
