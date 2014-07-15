@@ -1,7 +1,6 @@
 namespace Minesweeper
 {
     using System;
-    using System.Collections.Generic;
 
     using Interfaces;
 
@@ -15,9 +14,9 @@ namespace Minesweeper
         private const ConsoleKey NewGameKey = ConsoleKey.N;
         private const ConsoleKey TopPlayersKey = ConsoleKey.T;
 
-
-        private Board board;
-        private Highscore highscore;
+        private static readonly Game TheGame = new Game();
+        private readonly Highscore highscore;
+        private readonly IRenderer renderer;
         private IBoardScanner boardScanner;
         private IBoardManager boardManager;
         private Board board;
