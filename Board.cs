@@ -116,12 +116,13 @@ namespace Minesweeper
         public static Field[,] PrepareMatrix(int rows, int cols)
         {
             var fieldMatrix = new Field[rows, cols];
+            var field = new Field(0, FieldStatus.Closed);
 
             for (var row = 0; row < rows; row++)
             {
                 for (var col = 0; col < cols; col++)
                 {
-                    fieldMatrix[row, col] = new Field(0, FieldStatus.Closed);
+                    fieldMatrix[row, col] = field.Clone();
                 }
             }
 

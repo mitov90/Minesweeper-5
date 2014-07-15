@@ -2,7 +2,7 @@ namespace Minesweeper
 {
     using System;
 
-    public class Field
+    public class Field : FieldPrototype
     {
         private int value;
 
@@ -47,6 +47,11 @@ namespace Minesweeper
         public override int GetHashCode()
         {
             throw new NotImplementedException();
+        }
+
+        public override Field Clone()
+        {
+            return this.MemberwiseClone() as Field;
         }
     }
 }

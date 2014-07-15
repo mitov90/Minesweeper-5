@@ -51,3 +51,8 @@ E:\projects\JaneAustin\Minesweeper-52\bin\Debug\Minesweeper.exe
 E:\projects\JaneAustin\Minesweeper-52\bin\Debug\Minesweeper.pdb
 E:\projects\JaneAustin\Minesweeper-52\obj\Debug\Minesweeper.csprojResolveAssemblyReference.cache
 >>>>>>> f10567313679521a51390c088424431d019fc699
+D:\posledno\bin\Debug\Minesweeper.exe
+D:\posledno\bin\Debug\Minesweeper.pdb
+D:\posledno\obj\Debug\Minesweeper.csprojResolveAssemblyReference.cache
+D:\posledno\obj\Debug\Minesweeper.exe
+D:\posledno\obj\Debug\Minesweeper.pdb

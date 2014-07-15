@@ -60,6 +60,7 @@
     <Compile Include="Board.cs" />
     <Compile Include="BoardManager.cs" />
     <Compile Include="BoardScanner.cs" />
+    <Compile Include="FieldPrototype.cs" />
     <Compile Include="FieldStatus.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Field.cs" />
