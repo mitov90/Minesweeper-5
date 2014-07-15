@@ -4,24 +4,33 @@ namespace Minesweeper
     using System.Collections.Generic;
     using Interfaces;
 
-    public class Game
+    public sealed class Game
     {
         private const int MAX_ROWS = 5;
         private const int MAX_COLUMNS = 10;
         private const int MAX_MINES = 15;
         private const int MAX_TOP_PLAYERS = 5;
 
+        private static readonly Game TheGame = new Game();
         private Board board;
         private IBoardScanner boardScanner;
         private List<IPlayer> topPlayers;
         private IRenderer renderer;
         private IBoardManager boardManager;
 
-        public Game()
+        private Game()
         {
             this.renderer = new Renderer();
             this.topPlayers = new List<IPlayer> { Capacity = MAX_TOP_PLAYERS };
-        }           
+        }
+
+        public static Game Instance
+        {
+            get
+            {
+                return TheGame;
+            }
+        }
 
         /// <summary>
         /// The Main Menu of the Game.
