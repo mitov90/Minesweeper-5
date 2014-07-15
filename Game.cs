@@ -15,7 +15,7 @@ namespace Minesweeper
         private const ConsoleKey TopPlayersKey = ConsoleKey.T;
 
         private static readonly Game TheGame = new Game();
-        private readonly Highscore highscore;
+        private readonly IHighscore highscore;
         private readonly IRenderer renderer;
         private IBoardScanner boardScanner;
         private IBoardManager boardManager;
@@ -220,7 +220,7 @@ namespace Minesweeper
 
                 var player = new Player(playerName, playerScore);
 
-                this.highscore.AddTopPlayer(ref player);
+                this.highscore.AddTopPlayer(player);
                 this.renderer.PrintTopPlayers(this.highscore.TopPlayers);
             }
         }

@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using Interfaces;
 
-    public class Highscore
+    public class Highscore : IHighscore
     {
         private const int MAX_TOP_PLAYERS = 5;
 
@@ -47,7 +47,7 @@
             return false;
         }
 
-        public void AddTopPlayer(ref Player currentPlayer)
+        public void AddTopPlayer(Player currentPlayer)
         {
             if (currentPlayer == null)
             {

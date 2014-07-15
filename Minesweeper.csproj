@@ -64,10 +64,12 @@
     <Compile Include="Game.cs" />
     <Compile Include="Field.cs" />
     <Compile Include="GameStarter.cs" />
+    <Compile Include="Highscore.cs" />
     <Compile Include="Interfaces\IAcceptable.cs" />
     <Compile Include="Interfaces\IBoard.cs" />
     <Compile Include="Interfaces\IBoardManager.cs" />
     <Compile Include="Interfaces\IBoardScanner.cs" />
+    <Compile Include="Interfaces\IHighscore.cs" />
     <Compile Include="Interfaces\IPlayer.cs" />
     <Compile Include="Interfaces\IRenderer.cs" />
     <Compile Include="Interfaces\IVisitor.cs" />
