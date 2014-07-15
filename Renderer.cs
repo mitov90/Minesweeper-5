@@ -4,6 +4,9 @@
     using System.Collections.Generic;
     using Interfaces;
 
+    /// <summary>
+    /// Represent console renderer
+    /// </summary>
     public class Renderer : IRenderer
     {
         private const string BOMB_SYMBOL = "*";

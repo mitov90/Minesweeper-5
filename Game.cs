@@ -2,6 +2,7 @@ namespace Minesweeper
 {
     using System;
     using System.Collections.Generic;
+
     using Interfaces;
 
     public class Game
@@ -11,17 +12,22 @@ namespace Minesweeper
         private const int MAX_MINES = 15;
         private const int MAX_TOP_PLAYERS = 5;
 
-        private Board board;
+        private const ConsoleKey ExitGameKey = ConsoleKey.Q;
+        private const ConsoleKey NewGameKey = ConsoleKey.N;
+        private const ConsoleKey TopPlayersKey = ConsoleKey.T;
+
+
+        private readonly List<IPlayer> topPlayers;
+        private readonly IRenderer renderer;
         private IBoardScanner boardScanner;
-        private List<IPlayer> topPlayers;
-        private IRenderer renderer;
         private IBoardManager boardManager;
+        private Board board;
 
         public Game()
         {
             this.renderer = new Renderer();
             this.topPlayers = new List<IPlayer> { Capacity = MAX_TOP_PLAYERS };
-        }           
+        }
 
         /// <summary>
         /// The Main Menu of the Game.
@@ -33,13 +39,13 @@ namespace Minesweeper
             while (inGame)
             {
                 Renderer.PrintMainMenu();
-                
+
                 ConsoleKeyInfo keyPressed = Console.ReadKey();
 
                 switch (keyPressed.Key)
                 {
-                        // Start a new Game
-                    case ConsoleKey.N:
+                    // Start a new Game
+                    case NewGameKey:
                         {
                             this.Engine();
                             inGame = false;
@@ -48,7 +54,7 @@ namespace Minesweeper
                         break;
 
                     // Exit the Game
-                    case ConsoleKey.Q:
+                    case ExitGameKey:
                         {
                             inGame = false;
                             this.renderer.Write("Good bye!");
@@ -58,7 +64,7 @@ namespace Minesweeper
                         break;
 
                     // Show Top Scores
-                    case ConsoleKey.T:
+                    case TopPlayersKey:
                         {
                             if (this.topPlayers.Count > 0)
                             {
@@ -72,7 +78,7 @@ namespace Minesweeper
 
                         break;
 
-                        // Ask for a choice again
+                    // Ask for a choice again
                     default:
                         {
                         }
@@ -85,8 +91,8 @@ namespace Minesweeper
         private void InitializeGameBoard()
         {
             this.board = new Board(MAX_ROWS, MAX_COLUMNS, MAX_MINES);
-            this.boardScanner = new BoardScanner(this.board);            
-            this.boardManager = new BoardManager(this.board, this.boardScanner);            
+            this.boardScanner = new BoardScanner(this.board);
+            this.boardManager = new BoardManager(this.board, this.boardScanner);
         }
 
         private bool IsHighScore(int currentPlayerScore)
@@ -141,35 +147,24 @@ namespace Minesweeper
 
             while (true)
             {
-                this.renderer.Write("\nChoose and press Enter:\n" + "'" + ConsoleKey.X.ToString() + "'" +
+                this.renderer.Write("\nChoose and press Enter:\n" + "'" + PlayerCommand.ReturnKey + "'" +
                     " to return to the menu or\nEnter row and column separated by a space: \n");
 
-                var command = Console.ReadLine();
+                // getting player input as object
+                var command = new PlayerCommand(Console.ReadLine());
 
-                if (command != null && command.Trim().ToUpper() == ConsoleKey.X.ToString())
+                if (command.IsBadInput)
                 {
-                    this.Run();
+                    this.renderer.Write(command.Message);
                 }
                 else
                 {
-                    try
+                    if (command.IsReturnKey || this.IsGameOver(command.Row, command.Col))
                     {
-                        if (command != null)
-                        {
-                            var coordinates = command.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                            var chosenRow = int.Parse(coordinates[0]);
-                            var chosenColumn = int.Parse(coordinates[1]);
-                            if (this.IsGameOver(chosenRow, chosenColumn))
-                            {
-                                this.Run();
-                            }                          
-                        }
-                    }
-                    catch
-                    {
-                        this.renderer.Write("\nWrong field's coordinates!");
+                        this.Run();
                     }
                 }
+
             }
         }
 

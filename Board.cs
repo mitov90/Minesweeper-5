@@ -3,6 +3,9 @@ namespace Minesweeper
     using System;
     using Interfaces;
 
+    /// <summary>
+    /// Represent playing field populated with mines
+    /// </summary>
     public class Board : IBoard, IAcceptable
     {
         private int rows;

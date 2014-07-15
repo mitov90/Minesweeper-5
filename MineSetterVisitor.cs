@@ -8,7 +8,7 @@
     /// </summary>
     public class MineSetterVisitor : IVisitor
     {
-        private Random rand = new Random();
+        private readonly Random rand = new Random();
 
         public void Visit(Board board)
         {
