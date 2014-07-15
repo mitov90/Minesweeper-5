@@ -252,6 +252,12 @@ namespace Minesweeper
                 this.renderer.Write("Please enter your name for the top players' scoreboard: ");
 
                 var playerName = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(playerName))
+                {
+                    playerName = "no name";
+                }
+
                 var player = new Player(playerName, playerScore);
 
                 this.AddTopPlayer(ref player);

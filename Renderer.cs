@@ -12,11 +12,6 @@
         private const string NO_PLAYERS_MESSAGE = "There is still no TOP players!---";
         private const string SCORE_BOARD_TITLE = "Scoreboard";
 
-        public void Write(string input)
-        {
-            Console.WriteLine(input);
-        }
-
         public static void PrintMainMenu()
         {
             Console.WriteLine();
@@ -25,6 +20,11 @@
                             "'" + ConsoleKey.N.ToString() + "' to start a new game\n" +
                             "'" + ConsoleKey.Q.ToString() + "' to quit the game!\n\n");
             Console.WriteLine();
+        }
+
+        public void Write(string input)
+        {
+            Console.WriteLine(input);
         }
 
         public void PrintAllFields(IBoard board, IBoardScanner boardScanner)
@@ -57,18 +57,7 @@
             }
 
             PrintBottomBorder(board);
-        }
-
-        private static void PrintBottomBorder(IBoard board)
-        {
-            Console.Write("   _");
-            for (var i = 0; i < board.Columns; i++)
-            {
-                Console.Write("__");
-            }
-
-            Console.WriteLine();
-        }        
+        }      
 
         public void PrintGameBoard(IBoard board)
         {
@@ -133,5 +122,16 @@
 
             Console.WriteLine();
         }
+
+        private static void PrintBottomBorder(IBoard board)
+        {
+            Console.Write("   _");
+            for (var i = 0; i < board.Columns; i++)
+            {
+                Console.Write("__");
+            }
+
+            Console.WriteLine();
+        }  
     }
 }
