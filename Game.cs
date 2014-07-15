@@ -1,25 +1,74 @@
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Game.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The game.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
 namespace Minesweeper
 {
     using System;
 
-    using Interfaces;
-
     using Minesweeper.Data;
     using Minesweeper.Enums;
+    using Minesweeper.Interfaces;
     using Minesweeper.Logic;
 
+    /// <summary>
+    /// The game.
+    /// </summary>
     public sealed class Game
     {
+        #region Static Fields
+
+        /// <summary>
+        /// The the game.
+        /// </summary>
+        private static Game theGame;
+
+        #endregion
+
+        #region Fields
+
+        /// <summary>
+        /// The highscore.
+        /// </summary>
         internal readonly IHighscore Highscore;
+
+        /// <summary>
+        /// The renderer.
+        /// </summary>
         internal readonly IRenderer Renderer;
 
-        private static readonly Game TheGame = new Game();
-
-        private readonly UserInput userInputHandler;
-        private readonly IBoardScanner boardScanner;
-        private readonly IBoardManager boardManager;
+        /// <summary>
+        /// The board.
+        /// </summary>
         private readonly Board board;
 
+        /// <summary>
+        /// The board manager.
+        /// </summary>
+        private readonly IBoardManager boardManager;
+
+        /// <summary>
+        /// The board scanner.
+        /// </summary>
+        private readonly IBoardScanner boardScanner;
+
+        /// <summary>
+        /// The user input handler.
+        /// </summary>
+        private readonly UserInput userInputHandler;
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Prevents a default instance of the <see cref="Game"/> class from being created.
+        /// </summary>
         private Game()
         {
             this.Renderer = new Renderer();
@@ -29,18 +78,33 @@ namespace Minesweeper
             this.boardManager = new BoardManager(this.board, this.boardScanner);
             this.userInputHandler = new UserInput(this);
         }
-      
+
+        #endregion
+
+        #region Public Properties
+
+        /// <summary>
+        /// Gets the instance.
+        /// </summary>
         public static Game Instance
         {
+            // 'Lazy initialization'
             get
             {
-                return TheGame;
+                return theGame ?? (theGame = new Game());
             }
         }
 
+        #endregion
+
+        #region Public Methods and Operators
+
+        /// <summary>
+        /// The run.
+        /// </summary>
         public void Run()
         {
-            var inGame = true;
+            bool inGame = true;
 
             while (inGame)
             {
@@ -49,8 +113,12 @@ namespace Minesweeper
             }
         }
 
+        #endregion
+
+        #region Methods
+
         /// <summary>
-        /// The Engine of the Game.
+        ///     The Engine of the Game.
         /// </summary>
         internal void Engine()
         {
@@ -59,8 +127,9 @@ namespace Minesweeper
 
             while (true)
             {
-                this.Renderer.Write("\nChoose and press Enter:\n" + "'" + PlayerCommand.ReturnKey + "'" +
-                    " to return to the menu or\nEnter row and column separated by a space: \n");
+                this.Renderer.Write(
+                    "\nChoose and press Enter:\n" + "'" + PlayerCommand.ReturnKey + "'"
+                    + " to return to the menu or\nEnter row and column separated by a space: \n");
 
                 // getting player input as object
                 var command = new PlayerCommand(Console.ReadLine());
@@ -80,16 +149,49 @@ namespace Minesweeper
         }
 
         /// <summary>
-        /// Check the current status of the Game and print a result.        
+        /// If the current player is with top score, add it to Top list players and show the scoreboard.
         /// </summary>
-        /// <param name="chosenRow">Current field's row.</param>
-        /// <param name="chosenColumn">Current field's column.</param>
+        /// <param name="playerScore">
+        /// The score of the current player.
+        /// </param>
+        private void AddIfTopPlayer(int playerScore)
+        {
+            if (this.Highscore.IsHighScore(playerScore))
+            {
+                this.Renderer.Write("Please enter your name for the top players' scoreboard: ");
+
+                string playerName = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(playerName))
+                {
+                    playerName = "no name";
+                }
+
+                var player = new Player(playerName, playerScore);
+
+                this.Highscore.AddTopPlayer(player);
+                this.Renderer.PrintTopPlayers(this.Highscore.TopPlayers);
+            }
+        }
+
+        /// <summary>
+        /// Check the current status of the Game and print a result.
+        /// </summary>
+        /// <param name="chosenRow">
+        /// Current field's row.
+        /// </param>
+        /// <param name="chosenColumn">
+        /// Current field's column.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
         private bool IsGameOver(int chosenRow, int chosenColumn)
         {
             bool gameOver = false;
             try
             {
-                var boardStatus = this.boardManager.OpenField(chosenRow, chosenColumn);
+                BoardStatus boardStatus = this.boardManager.OpenField(chosenRow, chosenColumn);
 
                 switch (boardStatus)
                 {
@@ -97,9 +199,10 @@ namespace Minesweeper
                         {
                             this.Renderer.PrintAllFields(this.board, this.boardScanner);
 
-                            var playerScore = this.boardManager.CountOpenedFields();
-                            this.Renderer.Write("Booooom! You were killed by a mine. You revealed " +
-                                playerScore + " cells without mines.");
+                            int playerScore = this.boardManager.CountOpenedFields();
+                            this.Renderer.Write(
+                                "Booooom! You were killed by a mine. You revealed " + playerScore
+                                + " cells without mines.");
 
                             this.AddIfTopPlayer(playerScore);
                             this.Renderer.Write("Press Enter: to return to the menu");
@@ -121,7 +224,7 @@ namespace Minesweeper
                             this.Renderer.PrintAllFields(this.board, this.boardScanner);
                             this.Renderer.Write("Congratulations! You win!!!");
 
-                            var playerScore = this.boardManager.CountOpenedFields();
+                            int playerScore = this.boardManager.CountOpenedFields();
 
                             this.AddIfTopPlayer(playerScore);
                             this.Renderer.Write("Press Enter: to return to the menu");
@@ -147,28 +250,6 @@ namespace Minesweeper
             return gameOver;
         }
 
-        /// <summary>
-        /// If the current player is with top score, add it to Top list players and show the scoreboard.
-        /// </summary>
-        /// <param name="playerScore">The score of the current player.</param>
-        private void AddIfTopPlayer(int playerScore)
-        {
-            if (this.Highscore.IsHighScore(playerScore))
-            {
-                this.Renderer.Write("Please enter your name for the top players' scoreboard: ");
-
-                var playerName = Console.ReadLine();
-
-                if (string.IsNullOrEmpty(playerName))
-                {
-                    playerName = "no name";
-                }
-
-                var player = new Player(playerName, playerScore);
-
-                this.Highscore.AddTopPlayer(player);
-                this.Renderer.PrintTopPlayers(this.Highscore.TopPlayers);
-            }
-        }
+        #endregion
     }
 }
