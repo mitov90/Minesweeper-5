@@ -1,5 +1,7 @@
 ﻿namespace Minesweeper.Interfaces
 {
+    using Minesweeper.Data;
+
     public interface IBoard
     {
         int Rows { get; }

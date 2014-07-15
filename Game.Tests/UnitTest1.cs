@@ -2,6 +2,8 @@
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Minesweeper;
+    using Minesweeper.Data;
+    using Minesweeper.Enums;
 
     [TestClass]
     public class UnitTest1

@@ -3,6 +3,9 @@
     using System;
     using Interfaces;
 
+    using Minesweeper.Data;
+    using Minesweeper.Enums;
+
     /// <summary>
     /// Sets all mines at random position
     /// </summary>

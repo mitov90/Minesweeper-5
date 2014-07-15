@@ -2,6 +2,8 @@
 {
     using System.Collections.Generic;
 
+    using Minesweeper.Data;
+
     public interface IHighscore
     {
         List<IPlayer> TopPlayers { get; }

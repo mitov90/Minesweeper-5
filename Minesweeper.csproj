@@ -57,15 +57,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Board.cs" />
-    <Compile Include="BoardManager.cs" />
-    <Compile Include="BoardScanner.cs" />
+    <Compile Include="Data\Board.cs" />
+    <Compile Include="Logic\BoardManager.cs" />
+    <Compile Include="Logic\BoardScanner.cs" />
     <Compile Include="FieldPrototype.cs" />
-    <Compile Include="FieldStatus.cs" />
+    <Compile Include="Enums\FieldStatus.cs" />
     <Compile Include="Game.cs" />
-    <Compile Include="Field.cs" />
+    <Compile Include="Data\Field.cs" />
+    <Compile Include="Data\GameData.cs" />
     <Compile Include="GameStarter.cs" />
-    <Compile Include="Highscore.cs" />
+    <Compile Include="Data\Highscore.cs" />
     <Compile Include="Interfaces\IAcceptable.cs" />
     <Compile Include="Interfaces\IBoard.cs" />
     <Compile Include="Interfaces\IBoardManager.cs" />
@@ -75,10 +76,11 @@
     <Compile Include="Interfaces\IRenderer.cs" />
     <Compile Include="Interfaces\IVisitor.cs" />
     <Compile Include="MineSetterVisitor.cs" />
-    <Compile Include="Player.cs" />
-    <Compile Include="BoardStatus.cs" />
-    <Compile Include="PlayerCommand.cs" />
-    <Compile Include="Renderer.cs" />
+    <Compile Include="Data\Player.cs" />
+    <Compile Include="Enums\BoardStatus.cs" />
+    <Compile Include="Logic\PlayerCommand.cs" />
+    <Compile Include="Logic\Renderer.cs" />
+    <Compile Include="Logic\UserInput.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
@@ -99,9 +101,6 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="MinesClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
