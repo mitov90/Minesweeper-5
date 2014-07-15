@@ -11,5 +11,7 @@
         void PrintAllFields(IBoard board, IBoardScanner boardScanner);
 
         void PrintTopPlayers(List<IPlayer> players);
+
+        void PrintMainMenu();
     }
 }

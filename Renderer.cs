@@ -15,7 +15,7 @@
         private const string NO_PLAYERS_MESSAGE = "There is still no TOP players!---";
         private const string SCORE_BOARD_TITLE = "Scoreboard";
 
-        public static void PrintMainMenu()
+        public void PrintMainMenu()
         {
             Console.WriteLine();
             Console.WriteLine("Welcome to the game “Minesweeper”!\nTry to reveal all cells without mines.\nPlease press:\n\n" +
@@ -107,7 +107,7 @@
             }
         }
 
-        private static void PrintUpperBorder(IBoard board)
+        private void PrintUpperBorder(IBoard board)
         {
             Console.Write("    ");
             for (var i = 0; i < board.Columns; i++)
@@ -126,7 +126,7 @@
             Console.WriteLine();
         }
 
-        private static void PrintBottomBorder(IBoard board)
+        private void PrintBottomBorder(IBoard board)
         {
             Console.Write("   _");
             for (var i = 0; i < board.Columns; i++)

@@ -44,7 +44,7 @@ namespace Minesweeper
 
             while (inGame)
             {
-                Renderer.PrintMainMenu();
+                this.renderer.PrintMainMenu();
 
                 ConsoleKeyInfo keyPressed = Console.ReadKey();
 
