@@ -79,6 +79,8 @@ namespace Minesweeper
                             else
                             {
                                 this.renderer.Write("There is still no TOP players!");
+                                this.renderer.Write("Press Enter: to return to the menu");
+                                Console.ReadLine();
                             }
                         }
 
@@ -129,7 +131,6 @@ namespace Minesweeper
                         this.Run();
                     }
                 }
-
             }
         }
 

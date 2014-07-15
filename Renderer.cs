@@ -17,6 +17,7 @@
 
         public void PrintMainMenu()
         {
+            Console.Clear();
             Console.WriteLine();
             Console.WriteLine("Welcome to the game “Minesweeper”!\nTry to reveal all cells without mines.\nPlease press:\n\n" +
                             "'" + ConsoleKey.T.ToString() + "' to view the scoreboard\n" +
@@ -32,6 +33,7 @@
 
         public void PrintAllFields(IBoard board, IBoardScanner boardScanner)
         {
+            Console.Clear();
             PrintUpperBorder(board);
 
             for (var i = 0; i < board.Rows; i++)
@@ -64,6 +66,7 @@
 
         public void PrintGameBoard(IBoard board)
         {
+            Console.Clear();
             PrintUpperBorder(board);
 
             for (var i = 0; i < board.Rows; i++)
