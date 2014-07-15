@@ -9,19 +9,18 @@ namespace Minesweeper
         private const int MAX_ROWS = 5;
         private const int MAX_COLUMNS = 10;
         private const int MAX_MINES = 15;
-        private const int MAX_TOP_PLAYERS = 5;
 
         private static readonly Game TheGame = new Game();
         private Board board;
+        private Highscore highscore;
         private IBoardScanner boardScanner;
-        private List<IPlayer> topPlayers;
         private IRenderer renderer;
         private IBoardManager boardManager;
 
         private Game()
         {
             this.renderer = new Renderer();
-            this.topPlayers = new List<IPlayer> { Capacity = MAX_TOP_PLAYERS };
+            this.highscore = new Highscore();
         }
 
         public static Game Instance
@@ -42,12 +41,12 @@ namespace Minesweeper
             while (inGame)
             {
                 Renderer.PrintMainMenu();
-                
+
                 ConsoleKeyInfo keyPressed = Console.ReadKey();
 
                 switch (keyPressed.Key)
                 {
-                        // Start a new Game
+                    // Start a new Game
                     case ConsoleKey.N:
                         {
                             this.Engine();
@@ -69,9 +68,9 @@ namespace Minesweeper
                     // Show Top Scores
                     case ConsoleKey.T:
                         {
-                            if (this.topPlayers.Count > 0)
+                            if (this.highscore.TopPlayers.Count > 0)
                             {
-                                this.renderer.PrintTopPlayers(this.topPlayers);
+                                this.renderer.PrintTopPlayers(this.highscore.TopPlayers);
                             }
                             else
                             {
@@ -81,7 +80,7 @@ namespace Minesweeper
 
                         break;
 
-                        // Ask for a choice again
+                    // Ask for a choice again
                     default:
                         {
                         }
@@ -94,49 +93,8 @@ namespace Minesweeper
         private void InitializeGameBoard()
         {
             this.board = new Board(MAX_ROWS, MAX_COLUMNS, MAX_MINES);
-            this.boardScanner = new BoardScanner(this.board);            
-            this.boardManager = new BoardManager(this.board, this.boardScanner);            
-        }
-
-        private bool IsHighScore(int currentPlayerScore)
-        {
-            if (this.topPlayers.Capacity > this.topPlayers.Count)
-            {
-                return true;
-            }
-
-            foreach (var player in this.topPlayers)
-            {
-                var topPlayer = (Player)player;
-                if (topPlayer.Score < currentPlayerScore)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        private void AddTopPlayer(ref Player currentPlayer)
-        {
-            if (currentPlayer == null)
-            {
-                throw new ArgumentNullException("currentPlayer");
-            }
-
-            if (this.topPlayers.Capacity > this.topPlayers.Count)
-            {
-                this.topPlayers.Add(currentPlayer);
-                this.topPlayers.Sort();
-            }
-            else
-            {
-                var lastTopPlayerIndex = this.topPlayers.Capacity - 1;
-
-                this.topPlayers.RemoveAt(lastTopPlayerIndex);
-                this.topPlayers.Add(currentPlayer);
-                this.topPlayers.Sort();
-            }
+            this.boardScanner = new BoardScanner(this.board);
+            this.boardManager = new BoardManager(this.board, this.boardScanner);
         }
 
         /// <summary>
@@ -171,7 +129,7 @@ namespace Minesweeper
                             if (this.IsGameOver(chosenRow, chosenColumn))
                             {
                                 this.Run();
-                            }                          
+                            }
                         }
                     }
                     catch
@@ -256,7 +214,7 @@ namespace Minesweeper
         /// <param name="playerScore">The score of the current player.</param>
         private void AddIfTopPlayer(int playerScore)
         {
-            if (this.IsHighScore(playerScore))
+            if (this.highscore.IsHighScore(playerScore))
             {
                 this.renderer.Write("Please enter your name for the top players' scoreboard: ");
 
@@ -269,8 +227,8 @@ namespace Minesweeper
 
                 var player = new Player(playerName, playerScore);
 
-                this.AddTopPlayer(ref player);
-                this.renderer.PrintTopPlayers(this.topPlayers);
+                this.highscore.AddTopPlayer(ref player);
+                this.renderer.PrintTopPlayers(this.highscore.TopPlayers);
             }
         }
     }
