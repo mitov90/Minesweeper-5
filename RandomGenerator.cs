@@ -4,9 +4,14 @@
 
     public class RandomGenerator
     {
-        private static Random random = new Random();
+        private Random random;
+    
+        public RandomGenerator()
+        {
+            this.random = new Random();
+        }
 
-        public static int GenerateRandomNumber(int minValue, int maxValue)
+        public int GenerateRandomNumber(int minValue, int maxValue)
         {
             var number = random.Next(minValue, maxValue);
             return number;

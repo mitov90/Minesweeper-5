@@ -11,12 +11,13 @@
     /// </summary>
     public class MineSetterVisitor : IVisitor
     {
+        private RandomGenerator random = new RandomGenerator();
         public void Visit(Board board)
         {
             for (var i = 0; i < board.MinesCount; i++)
             {
-                var row = RandomGenerator.GenerateRandomNumber(0, board.Rows);
-                var column = RandomGenerator.GenerateRandomNumber(0, board.Columns);
+                var row = random.GenerateRandomNumber(0, board.Rows);
+                var column = random.GenerateRandomNumber(0, board.Columns);
 
                 if (board[row, column].Status == FieldStatus.IsAMine)
                 {
