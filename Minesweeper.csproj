@@ -81,6 +81,7 @@
     <Compile Include="Logic\PlayerCommand.cs" />
     <Compile Include="Logic\Renderer.cs" />
     <Compile Include="Logic\UserInput.cs" />
+    <Compile Include="RandomGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
