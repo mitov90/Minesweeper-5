@@ -12,6 +12,7 @@
     public class MineSetterVisitor : IVisitor
     {
         private RandomGenerator random = new RandomGenerator();
+
         public void Visit(Board board)
         {
             for (var i = 0; i < board.MinesCount; i++)

@@ -35,64 +35,64 @@
 
         public void PrintAllFields(IBoard board, IBoardScanner boardScanner)
         {
-            Console.Clear();
-            this.PrintUpperBorder(board);
+            var areAllFieldsOpened = true;
 
-            for (var i = 0; i < board.Rows; i++)
-            {
-                Console.Write(i);
-                Console.Write(" | ");
-                for (var j = 0; j < board.Columns; j++)
-                {
-                    var currentField = board.FieldsMatrix[i, j];
-                    switch (currentField.Status)
-                    {
-                        case FieldStatus.Opened:
-                            Console.Write(board.FieldsMatrix[i, j].Value + " ");
-                            break;
-                        case FieldStatus.IsAMine:
-                            Console.Write(BOMB_SYMBOL + SPACE);
-                            break;
-                        default:
-                            currentField.Value = boardScanner.ScanSurroundingFields(i, j);
-                            Console.Write(board.FieldsMatrix[i, j].Value + " ");
-                            break;
-                    }
-                }
+            this.PrintGameMatrix(board, areAllFieldsOpened);
+        }
 
-                Console.WriteLine("|");
-            }
-
-            this.PrintBottomBorder(board);
-        }      
-
-        public void PrintGameBoard(IBoard board)
+        public void PrintGameMatrix(IBoard board, bool areAllFieldsOpened)
         {
             Console.Clear();
-            this.PrintUpperBorder(board);
+            this.PrintColumnsNumber(board.Columns);
+            this.PrintTopOrBottomBorder(board.Columns, '╔', '═', '╗');
+
+            IBoardScanner boardScanner = new BoardScanner(board);
 
             for (var i = 0; i < board.Rows; i++)
             {
                 Console.Write(i);
-                Console.Write(" | ");
+                Console.Write(SPACE + "║");
+
                 for (var j = 0; j < board.Columns; j++)
                 {
                     var currentField = board.FieldsMatrix[i, j];
+
                     if (currentField.Status == FieldStatus.Opened)
                     {
-                        Console.Write(board.FieldsMatrix[i, j].Value);
-                        Console.Write(" ");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write(SPACE + board.FieldsMatrix[i, j].Value);
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                    else if (areAllFieldsOpened)
+                    {
+                        if (currentField.Status == FieldStatus.IsAMine)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write(SPACE + BOMB_SYMBOL);
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
+                        else
+                        {
+                            Console.Write(SPACE + boardScanner.ScanSurroundingFields(i, j));
+                        }
                     }
                     else
                     {
-                        Console.Write(UNCOVERED_FIELD_SYMBOL + SPACE);
+                        Console.Write(SPACE + UNCOVERED_FIELD_SYMBOL);
                     }
                 }
 
-                Console.WriteLine("|");
+                Console.WriteLine(SPACE + "║");
             }
 
-            this.PrintBottomBorder(board);
+            this.PrintTopOrBottomBorder(board.Columns, '╚', '═', '╝');
+        }
+
+        public void PrintGameBoard(IBoard board)
+        {
+            var areAllFieldsOpened = false;
+
+            this.PrintGameMatrix(board, areAllFieldsOpened);
         }
 
         public void PrintTopPlayers(List<IPlayer> players)
@@ -112,34 +112,23 @@
             }
         }
 
-        private void PrintUpperBorder(IBoard board)
+        private void PrintColumnsNumber(int columns)
         {
             Console.Write("    ");
-            for (var i = 0; i < board.Columns; i++)
-            {
-                Console.Write(i + " ");
-            }
 
-            Console.WriteLine();
-
-            Console.Write("   _");
-            for (var i = 0; i < board.Columns; i++)
+            for (var i = 0; i < columns; i++)
             {
-                Console.Write("__");
+                Console.Write(i + SPACE);
             }
 
             Console.WriteLine();
         }
 
-        private void PrintBottomBorder(IBoard board)
+        private void PrintTopOrBottomBorder(int columns, char firstSymbol, char mediumSymbols, char lastSymbol)
         {
-            Console.Write("   _");
-            for (var i = 0; i < board.Columns; i++)
-            {
-                Console.Write("__");
-            }
+            var borderLength = 2 * (columns + 2);
 
-            Console.WriteLine();
-        }  
+            Console.WriteLine(("  " + firstSymbol).PadRight(borderLength, mediumSymbols) + lastSymbol);
+        }
     }
 }
