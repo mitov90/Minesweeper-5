@@ -11,5 +11,7 @@
         bool IsHighScore(int currentPlayerScore);
 
         void AddTopPlayer(Player currentPlayer);
+
+        void AddIfTopPlayer(int playerScore, IRenderer renderer);
     }
 }

@@ -7,38 +7,25 @@ namespace Minesweeper
     using Minesweeper.Interfaces;
     using Minesweeper.Logic;
 
-    /// <summary>
-    /// The game.
-    /// </summary>
     public sealed class Game
     {
-        #region Static Fields
-        private static Game theGame;
-        #endregion
-
         #region Fields
-
-        internal readonly IHighscore Highscore;
-        internal readonly IRenderer Renderer;
-        private readonly Board board;
-        private readonly IBoardManager boardManager;
-        private readonly IBoardScanner boardScanner;
+        internal readonly GameData gameData;
+        private static Game theGame;
         private readonly UserInput userInputHandler;
-
+        private Board board;
+        private IBoardManager boardManager;
+        private IBoardScanner boardScanner;
         #endregion
 
         #region Constructors
 
         /// <summary>
-        /// Prevents a default instance of the <see cref="Game"/> class from being created.
+        ///     Prevents a default instance of the <see cref="Game" /> class from being created.
         /// </summary>
         private Game()
         {
-            this.Renderer = new Renderer();
-            this.Highscore = new Highscore();
-            this.board = new Board(GameData.MaxRows, GameData.MaxColumns, GameData.MaxMines);
-            this.boardScanner = new BoardScanner(this.board);
-            this.boardManager = new BoardManager(this.board, this.boardScanner);
+            this.gameData = new GameData(new Renderer(), new Highscore());
             this.userInputHandler = new UserInput(this);
         }
 
@@ -47,7 +34,7 @@ namespace Minesweeper
         #region Public Properties
 
         /// <summary>
-        /// Gets the instance.
+        ///     Gets the instance.
         /// </summary>
         public static Game Instance
         {
@@ -64,11 +51,11 @@ namespace Minesweeper
 
         public void Run()
         {
-            bool inGame = true;
+            var inGame = true;
 
             while (inGame)
             {
-                this.Renderer.PrintMainMenu();
+                this.gameData.Renderer.PrintMainMenu();
                 inGame = this.userInputHandler.Handle();
             }
         }
@@ -82,12 +69,15 @@ namespace Minesweeper
         /// </summary>
         internal void Engine()
         {
+            this.board = new Board(GameData.MaxRows, GameData.MaxColumns, GameData.MaxMines);
+            this.boardScanner = new BoardScanner(this.board);
+            this.boardManager = new BoardManager(this.board, this.boardScanner);
             this.board.Accept(new MineSetterVisitor());
-            this.Renderer.PrintGameBoard(this.board);
+            this.gameData.Renderer.PrintGameBoard(this.board);
 
             while (true)
             {
-                this.Renderer.Write(
+                this.gameData.Renderer.Write(
                     "\nChoose and press Enter:\n" + "'" + PlayerCommand.ReturnKey + "'"
                     + " to return to the menu or\nEnter row and column separated by a space: \n");
 
@@ -96,7 +86,7 @@ namespace Minesweeper
 
                 if (command.IsBadInput)
                 {
-                    this.Renderer.Write(command.Message);
+                    this.gameData.Renderer.Write(command.Message);
                 }
                 else
                 {
@@ -109,85 +99,56 @@ namespace Minesweeper
         }
 
         /// <summary>
-        /// If the current player is with top score, add it to Top list players and show the scoreboard.
-        /// </summary>
-        /// <param name="playerScore">
-        /// The score of the current player.
-        /// </param>
-        private void AddIfTopPlayer(int playerScore)
-        {
-            if (this.Highscore.IsHighScore(playerScore))
-            {
-                this.Renderer.Write("Please enter your name for the top players' scoreboard: ");
-
-                string playerName = Console.ReadLine();
-
-                if (string.IsNullOrEmpty(playerName))
-                {
-                    playerName = "no name";
-                }
-
-                var player = new Player(playerName, playerScore);
-
-                this.Highscore.AddTopPlayer(player);
-                this.Renderer.PrintTopPlayers(this.Highscore.TopPlayers);
-            }
-        }
-
-        /// <summary>
         /// Check the current status of the Game and print a result.
         /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
         private bool IsGameOver(int chosenRow, int chosenColumn)
         {
-            bool gameOver = false;
+            var gameOver = false;
             try
             {
-                BoardStatus boardStatus = this.boardManager.OpenField(chosenRow, chosenColumn);
+                var boardStatus = this.boardManager.OpenField(chosenRow, chosenColumn);
 
                 switch (boardStatus)
                 {
                     case BoardStatus.SteppedOnAMine:
                         {
-                            this.Renderer.PrintAllFields(this.board, this.boardScanner);
+                            this.gameData.Renderer.PrintAllFields(this.board, this.boardScanner);
 
-                            int playerScore = this.boardManager.CountOpenedFields();
-                            this.Renderer.Write(
+                            var playerScore = this.boardManager.CountOpenedFields();
+                            this.gameData.Renderer.Write(
                                 "Booooom! You were killed by a mine. You revealed " + playerScore
                                 + " cells without mines.");
 
-                            this.AddIfTopPlayer(playerScore);
-                            this.Renderer.Write("Press Enter: to return to the menu");
-                            Console.ReadLine();
-                            gameOver = true;
+                            gameOver = this.GetPlayerName(playerScore);
                         }
 
                         break;
 
                     case BoardStatus.AlreadyOpened:
                         {
-                            this.Renderer.Write("The field is already opened!");
+                            this.gameData.Renderer.Write("The field is already opened!");
                         }
 
                         break;
 
                     case BoardStatus.AllFieldsAreOpened:
                         {
-                            this.Renderer.PrintAllFields(this.board, this.boardScanner);
-                            this.Renderer.Write("Congratulations! You win!!!");
+                            this.gameData.Renderer.PrintAllFields(this.board, this.boardScanner);
+                            this.gameData.Renderer.Write("Congratulations! You win!!!");
 
-                            int playerScore = this.boardManager.CountOpenedFields();
+                            var playerScore = this.boardManager.CountOpenedFields();
 
-                            this.AddIfTopPlayer(playerScore);
-                            this.Renderer.Write("Press Enter: to return to the menu");
-                            Console.ReadLine();
-                            gameOver = true;
+                            gameOver = this.GetPlayerName(playerScore);
                         }
 
                         break;
 
                     default:
                         {
-                            this.Renderer.PrintGameBoard(this.board);
+                            this.gameData.Renderer.PrintGameBoard(this.board);
                         }
 
                         break;
@@ -195,10 +156,18 @@ namespace Minesweeper
             }
             catch
             {
-                this.Renderer.Write("Wrong field's coordinates!");
+                this.gameData.Renderer.Write("Wrong field's coordinates!");
             }
 
             return gameOver;
+        }
+
+        private bool GetPlayerName(int playerScore)
+        {
+            this.gameData.Highscore.AddIfTopPlayer(playerScore, this.gameData.Renderer);
+            this.gameData.Renderer.Write("Press Enter: to return to the menu");
+            Console.ReadLine();
+            return true;
         }
 
         #endregion

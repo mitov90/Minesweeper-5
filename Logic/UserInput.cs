@@ -41,7 +41,7 @@
                 case GameData.ExitGameKey:
                     {
                         inGame = false;
-                        this.instanceGame.Renderer.Write("Good bye!");
+                        this.instanceGame.gameData.Renderer.Write("Good bye!");
                         Environment.Exit(1);
                     }
 
@@ -50,13 +50,13 @@
                 // Show Top Scores
                 case GameData.TopPlayersKey:
                     {
-                        if (this.instanceGame.Highscore.TopPlayers.Count > 0)
+                        if (this.instanceGame.gameData.Highscore.TopPlayers.Count > 0)
                         {
-                            this.instanceGame.Renderer.PrintTopPlayers(this.instanceGame.Highscore.TopPlayers);
+                            this.instanceGame.gameData.Renderer.PrintTopPlayers(this.instanceGame.gameData.Highscore.TopPlayers);
                         }
                         else
                         {
-                            this.instanceGame.Renderer.Write("There is still no TOP players!/n"
+                            this.instanceGame.gameData.Renderer.Write("There is still no TOP players!/n"
                                                              + "Press Enter: to return to the menu");
                             Console.ReadLine();
                         }
