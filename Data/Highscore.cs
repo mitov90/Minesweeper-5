@@ -38,8 +38,7 @@
 
             foreach (var player in this.topPlayers)
             {
-                var topPlayer = (Player)player;
-                if (topPlayer.Score < currentPlayerScore)
+                if (player.Score < currentPlayerScore)
                 {
                     return true;
                 }
