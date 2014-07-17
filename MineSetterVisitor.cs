@@ -17,8 +17,8 @@
         {
             for (var i = 0; i < board.MinesCount; i++)
             {
-                var row = random.GenerateRandomNumber(0, board.Rows);
-                var column = random.GenerateRandomNumber(0, board.Columns);
+                var row = this.random.GenerateRandomNumber(0, board.Rows);
+                var column = this.random.GenerateRandomNumber(0, board.Columns);
 
                 if (board[row, column].Status == FieldStatus.IsAMine)
                 {

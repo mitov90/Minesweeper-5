@@ -13,7 +13,7 @@
 
         public int GenerateRandomNumber(int minValue, int maxValue)
         {
-            var number = random.Next(minValue, maxValue);
+            var number = this.random.Next(minValue, maxValue);
             return number;
         }
     }

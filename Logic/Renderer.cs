@@ -97,6 +97,8 @@
 
         public void PrintTopPlayers(List<IPlayer> players)
         {
+            Console.Clear();
+
             if (players.Count > 0)
             {
                 Console.WriteLine(SCORE_BOARD_TITLE);
