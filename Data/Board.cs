@@ -118,17 +118,8 @@ namespace Minesweeper.Data
         public void Accept(IVisitor visitor)
         {
             visitor.Visit(this);
-        }        
-
-        private bool IsPositionValid(int row, int col)
-        {
-            if ((row < 0 || row >= this.fieldsMatrix.GetLength(0)) || (col < 0 || col >= this.fieldsMatrix.GetLength(1)))
-            {
-                return false;
-            }
-
-            return true;
         }
+
         private static Field[,] PrepareMatrix(int rows, int cols)
         {
             var fieldMatrix = new Field[rows, cols];
@@ -145,5 +136,14 @@ namespace Minesweeper.Data
             return fieldMatrix;
         }
 
+        private bool IsPositionValid(int row, int col)
+        {
+            if ((row < 0 || row >= this.fieldsMatrix.GetLength(0)) || (col < 0 || col >= this.fieldsMatrix.GetLength(1)))
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

@@ -11,7 +11,12 @@
     /// </summary>
     public class MineSetterVisitor : IVisitor
     {
-        private RandomGenerator random = new RandomGenerator();
+        private IRandomGenerator random;
+
+        public MineSetterVisitor(IRandomGenerator random)
+        {
+            this.random = random;
+        }
 
         public void Visit(Board board)
         {

@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Board.cs" />
+    <Compile Include="Interfaces\IRandomGenerator.cs" />
     <Compile Include="Logic\BoardManager.cs" />
     <Compile Include="Logic\BoardScanner.cs" />
     <Compile Include="Enums\FieldStatus.cs" />

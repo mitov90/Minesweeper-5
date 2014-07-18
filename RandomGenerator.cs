@@ -1,8 +1,9 @@
 ﻿namespace Minesweeper
 {
     using System;
+    using Interfaces;
 
-    public class RandomGenerator
+    public class RandomGenerator : IRandomGenerator
     {
         private Random random;
     

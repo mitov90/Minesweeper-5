@@ -72,7 +72,7 @@ namespace Minesweeper
             this.board = new Board(GameData.MaxRows, GameData.MaxColumns, GameData.MaxMines);
             this.boardScanner = new BoardScanner(this.board);
             this.boardManager = new BoardManager(this.board, this.boardScanner);
-            this.board.Accept(new MineSetterVisitor());
+            this.board.Accept(new MineSetterVisitor(new RandomGenerator()));
             this.gameData.Renderer.PrintGameBoard(this.board);
 
             while (true)
