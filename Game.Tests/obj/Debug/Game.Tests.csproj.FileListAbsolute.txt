@@ -5,3 +5,5 @@ F:\GitHub\Minesweeper-5\Game.Tests\bin\Debug\Minesweeper.pdb
 F:\GitHub\Minesweeper-5\Game.Tests\obj\Debug\Game.Tests.csprojResolveAssemblyReference.cache
 F:\GitHub\Minesweeper-5\Game.Tests\obj\Debug\Game.Tests.dll
 F:\GitHub\Minesweeper-5\Game.Tests\obj\Debug\Game.Tests.pdb
+F:\GitHub\Minesweeper-5\Game.Tests\bin\Debug\Game.Tests.dll.CodeAnalysisLog.xml
+F:\GitHub\Minesweeper-5\Game.Tests\bin\Debug\Game.Tests.dll.lastcodeanalysissucceeded

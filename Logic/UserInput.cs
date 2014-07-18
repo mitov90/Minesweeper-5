@@ -50,18 +50,9 @@
                 // Show Top Scores
                 case GameData.TopPlayersKey:
                     {
-                        if (this.instanceGame.gameData.Highscore.TopPlayers.Count > 0)
-                        {
-                            this.instanceGame.gameData.Renderer.PrintTopPlayers(this.instanceGame.gameData.Highscore.TopPlayers);
-                            this.instanceGame.gameData.Renderer.Write("Press Enter: to return to the menu");
-                            Console.ReadLine();
-                        }
-                        else
-                        {
-                            this.instanceGame.gameData.Renderer.Write("\nThere is still no TOP players!\n"
-                                                             + "Press Enter: to return to the menu");
-                            Console.ReadLine();
-                        }
+                        this.instanceGame.gameData.Renderer.PrintTopPlayers(this.instanceGame.gameData.Highscore.TopPlayers);
+                        this.instanceGame.gameData.Renderer.Write("Press Enter: to return to the menu");
+                        Console.ReadLine();
                     }
 
                     break;

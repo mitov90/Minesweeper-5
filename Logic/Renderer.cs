@@ -14,7 +14,7 @@
         private const string BOMB_SYMBOL = "*";
         private const string UNCOVERED_FIELD_SYMBOL = "?";
         private const string SPACE = " ";
-        private const string NO_PLAYERS_MESSAGE = "There is still no TOP players!---";
+        private const string NO_PLAYERS_MESSAGE = "There is still no TOP players!";
         private const string SCORE_BOARD_TITLE = "Scoreboard";
 
         public void PrintMainMenu()
