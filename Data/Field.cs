@@ -53,7 +53,7 @@ namespace Minesweeper.Data
 
         public object Clone()
         {
-            //no reference types
+            //no reference types so MemberwiseClone should work
             var newField = this.MemberwiseClone();
             return newField;
         }

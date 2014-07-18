@@ -113,23 +113,7 @@ namespace Minesweeper.Data
 
                 this.fieldsMatrix[row, col] = value;
             }
-        }
-
-        public static Field[,] PrepareMatrix(int rows, int cols)
-        {
-            var fieldMatrix = new Field[rows, cols];
-            var field = new Field(0, FieldStatus.Closed);
-
-            for (var row = 0; row < rows; row++)
-            {
-                for (var col = 0; col < cols; col++)
-                {
-                    fieldMatrix[row, col] = field.Clone() as Field;
-                }
-            }
-
-            return fieldMatrix;
-        }
+        }        
 
         public void Accept(IVisitor visitor)
         {
@@ -145,5 +129,21 @@ namespace Minesweeper.Data
 
             return true;
         }
+        private static Field[,] PrepareMatrix(int rows, int cols)
+        {
+            var fieldMatrix = new Field[rows, cols];
+            var field = new Field(0, FieldStatus.Closed);
+
+            for (var row = 0; row < rows; row++)
+            {
+                for (var col = 0; col < cols; col++)
+                {
+                    fieldMatrix[row, col] = field.Clone() as Field;
+                }
+            }
+
+            return fieldMatrix;
+        }
+
     }
 }
