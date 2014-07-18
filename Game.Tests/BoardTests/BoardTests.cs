@@ -48,7 +48,7 @@
         {
             var board = new Board(5, 5, 10);
             var fieldMatrix = board.FieldsMatrix;
-            var bombSetter = new MineSetterVisitor();
+            var bombSetter = new MineSetterVisitor(new RandomGenerator());
             board.Accept(bombSetter);
             bool check = AreAllFieldsClosed(fieldMatrix);
             Assert.IsFalse(check);
