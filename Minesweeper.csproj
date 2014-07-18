@@ -60,7 +60,6 @@
     <Compile Include="Data\Board.cs" />
     <Compile Include="Logic\BoardManager.cs" />
     <Compile Include="Logic\BoardScanner.cs" />
-    <Compile Include="FieldPrototype.cs" />
     <Compile Include="Enums\FieldStatus.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Data\Field.cs" />

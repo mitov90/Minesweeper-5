@@ -4,7 +4,7 @@ namespace Minesweeper.Data
 
     using Minesweeper.Enums;
 
-    public class Field : FieldPrototype
+    public class Field : ICloneable
     {
         private int value;
 
@@ -51,9 +51,11 @@ namespace Minesweeper.Data
             throw new NotImplementedException();
         }
 
-        public override Field Clone()
+        public object Clone()
         {
-            return this.MemberwiseClone() as Field;
+            //no reference types
+            var newField = this.MemberwiseClone();
+            return newField;
         }
     }
 }

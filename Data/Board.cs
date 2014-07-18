@@ -124,7 +124,7 @@ namespace Minesweeper.Data
             {
                 for (var col = 0; col < cols; col++)
                 {
-                    fieldMatrix[row, col] = field.Clone();
+                    fieldMatrix[row, col] = field.Clone() as Field;
                 }
             }
 
