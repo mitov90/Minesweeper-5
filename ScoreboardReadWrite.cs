@@ -3,30 +3,38 @@
     using System.Collections.Generic;
 
     using Minesweeper.Data;
+    using Minesweeper.Interfaces;
     using Minesweeper.ReadWrite;
 
     public class ScoreboardReadWrite
     {
-        internal readonly GameData gameData;
-
-        public void SaveScoreboard(List<Player> players)
+        public static void SaveScoreboard(List<IPlayer> players)
         {
-            FileReadWrite.Serialize(players, @"..\..\Scoreboard.bin");
+            var seriazablePlayers = new List<SerializablePlayer>();
+
+            foreach (var player in players)
+            {
+                seriazablePlayers.Add(new SerializablePlayer(player.Name, player.Score));
+            }
+
+            FileReadWrite.Serialize(seriazablePlayers, @"..\..\Scoreboard.bin");
         }
 
-        public void ReadScoreboard()
+        public static List<IPlayer> ReadScoreboard()
         {
-            var players = new List<Player>();
+            var players = new List<IPlayer>();
 
-            if (null != (List<Player>)FileReadWrite.Deserialize(@"..\..\Scoreboard.bin"))
+            if (null != FileReadWrite.Deserialize(@"..\..\Scoreboard.bin"))
             {
-                players = (List<Player>)FileReadWrite.Deserialize(@"..\..\Scoreboard.bin");
+                var seriazablePlayers = (List<SerializablePlayer>)FileReadWrite.Deserialize(@"..\..\Scoreboard.bin");
 
-                for (int i = 0; i < players.Count; i++)
+                foreach (var seriazablePlayer in seriazablePlayers)
                 {
-                    this.gameData.Highscore.AddTopPlayer(players[i]);
+                    players.Add(new Player(seriazablePlayer.Name, seriazablePlayer.Score));
                 }
             }
+
+            return players;
         }
     }
 }

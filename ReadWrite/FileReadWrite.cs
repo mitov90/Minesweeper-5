@@ -23,8 +23,7 @@
             }
             catch (SerializationException e)
             {
-                // Console.WriteLine("Failed to serialize. Reason: " + e.Message);
-                throw new FieldAccessException("Failed to deserialize. Reason: " + e.Message);
+                throw new FieldAccessException("Failed to serialize. Reason: " + e.Message);
             }
             finally
             {
@@ -55,7 +54,6 @@
             }
             catch (SerializationException e)
             {
-                // Console.WriteLine("Failed to deserialize. Reason: " + e.Message);
                 throw new FieldAccessException("Failed to deserialize. Reason: " + e.Message);
             }
             finally

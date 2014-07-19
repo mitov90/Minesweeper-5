@@ -164,7 +164,16 @@ namespace Minesweeper
 
         private bool GetPlayerName(int playerScore)
         {
+            if (this.gameData.Highscore.TopPlayers.Count == 0)
+            {
+                foreach (var player in ScoreboardReadWrite.ReadScoreboard())
+                {
+                    this.gameData.Highscore.AddTopPlayer((Player)player);
+                }
+            }
+
             this.gameData.Highscore.AddIfTopPlayer(playerScore, this.gameData.Renderer);
+            ScoreboardReadWrite.SaveScoreboard(this.gameData.Highscore.TopPlayers);
             this.gameData.Renderer.Write("Press Enter: to return to the menu");
             Console.ReadLine();
             return true;
