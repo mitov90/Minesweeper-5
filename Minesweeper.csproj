@@ -82,6 +82,8 @@
     <Compile Include="Logic\Renderer.cs" />
     <Compile Include="Logic\UserInput.cs" />
     <Compile Include="RandomGenerator.cs" />
+    <Compile Include="ReadWrite\FileReadWrite.cs" />
+    <Compile Include="ScoreboardReadWrite.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
