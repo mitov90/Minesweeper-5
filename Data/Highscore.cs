@@ -8,12 +8,21 @@
     public class Highscore : IHighscore
     {
         private const int MaxTopPlayers = 5;
+        private const string DefaultPlayerName = "no name";
 
         private List<IPlayer> topPlayers;
 
         public Highscore()
         {
             this.topPlayers = new List<IPlayer> { Capacity = MaxTopPlayers };
+        }
+
+        public static int MaxTopPlayersCount
+        {
+            get
+            {
+                return MaxTopPlayers;
+            }
         }
 
         public List<IPlayer> TopPlayers
@@ -67,7 +76,7 @@
 
             if (string.IsNullOrEmpty(playerName))
             {
-                playerName = "no name";
+                playerName = DefaultPlayerName;
             }
 
             var player = new Player(playerName, playerScore);
@@ -96,6 +105,6 @@
                 this.topPlayers.Add(currentPlayer);
                 this.topPlayers.Sort();
             }
-        }
+        }        
     }
 }

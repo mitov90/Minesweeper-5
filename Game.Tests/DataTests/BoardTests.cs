@@ -18,7 +18,7 @@
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void CreateBoardWithInvalidRowShouldThrowException()
+        public void CreateBoardWithInvalidRowsShouldThrowException()
         {
             var board = new Board(-1, 5, 10);
         }
@@ -80,8 +80,8 @@
             var fieldMatrix = board.FieldsMatrix;
             var bombSetter = new MineSetterVisitor(new RandomGenerator());
             board.Accept(bombSetter);
-            bool check = AreAllFieldsClosed(fieldMatrix);
-            Assert.IsFalse(check);
+            bool allFieldsAreClosed = AreAllFieldsClosed(fieldMatrix);
+            Assert.IsFalse(allFieldsAreClosed);
         }        
 
         private static bool AreAllFieldsClosed(Field[,] fieldMatrix)

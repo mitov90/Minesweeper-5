@@ -32,7 +32,7 @@
         [TestMethod]
         public void HighscoreCount()
         {
-            Assert.AreEqual(highscore.TopPlayers.Count, 5);
+            Assert.AreEqual(highscore.TopPlayers.Count, Highscore.MaxTopPlayersCount);
         }
 
         [TestMethod]
