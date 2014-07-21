@@ -57,12 +57,31 @@
         }
 
         [TestMethod]
-        public void HighscoreSorting()
+        public void HighscoreSortingGetBestPlayer()
         {
             Player bestPlayer = new Player("Misho", 20);
             highscore.AddTopPlayer(bestPlayer);
 
-            Assert.AreEqual(highscore.TopPlayers[0], bestPlayer);
+            Assert.AreEqual(highscore.TopPlayers[0], bestPlayer);            
+        }
+
+        [TestMethod]
+        public void HighscoreSorting()
+        {
+            var sortedHighScore = new Highscore();
+            var fourth = new Player("Pesho", 5);
+            var first = new Player("Gosho", 1);            
+            var third = new Player("Misho", 4);            
+            var second = new Player("Tisho", 3);
+            sortedHighScore.AddTopPlayer(first);
+            sortedHighScore.AddTopPlayer(second);
+            sortedHighScore.AddTopPlayer(third);
+            sortedHighScore.AddTopPlayer(fourth);
+
+            var expected = new Player[] { fourth, third, second, first };
+            var actual = sortedHighScore.TopPlayers.ToArray();
+
+            CollectionAssert.AreEqual(expected, actual);
         }
     }
 }
