@@ -28,5 +28,14 @@
             Player secondPlayer = new Player("Gosho", 1);
             Assert.AreEqual(firstPlayer.CompareTo(secondPlayer), -1);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void PlayerCompareWithNonPlayer()
+        {
+            Player firstPlayer = new Player("Gosho", 2);
+            object fake = "fake player";
+            Assert.AreEqual(firstPlayer.CompareTo(fake), -1);
+        }
     }
 }
