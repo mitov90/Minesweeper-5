@@ -11,13 +11,27 @@
     {
         [TestMethod]
         [ExpectedException (typeof(ArgumentException))]
-        public void TestInitialization()
+        public void CreateBoardWithInvalidMinesShouldThrowException()
         {
             var board = new Board(10, 10, -10);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void CreateBoardWithInvalidRowShouldThrowException()
+        {
+            var board = new Board(-1, 5, 10);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void CreateBoardWithInvalidColumnsShouldThrowException()
+        {
+            var board = new Board(5, -1, 10);
+        }
+
         [TestMethod]        
-        public void TestInnerFieldMatrix()
+        public void TestRowsAndColsWhenCreateBoard()
         {
             var board = new Board(10, 9, 10);
             var rows = board.FieldsMatrix.GetLength(0);
@@ -32,6 +46,22 @@
         {
             var board = new Board(5, 5, 10);
             var field = board.FieldsMatrix[-1, 0];            
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void TestIndexerOutOfRange2()
+        {
+            var board = new Board(5, 5, 10);
+            var field = board.FieldsMatrix[0, -1];
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void TestIndexerOutOfRange3()
+        {
+            var board = new Board(5, 5, 10);
+            var field = board.FieldsMatrix[-2, -1];
         }
 
         [TestMethod]        
@@ -52,7 +82,7 @@
             board.Accept(bombSetter);
             bool check = AreAllFieldsClosed(fieldMatrix);
             Assert.IsFalse(check);
-        }
+        }        
 
         private static bool AreAllFieldsClosed(Field[,] fieldMatrix)
         {

@@ -48,7 +48,7 @@ namespace Minesweeper.Data
 
         public override int GetHashCode()
         {
-            throw new NotImplementedException();
+            return this.Value.GetHashCode() ^ this.Status.GetHashCode();
         }
 
         public object Clone()
