@@ -37,5 +37,15 @@
             object fake = "fake player";
             Assert.AreEqual(firstPlayer.CompareTo(fake), -1);
         }
+
+        [TestMethod]
+        public void CheckToStringMethod()
+        {
+            Player player = new Player("Gosho", 2);
+            string expected = "Gosho --> 2";
+            string actual = player.ToString();
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
