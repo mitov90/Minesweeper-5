@@ -5,6 +5,7 @@
     using Minesweeper;
     using Minesweeper.Data;
     using Minesweeper.Enums;
+    using Minesweeper.Interfaces;
 
     [TestClass]
     public class BoardTests
@@ -82,7 +83,18 @@
             board.Accept(bombSetter);
             bool allFieldsAreClosed = AreAllFieldsClosed(fieldMatrix);
             Assert.IsFalse(allFieldsAreClosed);
-        }        
+        }
+
+        [TestMethod]
+        public void SettingBombOnSpecificRowAndColTest()
+        {
+            var board = new Board(4, 4, 1);            
+            var bombSetter = new MineSetterVisitor(new RandomGeneratorForTesting(1));
+            board.Accept(bombSetter);
+            var fieldMatrix = board.FieldsMatrix;
+            var fieldWithBomb = board.FieldsMatrix[1, 1];
+            Assert.AreEqual(fieldWithBomb, new Field(0, FieldStatus.IsAMine));
+        }
 
         private static bool AreAllFieldsClosed(Field[,] fieldMatrix)
         {
@@ -101,5 +113,24 @@
 
             return true;
         }        
+    }
+
+    public class RandomGeneratorForTesting : IRandomGenerator
+    {
+        private int numberToReturn;
+
+        public RandomGeneratorForTesting(int numberToReturn)
+        {
+            this.numberToReturn = numberToReturn;
+        }
+        public int GenerateRandomNumber(int minValue, int maxValue)
+        {
+            if (this.numberToReturn < minValue || this.numberToReturn > maxValue)
+            {
+                throw new ArgumentException("The returned number is not in the appropriate range.");
+            }
+
+            return this.numberToReturn;
+        }
     }
 }
