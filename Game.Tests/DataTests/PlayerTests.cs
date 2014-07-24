@@ -47,5 +47,25 @@
 
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void CheckGetName()
+        {
+            Player player = new Player("Dimo", 4);
+            string expected = "Dimo";
+            string actual = player.Name;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void CheckGetScore()
+        {
+            Player player = new Player("Dimo", 4);
+            int expected = 4;
+            int actual = player.Score;
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
