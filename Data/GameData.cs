@@ -11,9 +11,9 @@
     /// </summary>
     internal class GameData
     {
-        public const int MaxRows = 5;
-        public const int MaxColumns = 10;
-        public const int MaxMines = 15;
+        public const int MAX_ROWS = 5;
+        public const int MAX_COLUMNS = 10;
+        public const int MAX_MINES = 15;
 
         public const ConsoleKey ExitGameKey = ConsoleKey.Q;
         public const ConsoleKey NewGameKey = ConsoleKey.N;

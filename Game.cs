@@ -68,7 +68,7 @@ namespace Minesweeper
         /// </summary>
         internal void Engine()
         {
-            this.board = new Board(GameData.MaxRows, GameData.MaxColumns, GameData.MaxMines);
+            this.board = new Board(GameData.MAX_ROWS, GameData.MAX_COLUMNS, GameData.MAX_MINES);
             this.boardScanner = new BoardScanner(this.board);
             this.boardManager = new BoardManager(this.board, this.boardScanner);
             this.board.Accept(new MineSetterVisitor(new RandomGenerator()));
