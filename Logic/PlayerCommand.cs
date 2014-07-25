@@ -7,7 +7,7 @@
     ///     Evaluate command
     ///     Represent command design pattern
     /// </summary>
-    internal class PlayerCommand
+    public class PlayerCommand
     {
         public static readonly string ReturnKey = "x";
         private readonly string[] commands;
