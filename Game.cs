@@ -1,7 +1,6 @@
 namespace Minesweeper
 {
     using System;
-
     using Minesweeper.Data;
     using Minesweeper.Enums;
     using Minesweeper.Interfaces;
@@ -166,14 +165,14 @@ namespace Minesweeper
         {
             if (this.gameData.Highscore.TopPlayers.Count == 0)
             {
-                foreach (var player in ScoreboardReadWrite.ReadScoreboard())
+                foreach (var player in Scoreboard.Load())
                 {
                     this.gameData.Highscore.AddTopPlayer((Player)player);
                 }
             }
 
             this.gameData.Highscore.AddIfTopPlayer(playerScore, this.gameData.Renderer);
-            ScoreboardReadWrite.SaveScoreboard(this.gameData.Highscore.TopPlayers);
+            Scoreboard.Save(this.gameData.Highscore.TopPlayers);
             this.gameData.Renderer.Write("Press Enter: to return to the menu");
             Console.ReadLine();
             return true;

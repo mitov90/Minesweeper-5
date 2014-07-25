@@ -1,14 +1,13 @@
 ﻿namespace Minesweeper
 {
     using System.Collections.Generic;
-
     using Minesweeper.Data;
     using Minesweeper.Interfaces;
     using Minesweeper.ReadWrite;
 
-    public class ScoreboardReadWrite
+    public class Scoreboard
     {
-        public static void SaveScoreboard(List<IPlayer> players)
+        public static void Save(List<IPlayer> players)
         {
             var seriazablePlayers = new List<SerializablePlayer>();
 
@@ -20,7 +19,7 @@
             FileReadWrite.Serialize(seriazablePlayers, @"..\..\Scoreboard.bin");
         }
 
-        public static List<IPlayer> ReadScoreboard()
+        public static List<IPlayer> Load()
         {
             var players = new List<IPlayer>();
 

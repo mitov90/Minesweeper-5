@@ -84,7 +84,7 @@
     <Compile Include="RandomGenerator.cs" />
     <Compile Include="ReadWrite\FileReadWrite.cs" />
     <Compile Include="ReadWrite\SerializablePlayer.cs" />
-    <Compile Include="ScoreboardReadWrite.cs" />
+    <Compile Include="Scoreboard.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

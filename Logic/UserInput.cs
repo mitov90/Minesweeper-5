@@ -50,7 +50,7 @@
                 // Show Top Scores
                 case GameData.TopPlayersKey:
                     {
-                        this.instanceGame.gameData.Renderer.PrintTopPlayers(ScoreboardReadWrite.ReadScoreboard());
+                        this.instanceGame.gameData.Renderer.PrintTopPlayers(Scoreboard.Load());
                         this.instanceGame.gameData.Renderer.Write("Press Enter: to return to the menu");
                         Console.ReadLine();
                     }
