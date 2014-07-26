@@ -2,6 +2,8 @@
 {
     public enum FieldStatus
     {
-        Closed, Opened, IsAMine
+        Closed,
+        Opened,
+        IsAMine
     }
 }

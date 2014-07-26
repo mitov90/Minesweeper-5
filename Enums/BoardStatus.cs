@@ -2,6 +2,9 @@
 {
     public enum BoardStatus
     {        
-        SteppedOnAMine, AlreadyOpened, SuccessfullyOpened, AllFieldsAreOpened
+        SteppedOnAMine,
+        AlreadyOpened,
+        SuccessfullyOpened,
+        AllFieldsAreOpened
     }
 }

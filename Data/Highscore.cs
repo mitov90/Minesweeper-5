@@ -7,21 +7,21 @@
 
     public class Highscore : IHighscore
     {
-        private const int MaxTopPlayers = 5;
-        private const string DefaultPlayerName = "no name";
+        private const int MAX_TOP_PLAYERS = 5;
+        private const string DEFAULT_PLAYER_NAME = "no name";
 
         private List<IPlayer> topPlayers;
 
         public Highscore()
         {
-            this.topPlayers = new List<IPlayer> { Capacity = MaxTopPlayers };
+            this.topPlayers = new List<IPlayer> { Capacity = MAX_TOP_PLAYERS };
         }
 
         public static int MaxTopPlayersCount
         {
             get
             {
-                return MaxTopPlayers;
+                return MAX_TOP_PLAYERS;
             }
         }
 
@@ -76,7 +76,7 @@
 
             if (string.IsNullOrEmpty(playerName))
             {
-                playerName = DefaultPlayerName;
+                playerName = DEFAULT_PLAYER_NAME;
             }
 
             var player = new Player(playerName, playerScore);
@@ -92,19 +92,13 @@
                 throw new ArgumentNullException("currentPlayer");
             }
 
-            if (this.topPlayers.Capacity > this.topPlayers.Count)
-            {
-                this.topPlayers.Add(currentPlayer);
-                this.topPlayers.Sort();
-            }
-            else
+            if (this.topPlayers.Capacity <= this.topPlayers.Count)
             {
                 var lastTopPlayerIndex = this.topPlayers.Capacity - 1;
-
                 this.topPlayers.RemoveAt(lastTopPlayerIndex);
-                this.topPlayers.Add(currentPlayer);
-                this.topPlayers.Sort();
             }
+            this.topPlayers.Add(currentPlayer);
+            this.topPlayers.Sort();
         }        
     }
 }

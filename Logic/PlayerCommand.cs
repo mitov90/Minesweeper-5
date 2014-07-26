@@ -11,6 +11,7 @@
     {
         public static readonly string ReturnKey = "x";
         private readonly string[] commands;
+        private const string WRONG_INPUT_MESSAGE = "Wrong input row/col on the field!";
 
         /// <summary>
         /// Create object of type PlayerCommand
@@ -41,8 +42,9 @@
 
         private void EvaluateCommand()
         {
-            int row, col;
+            
             var isCommandLengthOk = this.commands.Length >= 2;
+            int row, col;
 
             if (isCommandLengthOk &&
                 int.TryParse(this.commands[0], out row) && 
@@ -56,7 +58,7 @@
             else
             {
                 this.IsBadInput = true;
-                this.Message = "Wrong input row/col on the field!";
+                this.Message = WRONG_INPUT_MESSAGE;
             }
         }
     }
