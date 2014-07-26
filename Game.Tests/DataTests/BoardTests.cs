@@ -79,7 +79,7 @@
         {
             var board = new Board(5, 5, 10);
             var fieldMatrix = board.FieldsMatrix;
-            var bombSetter = new MineSetterVisitor(new RandomGenerator());
+            var bombSetter = new MineSetter(new RandomGenerator());
             board.Accept(bombSetter);
             bool allFieldsAreClosed = AreAllFieldsClosed(fieldMatrix);
             Assert.IsFalse(allFieldsAreClosed);
@@ -89,7 +89,7 @@
         public void SettingBombOnSpecificRowAndColTest()
         {
             var board = new Board(4, 4, 1);            
-            var bombSetter = new MineSetterVisitor(new RandomGeneratorForTesting(1));
+            var bombSetter = new MineSetter(new RandomGeneratorForTesting(1));
             board.Accept(bombSetter);
             var fieldMatrix = board.FieldsMatrix;
             var fieldWithBomb = board.FieldsMatrix[1, 1];

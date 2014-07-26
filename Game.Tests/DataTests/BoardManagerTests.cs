@@ -17,7 +17,7 @@
             var boardScanner = new BoardScanner(board);            
             var boardManager = new BoardManager(board, boardScanner);
             
-            var bombSetter = new MineSetterVisitor(new RandomGeneratorForTesting(1));
+            var bombSetter = new MineSetter(new RandomGeneratorForTesting(1));
             board.Accept(bombSetter);
             var openedField = boardManager.OpenField(1, 1);
 
@@ -31,7 +31,7 @@
             var boardScanner = new BoardScanner(board);
             var boardManager = new BoardManager(board, boardScanner);
 
-            var bombSetter = new MineSetterVisitor(new RandomGeneratorForTesting(2));
+            var bombSetter = new MineSetter(new RandomGeneratorForTesting(2));
             board.Accept(bombSetter);
             var openedField = boardManager.OpenField(2, 1);
 
@@ -45,7 +45,7 @@
             var boardScanner = new BoardScanner(board);
             var boardManager = new BoardManager(board, boardScanner);
 
-            var bombSetter = new MineSetterVisitor(new RandomGeneratorForTesting(2));
+            var bombSetter = new MineSetter(new RandomGeneratorForTesting(2));
             board.Accept(bombSetter);
             var openedField = boardManager.OpenField(2, 1);
             var secondOpeningField = boardManager.OpenField(2, 1);

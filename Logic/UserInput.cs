@@ -41,7 +41,7 @@
                 case GameData.ExitGameKey:
                     {
                         inGame = false;
-                        this.instanceGame.gameData.Renderer.Write("Good bye!");
+                        this.instanceGame.GameData.Renderer.Write("Good bye!");
                         Environment.Exit(1);
                     }
 
@@ -50,8 +50,8 @@
                 // Show Top Scores
                 case GameData.TopPlayersKey:
                     {
-                        this.instanceGame.gameData.Renderer.PrintTopPlayers(Scoreboard.Load());
-                        this.instanceGame.gameData.Renderer.Write("Press Enter: to return to the menu");
+                        this.instanceGame.GameData.Renderer.PrintTopPlayers(Scoreboard.Load());
+                        this.instanceGame.GameData.Renderer.Write("Press Enter: to return to the menu");
                         Console.ReadLine();
                     }
 

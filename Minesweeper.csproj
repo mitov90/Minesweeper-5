@@ -62,7 +62,7 @@
     <Compile Include="Logic\BoardManager.cs" />
     <Compile Include="Logic\BoardScanner.cs" />
     <Compile Include="Enums\FieldStatus.cs" />
-    <Compile Include="Game.cs" />
+    <Compile Include="Data\Game.cs" />
     <Compile Include="Data\Field.cs" />
     <Compile Include="Data\GameData.cs" />
     <Compile Include="GameStarter.cs" />
@@ -75,16 +75,16 @@
     <Compile Include="Interfaces\IPlayer.cs" />
     <Compile Include="Interfaces\IRenderer.cs" />
     <Compile Include="Interfaces\IVisitor.cs" />
-    <Compile Include="MineSetterVisitor.cs" />
+    <Compile Include="Data\MineSetter.cs" />
     <Compile Include="Data\Player.cs" />
     <Compile Include="Enums\BoardStatus.cs" />
     <Compile Include="Logic\PlayerCommand.cs" />
     <Compile Include="Logic\Renderer.cs" />
     <Compile Include="Logic\UserInput.cs" />
-    <Compile Include="RandomGenerator.cs" />
+    <Compile Include="Data\RandomGenerator.cs" />
     <Compile Include="ReadWrite\FileReadWrite.cs" />
     <Compile Include="ReadWrite\SerializablePlayer.cs" />
-    <Compile Include="Scoreboard.cs" />
+    <Compile Include="Data\Scoreboard.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

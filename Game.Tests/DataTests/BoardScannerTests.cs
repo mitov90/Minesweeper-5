@@ -15,7 +15,7 @@
         {
             var board = new Board(4, 4, 1);
             var boardScanner = new BoardScanner(board); 
-            var bombSetter = new MineSetterVisitor(new RandomGeneratorForTesting(3));
+            var bombSetter = new MineSetter(new RandomGeneratorForTesting(3));
             board.Accept(bombSetter);
             var fieldWithBomb = board.FieldsMatrix[3, 3];
             Assert.AreEqual(fieldWithBomb, new Field(0, FieldStatus.IsAMine));
@@ -39,8 +39,8 @@
         {
             var board = new Board(4, 4, 1);
             var boardScanner = new BoardScanner(board);
-            var bombSetter = new MineSetterVisitor(new RandomGeneratorForTesting(3));
-            var bombSetter2 = new MineSetterVisitor(new RandomGeneratorForTesting(2));
+            var bombSetter = new MineSetter(new RandomGeneratorForTesting(3));
+            var bombSetter2 = new MineSetter(new RandomGeneratorForTesting(2));
             board.Accept(bombSetter);
             board.Accept(bombSetter2);
             int expected = 2;

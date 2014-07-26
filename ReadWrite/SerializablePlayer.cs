@@ -7,6 +7,7 @@
     {
         private string name;
         private int score;
+
         public SerializablePlayer(string name, int score)
         {
             this.Name = name;
