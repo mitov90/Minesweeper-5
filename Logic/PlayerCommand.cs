@@ -10,9 +10,9 @@
     public class PlayerCommand
     {
         public static readonly string ReturnKey = "x";
-        private readonly string[] commands;
         private const string WRONG_INPUT_MESSAGE = "Wrong input row/col on the field!";
-
+        private readonly string[] commands;
+        
         /// <summary>
         /// Create object of type PlayerCommand
         /// </summary>
@@ -42,7 +42,6 @@
 
         private void EvaluateCommand()
         {
-            
             var isCommandLengthOk = this.commands.Length >= 2;
             int row, col;
 

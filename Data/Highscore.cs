@@ -97,6 +97,7 @@
                 var lastTopPlayerIndex = this.topPlayers.Capacity - 1;
                 this.topPlayers.RemoveAt(lastTopPlayerIndex);
             }
+
             this.topPlayers.Add(currentPlayer);
             this.topPlayers.Sort();
         }        
