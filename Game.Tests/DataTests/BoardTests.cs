@@ -1,17 +1,17 @@
 ﻿namespace Game.Tests
 {
     using System;
+    using Game.Tests.DataTests;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Minesweeper;
     using Minesweeper.Data;
     using Minesweeper.Enums;
-    using Minesweeper.Interfaces;
 
     [TestClass]
     public class BoardTests
     {
         [TestMethod]
-        [ExpectedException (typeof(ArgumentException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void CreateBoardWithInvalidMinesShouldThrowException()
         {
             var board = new Board(10, 10, -10);
@@ -31,7 +31,7 @@
             var board = new Board(5, -1, 10);
         }
 
-        [TestMethod]        
+        [TestMethod]
         public void TestRowsAndColsWhenCreateBoard()
         {
             var board = new Board(10, 9, 10);
@@ -46,7 +46,7 @@
         public void TestIndexerOutOfRange()
         {
             var board = new Board(5, 5, 10);
-            var field = board.FieldsMatrix[-1, 0];            
+            var field = board.FieldsMatrix[-1, 0];
         }
 
         [TestMethod]
@@ -65,7 +65,7 @@
             var field = board.FieldsMatrix[-2, -1];
         }
 
-        [TestMethod]        
+        [TestMethod]
         public void TestFieldMatrixInitialization()
         {
             var board = new Board(5, 5, 10);
@@ -88,7 +88,7 @@
         [TestMethod]
         public void SettingBombOnSpecificRowAndColTest()
         {
-            var board = new Board(4, 4, 1);            
+            var board = new Board(4, 4, 1);
             var bombSetter = new MineSetter(new RandomGeneratorForTesting(1));
             board.Accept(bombSetter);
             var fieldMatrix = board.FieldsMatrix;
@@ -112,25 +112,6 @@
             }
 
             return true;
-        }        
-    }
-
-    public class RandomGeneratorForTesting : IRandomGenerator
-    {
-        private int numberToReturn;
-
-        public RandomGeneratorForTesting(int numberToReturn)
-        {
-            this.numberToReturn = numberToReturn;
-        }
-        public int GenerateRandomNumber(int minValue, int maxValue)
-        {
-            if (this.numberToReturn < minValue || this.numberToReturn > maxValue)
-            {
-                throw new ArgumentException("The returned number is not in the appropriate range.");
-            }
-
-            return this.numberToReturn;
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿namespace Game.Tests
 {
-    using System;
+    using Game.Tests.DataTests;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Minesweeper;
     using Minesweeper.Data;
     using Minesweeper.Enums;
-    using Minesweeper.Logic;
+    using Minesweeper.Logic;   
 
     [TestClass]
     public class BoardScannerTests

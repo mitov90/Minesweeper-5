@@ -9,14 +9,14 @@
     public class FieldTests
     {
         [TestMethod]
-        [ExpectedException (typeof(ArgumentException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void InvalidValueShouldThrowException()
         {
             var field = new Field(0, FieldStatus.Opened);
-            field.Value = -1;;
+            field.Value = -1;
         }
 
-        [TestMethod]        
+        [TestMethod]
         public void CheckEqualsWhenCompareWithNoField()
         {
             var field = new Field(0, FieldStatus.Opened);

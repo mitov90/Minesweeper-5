@@ -1,6 +1,6 @@
 ﻿namespace Game.Tests
 {
-    using System;
+    using Game.Tests.DataTests;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Minesweeper;
     using Minesweeper.Data;

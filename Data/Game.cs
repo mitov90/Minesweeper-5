@@ -8,16 +8,16 @@ namespace Minesweeper
 
     public sealed class Game
     {
-        #region Fields
+        public const int MAX_ROWS = 5;
+        public const int MAX_COLUMNS = 10;
+        public const int MAX_MINES = 15;
+
         internal readonly GameData GameData;
         private static Game theGame;
         private readonly UserInput userInputHandler;
         private Board board;
         private IBoardManager boardManager;
         private IBoardScanner boardScanner;
-        #endregion
-
-        #region Constructors
 
         /// <summary>
         ///     Prevents a default instance of the <see cref="Game" /> class from being created.
@@ -27,10 +27,6 @@ namespace Minesweeper
             this.GameData = new GameData(new Renderer(), new Highscore());
             this.userInputHandler = new UserInput(this);
         }
-
-        #endregion
-
-        #region Public Properties
 
         /// <summary>
         ///     Gets the instance.
@@ -44,10 +40,6 @@ namespace Minesweeper
             }
         }
 
-        #endregion
-
-        #region Public Methods and Operators
-
         public void Run()
         {
             var inGame = true;
@@ -59,16 +51,12 @@ namespace Minesweeper
             }
         }
 
-        #endregion
-
-        #region Methods
-
         /// <summary>
         ///     The Engine of the Game.
         /// </summary>
         internal void Engine()
         {
-            this.board = new Board(GameData.MAX_ROWS, GameData.MAX_COLUMNS, GameData.MAX_MINES);
+            this.board = new Board(MAX_ROWS, MAX_COLUMNS, MAX_MINES);
             this.boardScanner = new BoardScanner(this.board);
             this.boardManager = new BoardManager(this.board, this.boardScanner);
             this.board.Accept(new MineSetter(new RandomGenerator()));
@@ -177,7 +165,5 @@ namespace Minesweeper
             Console.ReadLine();
             return true;
         }
-
-        #endregion
     }
 }

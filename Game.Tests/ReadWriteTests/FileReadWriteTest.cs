@@ -1,10 +1,10 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Minesweeper.Data;
-using Minesweeper.ReadWrite;
-
-namespace Game.Tests.ReadWriteTests
+﻿namespace Game.Tests.ReadWriteTests
 {
+    using System;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Minesweeper.Data;
+    using Minesweeper.ReadWrite;
+
     [TestClass]
     public class FileReadWriteTest
     {
