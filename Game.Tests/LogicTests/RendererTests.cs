@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using Minesweeper.Data;
-using Minesweeper.Interfaces;
-
-namespace Game.Tests.LogicTests
+﻿namespace Game.Tests.LogicTests
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Minesweeper.Data;
+    using Minesweeper.Interfaces;
     using Minesweeper.Logic;
 
     [TestClass]
@@ -53,7 +52,7 @@ namespace Game.Tests.LogicTests
                     Console.SetIn(sr);
 
                     Renderer ab = new Renderer();
-                    Player ivo = new Player("Ivaylo",10);
+                    Player ivo = new Player("Ivaylo", 10);
                     List<IPlayer> players = new List<IPlayer>();
                     players.Add(ivo);
                     ab.PrintTopPlayers(players);
@@ -80,6 +79,35 @@ namespace Game.Tests.LogicTests
                     ab.PrintTopPlayers(players);
 
                     string expected = string.Format("There is still no TOP players!" + Environment.NewLine);
+                    Assert.AreEqual<string>(expected, sw.ToString());
+                }
+            }
+        }
+
+        [TestMethod]
+        public void TestPrintGameMatrix()
+        {
+            using (StringWriter sw = new StringWriter())
+            {
+                Console.SetOut(sw);
+
+                using (StringReader sr = new StringReader(string.Format("    0 " + Environment.NewLine +
+                                                                        "  ╔═══╗" + Environment.NewLine +
+                                                                        "0 ║ 0 ║" + Environment.NewLine +
+                                                                        "  ╚═══╝" + Environment.NewLine)))
+                {
+                    Console.SetIn(sr);
+
+                    Renderer ab = new Renderer();
+                    IBoard gameMatrix = new Board(1, 1, 0);
+
+                    ab.PrintGameMatrix(gameMatrix, true);
+
+                    string expected = string.Format("    0 " + Environment.NewLine +
+                                                    "  ╔═══╗" + Environment.NewLine +
+                                                    "0 ║ 0 ║" + Environment.NewLine +
+                                                    "  ╚═══╝" + Environment.NewLine);
+
                     Assert.AreEqual<string>(expected, sw.ToString());
                 }
             }
