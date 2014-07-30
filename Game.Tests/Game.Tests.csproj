@@ -58,6 +58,8 @@
     <Compile Include="DataTests\PlayerCommandTests.cs" />
     <Compile Include="DataTests\PlayerTests.cs" />
     <Compile Include="DataTests\RandomGeneratorForTesting.cs" />
+    <Compile Include="DataTests\GameTests.cs" />
+    <Compile Include="DataTests\ScoreboardTests.cs" />
     <Compile Include="LogicTests\RendererTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadWriteTests\SerializablePlayerTests.cs" />

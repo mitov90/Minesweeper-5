@@ -6,7 +6,7 @@
     using Minesweeper.ReadWrite;
 
     public class Scoreboard
-    {
+    {        
         public static void Save(List<IPlayer> players)
         {
             var seriazablePlayers = new List<SerializablePlayer>();
