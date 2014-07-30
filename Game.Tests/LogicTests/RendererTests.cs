@@ -112,5 +112,100 @@
                 }
             }
         }
+
+        [TestMethod]
+        public void TestPrintAllFields()
+        {
+            using (StringWriter sw = new StringWriter())
+            {
+                Console.SetOut(sw);
+
+                using (StringReader sr = new StringReader(string.Format("    0 " + Environment.NewLine +
+                                                                        "  ╔═══╗" + Environment.NewLine +
+                                                                        "0 ║ 0 ║" + Environment.NewLine +
+                                                                        "  ╚═══╝" + Environment.NewLine)))
+                {
+                    Console.SetIn(sr);
+
+                    Renderer ab = new Renderer();
+                    IBoard gameMatrix = new Board(1, 1, 0);
+                    IBoardScanner scanner = new BoardScanner(gameMatrix);
+
+                    ab.PrintAllFields(gameMatrix, scanner);
+
+                    string expected = string.Format("    0 " + Environment.NewLine +
+                                                    "  ╔═══╗" + Environment.NewLine +
+                                                    "0 ║ 0 ║" + Environment.NewLine +
+                                                    "  ╚═══╝" + Environment.NewLine);
+
+                    Assert.AreEqual<string>(expected, sw.ToString());
+                }
+            }
+        }
+
+        [TestMethod]
+        public void TestPrintGameBoard()
+        {
+            using (StringWriter sw = new StringWriter())
+            {
+                Console.SetOut(sw);
+
+                using (StringReader sr = new StringReader(string.Format("    0 " + Environment.NewLine +
+                                                                        "  ╔═══╗" + Environment.NewLine +
+                                                                        "0 ║ ? ║" + Environment.NewLine +
+                                                                        "  ╚═══╝" + Environment.NewLine)))
+                {
+                    Console.SetIn(sr);
+
+                    Renderer ab = new Renderer();
+                    IBoard gameMatrix = new Board(1, 1, 0);
+
+                    ab.PrintGameBoard(gameMatrix);
+
+                    string expected = string.Format("    0 " + Environment.NewLine +
+                                                    "  ╔═══╗" + Environment.NewLine +
+                                                    "0 ║ ? ║" + Environment.NewLine +
+                                                    "  ╚═══╝" + Environment.NewLine);
+
+                    Assert.AreEqual<string>(expected, sw.ToString());
+                }
+            }
+        }
+
+        [TestMethod]
+        public void TestPrintMainMenu()
+        {
+            using (StringWriter sw = new StringWriter())
+            {
+                Console.SetOut(sw);
+
+                using (StringReader sr = new StringReader(string.Format(Environment.NewLine +
+                        "Welcome to the game “Minesweeper”!" + Environment.NewLine +
+                        "Try to reveal all cells without mines." + Environment.NewLine +
+                        "Please press:" + Environment.NewLine + Environment.NewLine +
+                            "'" + ConsoleKey.T.ToString() + "' to view the scoreboard" + Environment.NewLine +
+                            "'" + ConsoleKey.N.ToString() + "' to start a new game" + Environment.NewLine +
+                            "'" + ConsoleKey.Q.ToString() + "' to quit the game!" +
+                            Environment.NewLine + Environment.NewLine + Environment.NewLine)))
+                {
+                    Console.SetIn(sr);
+
+                    Renderer ab = new Renderer();
+
+                    ab.PrintMainMenu();
+
+                    string expected = string.Format(Environment.NewLine +
+                        "Welcome to the game “Minesweeper”!" + Environment.NewLine +
+                        "Try to reveal all cells without mines." + Environment.NewLine +
+                        "Please press:" + Environment.NewLine + Environment.NewLine +
+                            "'" + ConsoleKey.T.ToString() + "' to view the scoreboard" + Environment.NewLine +
+                            "'" + ConsoleKey.N.ToString() + "' to start a new game" + Environment.NewLine +
+                            "'" + ConsoleKey.Q.ToString() + "' to quit the game!" +
+                            Environment.NewLine + Environment.NewLine + Environment.NewLine);
+
+                    Assert.AreEqual<string>(expected, sw.ToString());
+                }
+            }
+        }
     }
 }

@@ -20,12 +20,14 @@
         public void PrintMainMenu()
         {
             Console.Clear();
-            Console.WriteLine();
-            Console.WriteLine("Welcome to the game “Minesweeper”!\nTry to reveal all cells without mines.\nPlease press:\n\n" +
-                            "'" + ConsoleKey.T.ToString() + "' to view the scoreboard\n" +
-                            "'" + ConsoleKey.N.ToString() + "' to start a new game\n" +
-                            "'" + ConsoleKey.Q.ToString() + "' to quit the game!\n\n");
-            Console.WriteLine();
+            Console.WriteLine(string.Format(Environment.NewLine +
+                        "Welcome to the game “Minesweeper”!" + Environment.NewLine +
+                        "Try to reveal all cells without mines." + Environment.NewLine +
+                        "Please press:" + Environment.NewLine + Environment.NewLine +
+                            "'" + ConsoleKey.T.ToString() + "' to view the scoreboard" + Environment.NewLine +
+                            "'" + ConsoleKey.N.ToString() + "' to start a new game" + Environment.NewLine +
+                            "'" + ConsoleKey.Q.ToString() + "' to quit the game!" +
+                            Environment.NewLine + Environment.NewLine));
         }
 
         public void Write(string input)
